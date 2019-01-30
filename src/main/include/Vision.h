@@ -7,7 +7,28 @@
 
 #pragma once
 
+#include <networktables/NetworkTable.h>
+#include <networktables/NetworkTableInstance.h>
+#include <frc/Servo.h>
+
 class Vision {
- public:
-  Vision();
+  public:
+    Vision();
+
+    //set up a mode system for vision
+    enum visionMode { Driver, Tape, Hatch };
+    void SetVisionMode(visionMode Mode);
+    visionMode getVisionMode();
+
+    //get values from vision output
+    double getTapeYaw();
+    double getHatchYaw();
+    double getTapeLeftYaw();
+    double getTapeRightYaw();
+
+    //get if something is detected
+    bool getHatchDetected();
+    bool getTapeDetected();
+  private:
+    visionMode currentMode;
 };

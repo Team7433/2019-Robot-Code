@@ -11,3 +11,21 @@
 Vision::Vision() {
 
 }
+
+void Vision::SetVisionMode(visionMode mode) {
+    switch (mode)
+    {
+        case Driver:
+            
+            break;
+        case Tape:
+            
+            break;
+        case Hatch:
+            
+            break;
+    
+        default:
+            break;
+    }
+}
