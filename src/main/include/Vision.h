@@ -18,7 +18,7 @@ class Vision {
     //set up a mode system for vision
     enum visionMode { Driver, Tape, Hatch };
     void SetVisionMode(visionMode Mode);
-    visionMode getVisionMode();
+    int getVisionMode();
 
     //get values from vision output
     double getTapeYaw();
@@ -30,5 +30,7 @@ class Vision {
     bool getHatchDetected();
     bool getTapeDetected();
   private:
-    visionMode currentMode;
+    std::shared_ptr<NetworkTable> visionTable;
+    //Store current vision mode
+    visionMode m_currentMode;
 };
