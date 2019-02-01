@@ -15,7 +15,11 @@
 #include "OI.h"
 #include "Vision.h"
 
+
+
+
 //Subsystems
+#include "subsystems/Foot.h"
 #include "subsystems/Trunk.h"
 
 class Robot : public frc::TimedRobot {
@@ -25,8 +29,11 @@ class Robot : public frc::TimedRobot {
   static OI oi;
   static Vision vision;
 
+
   //Subsystems
+  static Foot foot;
   static Trunk trunk;
+
 
   void RobotInit() override;
   void RobotPeriodic() override;

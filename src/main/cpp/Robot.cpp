@@ -15,7 +15,9 @@ OI Robot::oi;
 Vision Robot::vision;
 
 //Subsystems
+Foot Robot::foot;
 Trunk Robot::trunk;
+
 
 void Robot::RobotInit() {
 
