@@ -40,3 +40,7 @@ void Foot::controlManual(double output) {
 void Foot::gotoPosition(double position) {
   m_footMotor->Set(ControlMode::Position, position);
 }
+
+double Foot::getFootPosition() {
+	return m_footMotor->GetSelectedSensorPosition();
+}

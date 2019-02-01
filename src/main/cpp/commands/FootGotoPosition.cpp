@@ -23,7 +23,12 @@ void FootGotoPosition::Initialize() {
 void FootGotoPosition::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool FootGotoPosition::IsFinished() { return false; }
+bool FootGotoPosition::IsFinished() { 
+ if (m_position-3 < Robot::foot.getFootPosition() && m_position+3 > Robot::foot.getFootPosition()) {
+   return true;
+ }
+ return false;
+}
 
 // Called once after isFinished returns true
 void FootGotoPosition::End() {}
