@@ -6,20 +6,29 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/TrunkGotoPosition.h"
+#include "Robot.h"
 
-TrunkGotoPosition::TrunkGotoPosition() {
+TrunkGotoPosition::TrunkGotoPosition(double position) {
+  m_position = position;
   // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
+  Requires(&Robot::trunk);
 }
 
 // Called just before this Command runs the first time
-void TrunkGotoPosition::Initialize() {}
+void TrunkGotoPosition::Initialize() {
+  Robot::trunk.gotoPosition(m_position);
+}
 
 // Called repeatedly when this Command is scheduled to run
 void TrunkGotoPosition::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool TrunkGotoPosition::IsFinished() { return false; }
+bool TrunkGotoPosition::IsFinished() { 
+  if (m_position-m_tolerence < Robot::trunk.getPosition() && m_position+m_tolerence > Robot::trunk.getPosition()) {
+    return true;
+  }
+  return false;
+ }
 
 // Called once after isFinished returns true
 void TrunkGotoPosition::End() {}

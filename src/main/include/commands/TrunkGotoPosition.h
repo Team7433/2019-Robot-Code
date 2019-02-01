@@ -10,11 +10,14 @@
 #include <frc/commands/Command.h>
 
 class TrunkGotoPosition : public frc::Command {
- public:
-  TrunkGotoPosition();
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
+  public:
+    TrunkGotoPosition(double position);
+    void Initialize() override;
+    void Execute() override;
+    bool IsFinished() override;
+    void End() override;
+    void Interrupted() override;
+  private:
+    double m_position;
+    double m_tolerence = 10;
 };
