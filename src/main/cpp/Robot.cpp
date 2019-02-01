@@ -10,11 +10,14 @@
 #include <frc/commands/Scheduler.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 
-//ExampleSubsystem Robot::m_subsystem;
+//Modules
 OI Robot::oi;
 Vision Robot::vision;
 
+//Subsystems
 Foot Robot::foot;
+Trunk Robot::trunk;
+
 
 void Robot::RobotInit() {
 
