@@ -14,12 +14,15 @@
 #include "OI.h"
 #include "Vision.h"
 
+#include "subsystems/Foot.h"
 
 class Robot : public frc::TimedRobot {
  public:
   //static ExampleSubsystem m_subsystem;
   static OI oi;
   static Vision vision;
+
+  static Foot foot;
 
   void RobotInit() override;
   void RobotPeriodic() override;

@@ -14,6 +14,8 @@
 OI Robot::oi;
 Vision Robot::vision;
 
+Foot Robot::foot;
+
 void Robot::RobotInit() {
 
 }
