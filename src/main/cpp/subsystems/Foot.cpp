@@ -11,7 +11,8 @@
 #include "commands/manualFoot.h"
 
 Foot::Foot() : Subsystem("ExampleSubsystem") {
-  m_footMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, kPIDLoopIdx, kTimeoutMs);
+  m_footMotor->ConfigRemoteFeedbackFilter(1, RemoteSensorSource::RemoteSensorSource_CANifier_Quadrature, 0, 0);
+	m_footMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::RemoteSensor0, 0, 0);
 	m_footMotor->SetSensorPhase(false);
 
 			// set the peak and nominal outputs, 12V means full

@@ -15,6 +15,7 @@ class Foot : public frc::Subsystem {
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
   WPI_TalonSRX * m_footMotor = new WPI_TalonSRX(1);
+  CANifier * m_canifier = new CANifier{1};
  public:
   Foot();
   void InitDefaultCommand() override;
