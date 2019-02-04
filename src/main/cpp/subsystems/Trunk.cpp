@@ -7,6 +7,7 @@
 
 #include "subsystems/Trunk.h"
 #include "subsystems/constants.h"
+#include "commands/ManualTrunk.h"
 
 Trunk::Trunk() : Subsystem("ExampleSubsystem") {
   m_TrunkSlave->Follow(*m_TrunkMaster);
@@ -16,21 +17,28 @@ Trunk::Trunk() : Subsystem("ExampleSubsystem") {
 			// set the peak and nominal outputs, 12V means full
 	m_TrunkMaster->ConfigNominalOutputForward(0, kTimeoutMs);
 	m_TrunkMaster->ConfigNominalOutputReverse(0, kTimeoutMs);
-	m_TrunkMaster->ConfigPeakOutputForward(1, kTimeoutMs);
-	m_TrunkMaster->ConfigPeakOutputReverse(-1, kTimeoutMs);
+	m_TrunkMaster->ConfigPeakOutputForward(0.5, kTimeoutMs);
+	m_TrunkMaster->ConfigPeakOutputReverse(-0.5, kTimeoutMs);
 	//Elevator_talon_a->ConfigPeakOutputForward(elevatorupmax, kTimeoutMs);
 	//Elevator_talon_a->ConfigPeakOutputReverse(elevatordownmax, kTimeoutMs);
 
 			// set closed loop gains in slot0
-	m_TrunkMaster->Config_kF(kPIDLoopIdx, 1.39373, kTimeoutMs);
-	m_TrunkMaster->Config_kP(kPIDLoopIdx, 3.0, kTimeoutMs);
+	m_TrunkMaster->Config_kF(kPIDLoopIdx, 1.423, kTimeoutMs);//1.39373
+	m_TrunkMaster->Config_kP(kPIDLoopIdx, 1.0, kTimeoutMs);
 	m_TrunkMaster->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_TrunkMaster->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
+
+  m_TrunkMaster->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyClosed,kTimeoutMs);
+  m_TrunkMaster->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,kTimeoutMs);
+
+  m_TrunkMaster->ConfigMotionCruiseVelocity(600.2, kTimeoutMs);
+	m_TrunkMaster->ConfigMotionAcceleration(380.8, kTimeoutMs);
+
 }
 
 void Trunk::InitDefaultCommand() {
   // Set the default command for a subsystem here.
-  // SetDefaultCommand(new MySpecialCommand());
+  SetDefaultCommand(new ManualTrunk());
 }
 
 void Trunk::manualControl(double output) {
@@ -39,6 +47,10 @@ void Trunk::manualControl(double output) {
 
 void Trunk::gotoPosition(double position) {
   m_TrunkMaster->Set(ControlMode::Position, position);
+}
+
+void Trunk::gotoPositionMM(double position) {
+  m_TrunkMaster->Set(ControlMode::MotionMagic, position);
 }
 
 double Trunk::getPosition() {

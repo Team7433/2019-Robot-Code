@@ -5,37 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/TrunkGotoPosition.h"
+#include "commands/ResetTrunkPosition.h"
 #include "Robot.h"
-#include "frc/smartdashboard/SmartDashboard.h"
 
-TrunkGotoPosition::TrunkGotoPosition(double position) {
-  m_position = position;
+ResetTrunkPosition::ResetTrunkPosition() {
   // Use Requires() here to declare subsystem dependencies
-  Requires(&Robot::trunk);
+  // eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
-void TrunkGotoPosition::Initialize() {
-  Robot::trunk.gotoPositionMM(m_position);
+void ResetTrunkPosition::Initialize() {
+  Robot::trunk.resetSensor();
+  std::cout << "Reset Sensors";
 }
 
 // Called repeatedly when this Command is scheduled to run
-void TrunkGotoPosition::Execute() {
-  frc::SmartDashboard::PutNumber("Trunk Position", Robot::trunk.getPosition());
-}
+void ResetTrunkPosition::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool TrunkGotoPosition::IsFinished() { 
-  if (m_position-m_tolerence < Robot::trunk.getPosition() && m_position+m_tolerence > Robot::trunk.getPosition()) {
-    return true;
-  }
-  return false;
- }
+bool ResetTrunkPosition::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void TrunkGotoPosition::End() {}
+void ResetTrunkPosition::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void TrunkGotoPosition::Interrupted() {}
+void ResetTrunkPosition::Interrupted() {}

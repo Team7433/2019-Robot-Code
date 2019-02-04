@@ -22,6 +22,7 @@ class Trunk : public frc::Subsystem {
   void InitDefaultCommand() override;
   void manualControl(double output);
   void gotoPosition(double position);
+  void gotoPositionMM(double position);
   void resetSensor();
   double getPosition();
   void SetMaxSpeeds(double forward, double reverse);

@@ -28,7 +28,7 @@ void Robot::RobotPeriodic() {
 }
 
 void Robot::DisabledInit() {
-
+  Robot::trunk.manualControl(0);
 }
 
 void Robot::DisabledPeriodic() { 
