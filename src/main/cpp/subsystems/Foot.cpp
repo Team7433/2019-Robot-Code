@@ -28,6 +28,13 @@ Foot::Foot() : Subsystem("ExampleSubsystem") {
 	m_footMotor->Config_kP(kPIDLoopIdx, 50.0, kTimeoutMs);
 	m_footMotor->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_footMotor->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
+
+	//Config
+	m_footMotor->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_RemoteCANifier, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen, m_canifier->GetDeviceNumber(), kTimeoutMs);
+	m_footMotor->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_RemoteCANifier, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen, m_canifier->GetDeviceNumber(), kTimeoutMs);
+
+  m_footMotor->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_RemoteCANifier, LimitSwitchNormal::LimitSwitchNormal_NormallyClosed,kTimeoutMs);
+  m_footMotor->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,kTimeoutMs);
 }
 
 void Foot::InitDefaultCommand() {
