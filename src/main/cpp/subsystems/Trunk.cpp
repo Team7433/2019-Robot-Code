@@ -10,30 +10,33 @@
 #include "commands/ManualTrunk.h"
 
 Trunk::Trunk() : Subsystem("ExampleSubsystem") {
+
+  //Make second motor follow first
   m_TrunkSlave->Follow(*m_TrunkMaster);
+
+  //config sensor and make sure its readings are correct
   m_TrunkMaster->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, kPIDLoopIdx, kTimeoutMs);
 	m_TrunkMaster->SetSensorPhase(true);
 
-			// set the peak and nominal outputs, 12V means full
+  //set the peak and nominal(least) outputs
 	m_TrunkMaster->ConfigNominalOutputForward(0, kTimeoutMs);
 	m_TrunkMaster->ConfigNominalOutputReverse(0, kTimeoutMs);
 	m_TrunkMaster->ConfigPeakOutputForward(0.5, kTimeoutMs);
 	m_TrunkMaster->ConfigPeakOutputReverse(-0.5, kTimeoutMs);
-	//Elevator_talon_a->ConfigPeakOutputForward(elevatorupmax, kTimeoutMs);
-	//Elevator_talon_a->ConfigPeakOutputReverse(elevatordownmax, kTimeoutMs);
 
-			// set closed loop gains in slot0
+	// set PID Values
 	m_TrunkMaster->Config_kF(kPIDLoopIdx, 1.423, kTimeoutMs);//1.39373
 	m_TrunkMaster->Config_kP(kPIDLoopIdx, 1.0, kTimeoutMs);
 	m_TrunkMaster->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_TrunkMaster->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
 
+  //config limit switches
   m_TrunkMaster->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyClosed,kTimeoutMs);
   m_TrunkMaster->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,kTimeoutMs);
 
+  //config motion magic with acceleration and cruise velocity 
   m_TrunkMaster->ConfigMotionCruiseVelocity(600.2, kTimeoutMs);
 	m_TrunkMaster->ConfigMotionAcceleration(380.8, kTimeoutMs);
-
 }
 
 void Trunk::InitDefaultCommand() {
