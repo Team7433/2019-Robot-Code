@@ -24,5 +24,6 @@ class Foot : public frc::Subsystem {
   void controlManual(double output);
   void gotoPosition(double position);
   void resetEncoder();
+  void UpdateData();
   double getFootPosition();
 };
