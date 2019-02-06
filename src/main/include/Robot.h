@@ -16,9 +16,6 @@
 #include "OI.h"
 #include "Vision.h"
 
-
-
-
 //Subsystems
 #include "subsystems/Foot.h"
 #include "subsystems/Trunk.h"
