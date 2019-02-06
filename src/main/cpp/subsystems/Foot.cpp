@@ -60,8 +60,15 @@ void Foot::UpdateData() {
 	frc::SmartDashboard::PutNumber("Foot/Velocity", m_footMotor->GetSelectedSensorVelocity());
 	frc::SmartDashboard::PutBoolean("Foot/FwdLimit", !m_canifier->GetGeneralInput(ctre::phoenix::CANifier::GeneralPin::LIMF));
 	frc::SmartDashboard::PutBoolean("Foot/RevLimit", !m_canifier->GetGeneralInput(ctre::phoenix::CANifier::GeneralPin::LIMR));
-	//frc::SmartDashboard::PutNumber("Foot/Target", m_footMotor->GetClosedLoopTarget());
-	//frc::SmartDashboard::PutNumber("Foot/Error", m_footMotor->GetClosedLoopError());
+	if (m_footMotor->GetControlMode == ControlMode::Position) {
+		frc::SmartDashboard::PutBoolean("Foot/PositionMode", true);
+		frc::SmartDashboard::PutNumber("Foot/Target", m_footMotor->GetClosedLoopTarget());
+		frc::SmartDashboard::PutNumber("Foot/Error", m_footMotor->GetClosedLoopError());
+	} else {
+		frc::SmartDashboard::PutBoolean("Foot/PositionMode", false);
+		frc::SmartDashboard::PutNumber("Foot/Target", 0);
+		frc::SmartDashboard::PutNumber("Foot/Error", 0);
+	}
 }
 
 double Foot::getFootPosition() {
