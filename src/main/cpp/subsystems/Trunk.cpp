@@ -41,7 +41,7 @@ Trunk::Trunk() : Subsystem("ExampleSubsystem") {
 
 void Trunk::InitDefaultCommand() {
   // Set the default command for a subsystem here.
-  SetDefaultCommand(new ManualTrunk());
+  //SetDefaultCommand(new ManualTrunk());
 }
 
 void Trunk::manualControl(double output) {
