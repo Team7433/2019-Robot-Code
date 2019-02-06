@@ -49,6 +49,9 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() { 
   frc::Scheduler::GetInstance()->Run(); 
+
+  //update data from subsystems
+  foot.UpdateData();
 }
 
 void Robot::TestPeriodic() {}

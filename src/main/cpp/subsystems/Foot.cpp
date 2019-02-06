@@ -7,11 +7,13 @@
 
 #include "subsystems/Foot.h"
 #include "subsystems/constants.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #include "commands/manualFoot.h"
 
 Foot::Foot() : Subsystem("ExampleSubsystem") {
-  m_footMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, kPIDLoopIdx, kTimeoutMs);
+  m_footMotor->ConfigRemoteFeedbackFilter(1, RemoteSensorSource::RemoteSensorSource_CANifier_Quadrature, 0, 0);
+	m_footMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::RemoteSensor0, 0, 0);
 	m_footMotor->SetSensorPhase(false);
 
 			// set the peak and nominal outputs, 12V means full
@@ -27,10 +29,22 @@ Foot::Foot() : Subsystem("ExampleSubsystem") {
 	m_footMotor->Config_kP(kPIDLoopIdx, 50.0, kTimeoutMs);
 	m_footMotor->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_footMotor->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
+
+
+	//Config limit switches to remote canifier
+	m_footMotor->ConfigForwardLimitSwitchSource(	RemoteLimitSwitchSource::RemoteLimitSwitchSource_RemoteCANifier,
+													LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,
+													m_canifier->GetDeviceNumber(),
+													kTimeoutMs);
+
+	m_footMotor->ConfigReverseLimitSwitchSource(	RemoteLimitSwitchSource::RemoteLimitSwitchSource_RemoteCANifier,
+													LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,
+													1,
+													kTimeoutMs);
 }
 
 void Foot::InitDefaultCommand() {
-  //SetDefaultCommand(new manualFoot());
+  SetDefaultCommand(new manualFoot());
 }
 
 void Foot::controlManual(double output) {
@@ -39,6 +53,22 @@ void Foot::controlManual(double output) {
 
 void Foot::gotoPosition(double position) {
   m_footMotor->Set(ControlMode::Position, position);
+}
+
+void Foot::UpdateData() {
+	frc::SmartDashboard::PutNumber("Foot/Position", m_footMotor->GetSelectedSensorPosition());
+	frc::SmartDashboard::PutNumber("Foot/Velocity", m_footMotor->GetSelectedSensorVelocity());
+	frc::SmartDashboard::PutBoolean("Foot/FwdLimit", !m_canifier->GetGeneralInput(ctre::phoenix::CANifier::GeneralPin::LIMF));
+	frc::SmartDashboard::PutBoolean("Foot/RevLimit", !m_canifier->GetGeneralInput(ctre::phoenix::CANifier::GeneralPin::LIMR));
+	if (m_footMotor->GetControlMode == ControlMode::Position) {
+		frc::SmartDashboard::PutBoolean("Foot/PositionMode", true);
+		frc::SmartDashboard::PutNumber("Foot/Target", m_footMotor->GetClosedLoopTarget());
+		frc::SmartDashboard::PutNumber("Foot/Error", m_footMotor->GetClosedLoopError());
+	} else {
+		frc::SmartDashboard::PutBoolean("Foot/PositionMode", false);
+		frc::SmartDashboard::PutNumber("Foot/Target", 0);
+		frc::SmartDashboard::PutNumber("Foot/Error", 0);
+	}
 }
 
 double Foot::getFootPosition() {
