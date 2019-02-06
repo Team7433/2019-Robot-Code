@@ -19,7 +19,6 @@ Foot Robot::foot;
 Trunk Robot::trunk;
 
 
-
 void Robot::RobotInit() {
 
 }
@@ -29,7 +28,7 @@ void Robot::RobotPeriodic() {
 }
 
 void Robot::DisabledInit() {
-
+  Robot::trunk.manualControl(0);
 }
 
 void Robot::DisabledPeriodic() { 

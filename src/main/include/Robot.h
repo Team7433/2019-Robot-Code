@@ -10,14 +10,11 @@
 #include <frc/TimedRobot.h>
 #include <frc/commands/Command.h>
 #include <frc/smartdashboard/SendableChooser.h>
+#include <iostream>
 
 //Modules
 #include "OI.h"
 #include "Vision.h"
-
-#include "subsystems/Foot.h"
-
-
 
 //Subsystems
 #include "subsystems/Foot.h"
@@ -34,6 +31,7 @@ class Robot : public frc::TimedRobot {
   //Subsystems
   static Foot foot;
   static Trunk trunk;
+
 
   void RobotInit() override;
   void RobotPeriodic() override;
