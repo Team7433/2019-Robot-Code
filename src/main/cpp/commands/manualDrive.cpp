@@ -5,31 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ManualTrunk.h"
+#include "commands/manualDrive.h"
 #include "Robot.h"
-#include "frc/smartdashboard/SmartDashboard.h"
 
-ManualTrunk::ManualTrunk() {
+manualDrive::manualDrive() {
   // Use Requires() here to declare subsystem dependencies
-  Requires(&Robot::trunk);
+  Requires(&Robot::drivetrain);
 }
 
 // Called just before this Command runs the first time
-void ManualTrunk::Initialize() {}
+void manualDrive::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void ManualTrunk::Execute() {
-  auto& joystick = Robot::oi.getJoystick2();
-  Robot::trunk.manualControl(joystick.GetY());
-  frc::SmartDashboard::PutNumber("Trunk Position", Robot::trunk.getPosition());
+void manualDrive::Execute() {
+  auto& joystick = Robot::oi.getJoystick1();
+  Robot::drivetrain.driveCurvature(joystick.GetY(),joystick.GetZ(), joystick.GetRawButton(1));
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ManualTrunk::IsFinished() { return false; }
+bool manualDrive::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void ManualTrunk::End() {}
+void manualDrive::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ManualTrunk::Interrupted() {}
+void manualDrive::Interrupted() {}

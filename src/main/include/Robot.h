@@ -19,6 +19,7 @@
 //Subsystems
 #include "subsystems/Foot.h"
 #include "subsystems/Trunk.h"
+#include "subsystems/Drivetrain.h"
 
 class Robot : public frc::TimedRobot {
  public:
@@ -26,7 +27,7 @@ class Robot : public frc::TimedRobot {
   //Modules
   static OI oi;
   static Vision vision;
-
+  static Drivetrain drivetrain;
 
   //Subsystems
   static Foot foot;
