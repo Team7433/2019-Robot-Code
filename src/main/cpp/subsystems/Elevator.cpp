@@ -29,42 +29,11 @@ Elevator::Elevator() : Subsystem("ExampleSubsystem") {
 	m_ElevatorMaster->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_ElevatorMaster->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
 
-  //config limit switches
-  m_ElevatorMaster->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyClosed,kTimeoutMs);
-  m_ElevatorMaster->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,kTimeoutMs);
 
   //config motion magic with acceleration and cruise velocity 
   m_ElevatorMaster->ConfigMotionCruiseVelocity(600.2, kTimeoutMs);
 	m_ElevatorMaster->ConfigMotionAcceleration(380.8, kTimeoutMs);
 }
 
-void Trunk::InitDefaultCommand() {
-  // Set the default command for a subsystem here.
-  //SetDefaultCommand(new ManualTrunk());
-}
 
-void Trunk::manualControl(double output) {
-  m_TrunkMaster->Set(ControlMode::PercentOutput, output);
-}
-
-void Trunk::gotoPosition(double position) {
-  m_TrunkMaster->Set(ControlMode::Position, position);
-}
-
-void Trunk::gotoPositionMM(double position) {
-  m_TrunkMaster->Set(ControlMode::MotionMagic, position);
-}
-
-double Trunk::getPosition() {
-  return m_TrunkMaster->GetSelectedSensorPosition();
-}
-
-void Trunk::resetSensor() {
-  m_TrunkMaster->SetSelectedSensorPosition(0);
-}
-
-void Trunk::SetMaxSpeeds(double forward, double reverse) {
-  m_TrunkMaster->ConfigPeakOutputForward(forward, kTimeoutMs);
-  m_TrunkMaster->ConfigPeakOutputReverse(reverse, kTimeoutMs);	
-}
 
