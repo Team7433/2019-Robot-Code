@@ -13,6 +13,7 @@
 #include "commands/FootGotoPosition.h"
 #include "commands/TrunkGotoPosition.h"
 #include "commands/ResetTrunkPosition.h"
+#include "commands/ResetFootEncoder.h"
 
 
 OI::OI() {
@@ -24,7 +25,7 @@ OI::OI() {
     m_joystick1button3.WhenPressed(new TrunkGotoPosition(332));
     //m_joystick1button4.WhenPressed(new command());
     m_joystick1button5.WhenPressed(new ResetTrunkPosition());
-    //m_joystick1button6.WhenPressed(new command());
+    m_joystick1button6.WhenPressed(new ResetFootEncoder());
     m_joystick1button7.WhenPressed(new FootGotoPosition(5700));
     m_joystick1button8.WhenPressed(new TrunkGotoPosition(0));
     m_joystick1button9.WhenPressed(new FootGotoPosition(0));

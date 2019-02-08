@@ -19,7 +19,7 @@ void manualDrive::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void manualDrive::Execute() {
   auto& joystick = Robot::oi.getJoystick1();
-  Robot::drivetrain.driveCurvature(joystick.GetY(),joystick.GetZ(), joystick.GetRawButton(1));
+  Robot::drivetrain.driveCurvature(joystick.GetY(),joystick.GetX(), joystick.GetRawButton(1));
 }
 
 // Make this return true when this Command no longer needs to run execute()

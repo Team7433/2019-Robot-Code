@@ -55,6 +55,10 @@ void Foot::gotoPosition(double position) {
   m_footMotor->Set(ControlMode::Position, position);
 }
 
+void Foot::resetEncoder() {
+	m_canifier->SetQuadraturePosition(0, kTimeoutMs);
+}
+
 void Foot::UpdateData() {
 	frc::SmartDashboard::PutNumber("Foot/Position", m_footMotor->GetSelectedSensorPosition());
 	frc::SmartDashboard::PutNumber("Foot/Velocity", m_footMotor->GetSelectedSensorVelocity());
