@@ -7,14 +7,10 @@
 
 #pragma once
 
-#include <frc/commands/Command.h>
+#include <frc/commands/InstantCommand.h>
 
-class manualFoot : public frc::Command {
+class resetElevatorPosition : public frc::InstantCommand {
  public:
-  manualFoot();
+  resetElevatorPosition();
   void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
 };

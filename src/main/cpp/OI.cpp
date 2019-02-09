@@ -13,6 +13,7 @@
 #include "commands/FootGotoPosition.h"
 #include "commands/TrunkGotoPosition.h"
 #include "commands/ResetTrunkPosition.h"
+#include "commands/resetElevatorPosition.h"
 
 
 OI::OI() {
@@ -20,9 +21,9 @@ OI::OI() {
   //Setup joystick buttons to commands
     //joystick 1
     //m_joystick1button1.WhenPressed(new command());
-    //m_joystick1button2.WhenPressed(new command());
-    //m_joystick1button3.WhenPressed(new command());
-    //m_joystick1button4.WhenPressed(new command());
+    //m_joystick1button2.WhenPressed(new ElevatorGotoPosition());
+    //m_joystick1button3.WhenPressed(new ElevatorGotoPosition());
+    //m_joystick1button4.WhenPressed(new ElevatorGotoPosition());
     m_joystick1button5.WhenPressed(new ResetTrunkPosition());
     //m_joystick1button6.WhenPressed(new command());
     m_joystick1button7.WhenPressed(new FootGotoPosition(6332));
@@ -37,7 +38,7 @@ OI::OI() {
     //m_joystick2button2.WhenPressed(new command());
     //m_joystick2button3.WhenPressed(new command());
     //m_joystick2button4.WhenPressed(new command());
-    //m_joystick2button5.WhenPressed(new command());
+    m_joystick2button5.WhenPressed(new resetElevatorPosition());
     //m_joystick2button6.WhenPressed(new command());
     //m_joystick2button7.WhenPressed(new command());
     //m_joystick2button8.WhenPressed(new command());

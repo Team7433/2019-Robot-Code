@@ -5,34 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ElevatorGotoPosition.h"
+#include "commands/manualElevator.h"
 #include "Robot.h"
-
-ElevatorGotoPosition::ElevatorGotoPosition(double position) {
-   m_position = position;
-  // Use Requires() here to declare subsystem dependencies
-   Requires(&Robot::elevator);
+#include <iostream>
+// Fix below.
+manualElevator::manualElevator() {
+  Requires(&Robot::elevator);
 }
 
 // Called just before this Command runs the first time
-void ElevatorGotoPosition::Initialize() {
-   Robot::elevator.gotoPosition(m_position);
-}
+void manualElevator::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void ElevatorGotoPosition::Execute() {}
-
-// Make this return true when this Command no longer needs to run execute()
-bool ElevatorGotoPosition::IsFinished() { 
- if (m_position-3 < Robot::elevator.getPosition() && m_position+3 > Robot::elevator.getPosition()) {
-   return true;
- }
- return false;
+void manualElevator::Execute() {
+  auto& joystick = Robot::oi.getJoystick2();
+  Robot::elevator.controlManual(joystick.GetY());
 }
 
+// Make this return true when this Command no longer needs to run execute()
+bool manualElevator::IsFinished() { return false; }
+
 // Called once after isFinished returns true
-void ElevatorGotoPosition::End() {}
+void manualElevator::End() {
+  std::cout << "Done \n";
+  Robot::foot.controlManual(0.00);
+}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ElevatorGotoPosition::Interrupted() {}
+void manualElevator::Interrupted() {}

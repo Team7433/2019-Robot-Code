@@ -5,35 +5,41 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+#include "subsystems/Elevator.h"
+#include "subsystems/constants.h"
+#include "commands/manualElevator.h"
 
 
 
 Elevator::Elevator() : Subsystem("ExampleSubsystem") {
+  m_elevatorMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, kPIDLoopIdx, kTimeoutMs);
+	m_elevatorMotor->SetSensorPhase(false);
 
-  //Make second motor follow first
-  m_ElevatorSlave->Follow(*m_ElevatorMaster);
+			// set the peak and nominal outputs, 12V means full
+	m_elevatorMotor->ConfigNominalOutputForward(0, kTimeoutMs);
+	m_elevatorMotor->ConfigNominalOutputReverse(0, kTimeoutMs);
+	m_elevatorMotor->ConfigPeakOutputForward(1, kTimeoutMs);
+	m_elevatorMotor->ConfigPeakOutputReverse(-1, kTimeoutMs);
+	//Elevator_talon_a->ConfigPeakOutputForward(elevatorupmax, kTimeoutMs);
+	//Elevator_talon_a->ConfigPeakOutputReverse(elevatordownmax, kTimeoutMs);
 
-  //config sensor and make sure its readings are correct
-  m_ElevatorMaster->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, kPIDLoopIdx, kTimeoutMs);
-	m_ElevatorMaster->SetSensorPhase(true);
-
-  //set the peak and nominal(least) outputs
-	m_ElevatorMaster->ConfigNominalOutputForward(0, kTimeoutMs);
-	m_ElevatorMaster->ConfigNominalOutputReverse(0, kTimeoutMs);
-	m_ElevatorMaster->ConfigPeakOutputForward(0.5, kTimeoutMs);
-	m_ElevatorMaster->ConfigPeakOutputReverse(-0.5, kTimeoutMs);
-
-	// set PID Values
-	m_ElevatorMaster->Config_kF(kPIDLoopIdx, 1.423, kTimeoutMs);//1.39373
-	m_ElevatorMaster->Config_kP(kPIDLoopIdx, 1.0, kTimeoutMs);
-	m_ElevatorMaster->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
-	m_ElevatorMaster->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
-
-
-  //config motion magic with acceleration and cruise velocity 
-  m_ElevatorMaster->ConfigMotionCruiseVelocity(600.2, kTimeoutMs);
-	m_ElevatorMaster->ConfigMotionAcceleration(380.8, kTimeoutMs);
+			// set closed loop gains in slot0
+	m_elevatorMotor->Config_kF(kPIDLoopIdx, 0.0, kTimeoutMs);
+	m_elevatorMotor->Config_kP(kPIDLoopIdx, 50.0, kTimeoutMs);
+	m_elevatorMotor->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
+	m_elevatorMotor->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
 }
 
+void Elevator::InitDefaultCommand() {
+}
+void Elevator::controlManual(double output) {
+  m_elevatorMotor->Set(ControlMode::PercentOutput, output);
+}
 
+void Elevator::gotoPosition(double position) {
+  m_elevatorMotor->Set(ControlMode::Position, position);
+}
 
+double Elevator::getPosition() {
+	return m_elevatorMotor->GetSelectedSensorPosition();
+}
