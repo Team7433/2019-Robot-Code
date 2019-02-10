@@ -19,10 +19,12 @@ class Auto {
     //Setup and running of auto
     void SetRoutine(int routine);   //called in automous init
     void ExecuteRoutine();          //called in automous periotic
+    
+    void StartStep();
+    void StartCommand(std::string Function, std::string parameters[], int paramSize);
 
     int GetRoutineId();
 
-    int ParseRoutineLength();
 
     //void SetupSmartDahboard();
   private:

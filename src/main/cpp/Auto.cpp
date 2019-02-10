@@ -73,3 +73,38 @@ void Auto::SetRoutine(int routine) {
     }
     
 }
+
+void Auto::ExecuteRoutine() {
+    if (startedStep == false) {
+        StartStep();
+    }
+}
+
+void Auto::StartStep() {
+    std::string StepFunction = RoutineArray[currentStep];
+    int OpenBracketPos = StepFunction.find('(');
+    int ClosedBracketPos = StepFunction.find(')');
+    std::string functionName = StepFunction.substr(0, OpenBracketPos);
+    std::string parametersStr = StepFunction.substr(OpenBracketPos+1, ClosedBracketPos-OpenBracketPos-1);
+    std::string LineRemainder = parametersStr;
+    int NumberOfParameters = 1;
+    while (LineRemainder.find(',') != std::string::npos) {
+        int commaPos = LineRemainder.find(',');
+        LineRemainder = LineRemainder.substr(commaPos+1, std::string::npos);
+        NumberOfParameters++;
+    }
+    std::string parameters[NumberOfParameters];
+    LineRemainder = parametersStr;
+    for (int i = 0; i < NumberOfParameters; i++) {
+        int colinPos = LineRemainder.find(',');
+        parameters[i] = LineRemainder.substr(0, colinPos);
+        //std::cout << "Line Length" << LineRemainder.length() << "Maths:" << colinPos+1 + LineRemainder.length()-colinPos-2 << "\n";
+        LineRemainder = LineRemainder.substr(colinPos+1, std::string::npos);
+    }
+    StartCommand(functionName, parameters, NumberOfParameters);
+
+}
+
+void Auto::StartCommand(std::string Function, std::string parameters[], int paramSize) {
+
+}
