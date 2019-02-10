@@ -16,7 +16,7 @@ class Trunk : public frc::Subsystem {
   // for methods that implement subsystem capabilities
 
   WPI_TalonSRX * m_TrunkMaster = new WPI_TalonSRX{2};
-  WPI_TalonSRX * m_TrunkSlave = new WPI_TalonSRX{44};
+  WPI_TalonSRX * m_TrunkSlave = new WPI_TalonSRX{7};
  public:
   Trunk();
   void InitDefaultCommand() override;

@@ -22,16 +22,16 @@ OI::OI() {
     //joystick 1
     //m_joystick1button1.WhenPressed(new command());
     //m_joystick1button2.WhenPressed(new command());
-    m_joystick1button3.WhenPressed(new TrunkGotoPosition(332));
+    m_joystick1button3.WhenPressed(new TrunkGotoPosition(750));
     //m_joystick1button4.WhenPressed(new command());
     m_joystick1button5.WhenPressed(new ResetTrunkPosition());
     m_joystick1button6.WhenPressed(new ResetFootEncoder());
-    m_joystick1button7.WhenPressed(new FootGotoPosition(5700));
+    m_joystick1button7.WhenPressed(new FootGotoPosition(5600)); // Foot all the way back
     m_joystick1button8.WhenPressed(new TrunkGotoPosition(0));
     m_joystick1button9.WhenPressed(new FootGotoPosition(0));
-    m_joystick1button10.WhenPressed(new TrunkGotoPosition(3000));
-    m_joystick1button11.WhenPressed(new FootGotoPosition(-2750));
-    m_joystick1button12.WhenPressed(new TrunkGotoPosition(6178));
+    m_joystick1button10.WhenPressed(new TrunkGotoPosition(7500)); //Trunk down test
+    m_joystick1button11.WhenPressed(new FootGotoPosition(-2750)); //Foot all the way forward
+    m_joystick1button12.WhenPressed(new TrunkGotoPosition(19100));
 
     //joystick 2
     //m_joystick2button1.WhenPressed(new command());

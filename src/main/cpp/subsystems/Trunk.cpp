@@ -15,7 +15,7 @@ Trunk::Trunk() : Subsystem("ExampleSubsystem") {
   m_TrunkSlave->Follow(*m_TrunkMaster);
 
   //config sensor and make sure its readings are correct
-  m_TrunkMaster->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, kPIDLoopIdx, kTimeoutMs);
+  m_TrunkMaster->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, kPIDLoopIdx, kTimeoutMs);
 	m_TrunkMaster->SetSensorPhase(true);
 
   //set the peak and nominal(least) outputs
@@ -26,7 +26,7 @@ Trunk::Trunk() : Subsystem("ExampleSubsystem") {
 
 	// set PID Values
 	m_TrunkMaster->Config_kF(kPIDLoopIdx, 1.423, kTimeoutMs);//1.39373
-	m_TrunkMaster->Config_kP(kPIDLoopIdx, 1.0, kTimeoutMs);
+	m_TrunkMaster->Config_kP(kPIDLoopIdx, 2.0, kTimeoutMs);
 	m_TrunkMaster->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_TrunkMaster->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
 

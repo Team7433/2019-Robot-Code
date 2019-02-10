@@ -22,13 +22,16 @@ void ManualTrunk::Execute() {
   auto& joystick = Robot::oi.getJoystick2();
   Robot::trunk.manualControl(joystick.GetY());
   frc::SmartDashboard::PutNumber("Trunk Position", Robot::trunk.getPosition());
+  frc::SmartDashboard::PutBoolean("TrunkManual", true);
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool ManualTrunk::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void ManualTrunk::End() {}
+void ManualTrunk::End() {
+  frc::SmartDashboard::PutBoolean("TrunkManual", false);
+}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
