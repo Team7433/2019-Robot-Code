@@ -13,6 +13,7 @@
 //Modules
 OI Robot::oi;
 Vision Robot::vision;
+Auto Robot::autoExecuter;
 
 //Subsystems
 Foot Robot::foot;
@@ -20,7 +21,7 @@ Trunk Robot::trunk;
 
 
 void Robot::RobotInit() {
-
+  
 }
 
 void Robot::RobotPeriodic() {
@@ -36,7 +37,7 @@ void Robot::DisabledPeriodic() {
 }
 
 void Robot::AutonomousInit() {
-
+  autoExecuter.SetRoutine(frc::SmartDashboard::GetNumber("Routine ID", 0));
 }
 
 void Robot::AutonomousPeriodic() { 

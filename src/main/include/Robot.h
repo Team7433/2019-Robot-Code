@@ -15,6 +15,7 @@
 //Modules
 #include "OI.h"
 #include "Vision.h"
+#include "Auto.h"
 
 //Subsystems
 #include "subsystems/Foot.h"
@@ -26,7 +27,7 @@ class Robot : public frc::TimedRobot {
   //Modules
   static OI oi;
   static Vision vision;
-
+  static Auto autoExecuter;
 
   //Subsystems
   static Foot foot;
