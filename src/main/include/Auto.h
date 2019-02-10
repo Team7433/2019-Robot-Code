@@ -10,6 +10,7 @@
 #include "iostream"
 #include "string"
 #include "fstream"
+#include <frc/commands/Command.h>
 
 class Auto {
   public:
@@ -29,6 +30,14 @@ class Auto {
     int m_routineLength;
     bool m_isRunningAuto = false;
     bool m_Error = false;
-    std::string& RoutineArray;
+    bool m_debug = false;
+    std::string * RoutineArray = nullptr;
+
+    frc::Command * m_command = nullptr;
+
+    bool CommandRunning = false;
+
+    int currentStep = 0;
+    bool startedStep = false;
 
 };
