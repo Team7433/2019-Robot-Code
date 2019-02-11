@@ -17,6 +17,7 @@ Vision Robot::vision;
 //Subsystems
 Foot Robot::foot;
 Trunk Robot::trunk;
+Elevator Robot::elevator;
 
 
 void Robot::RobotInit() {

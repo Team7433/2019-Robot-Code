@@ -12,8 +12,8 @@
 
 
 Elevator::Elevator() : Subsystem("ExampleSubsystem") {
-  m_elevatorMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, kPIDLoopIdx, kTimeoutMs);
-	m_elevatorMotor->SetSensorPhase(false);
+  m_elevatorMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, kPIDLoopIdx, kTimeoutMs);
+	m_elevatorMotor->SetSensorPhase(true);
 
 			// set the peak and nominal outputs, 12V means full
 	m_elevatorMotor->ConfigNominalOutputForward(0, kTimeoutMs);
@@ -24,22 +24,30 @@ Elevator::Elevator() : Subsystem("ExampleSubsystem") {
 	//Elevator_talon_a->ConfigPeakOutputReverse(elevatordownmax, kTimeoutMs);
 
 			// set closed loop gains in slot0
-	m_elevatorMotor->Config_kF(kPIDLoopIdx, 0.0, kTimeoutMs);
-	m_elevatorMotor->Config_kP(kPIDLoopIdx, 50.0, kTimeoutMs);
+	m_elevatorMotor->Config_kF(kPIDLoopIdx, 0.4358869565, kTimeoutMs); // 98% output is 2308 units/100ms
+	m_elevatorMotor->Config_kP(kPIDLoopIdx, 1.0, kTimeoutMs);
 	m_elevatorMotor->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_elevatorMotor->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
+
+	m_elevatorMotor->ConfigMotionCruiseVelocity(1100.5);
+	m_elevatorMotor->ConfigMotionAcceleration(800.5);
 }
 
 void Elevator::InitDefaultCommand() {
+	SetDefaultCommand(new manualElevator());
 }
 void Elevator::controlManual(double output) {
   m_elevatorMotor->Set(ControlMode::PercentOutput, output);
 }
 
 void Elevator::gotoPosition(double position) {
-  m_elevatorMotor->Set(ControlMode::Position, position);
+  m_elevatorMotor->Set(ControlMode::MotionMagic, position);
 }
 
 double Elevator::getPosition() {
 	return m_elevatorMotor->GetSelectedSensorPosition();
+}
+
+void Elevator::resetEncoder() {
+	m_elevatorMotor->SetSelectedSensorPosition(0);
 }
