@@ -8,13 +8,16 @@
 #pragma once
 
 #include <frc/commands/Command.h>
+#include <frc/Timer.h>
 
 class CountTest : public frc::Command {
- public:
-  CountTest(int);
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
+  public:
+    CountTest(int);
+    void Initialize() override;
+    void Execute() override;
+    bool IsFinished() override;
+    void End() override;
+    void Interrupted() override;
+  private:
+    frc::Timer m_timer;
 };

@@ -6,17 +6,22 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/autostuff/OtherCommand.h"
+#include <frc/smartdashboard/SmartDashboard.h>
+#include <cstdlib>
 
 OtherCommand::OtherCommand() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
+  SetTimeout(2);
 }
 
 // Called just before this Command runs the first time
 void OtherCommand::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void OtherCommand::Execute() {}
+void OtherCommand::Execute() {
+  frc::SmartDashboard::PutNumber("Random Number", rand());
+}
 
 // Make this return true when this Command no longer needs to run execute()
 bool OtherCommand::IsFinished() { return false; }

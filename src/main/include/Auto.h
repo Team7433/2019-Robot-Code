@@ -40,6 +40,6 @@ class Auto {
     bool CommandRunning = false;
 
     int currentStep = 0;
-    bool startedStep = false;
+    bool m_startedStep = false;
 
 };

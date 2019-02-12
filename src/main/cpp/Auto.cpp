@@ -7,7 +7,7 @@
 
 #include "Auto.h"
 #include <frc/smartdashboard/SmartDashboard.h>
-
+#include "Robot.h"
 
 //commands
 #include "commands/autostuff/CountTest.h"
@@ -76,16 +76,40 @@ void Auto::SetRoutine(int routine) {
     for(int i = 0; i < routineLength; i++) {
         std::cout << "Item" << i << ":" << RoutineArray[i] << "\n";
     }
+    m_isRunningAuto = true;
     
 }
 
 void Auto::ExecuteRoutine() {
-    if (startedStep == false) {
-        StartStep();
+    try
+    {
+        frc::SmartDashboard::PutNumber("Current Step", currentStep);
+        if (m_isRunningAuto == false) {
+            std::cout << "Running Auto is false\n";
+            return;
+        }
+        std::cout << "m_startedStep = " << m_startedStep << "\n";
+        if (m_startedStep == false) {
+            std::cout << "Not started step" << "\n";
+            StartStep();
+        }
+        if (m_command->IsCompleted() == true) {
+            currentStep++;
+            m_startedStep = false;
+            m_command = nullptr;
+        }
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << e.what() << '\n';
     }
 }
 
 void Auto::StartStep() {
+    if (currentStep >= m_routineLength) {
+        m_isRunningAuto = false;
+        return;
+    }
     std::string StepFunction = RoutineArray[currentStep];
     int OpenBracketPos = StepFunction.find('(');
     int ClosedBracketPos = StepFunction.find(')');
@@ -107,7 +131,14 @@ void Auto::StartStep() {
         LineRemainder = LineRemainder.substr(colinPos+1, std::string::npos);
     }
     StartCommand(functionName, parameters, NumberOfParameters);
-
+    if (m_command != nullptr) {
+        m_startedStep = true;
+        m_command->Start();
+        frc::SmartDashboard::PutString("Auto Status", "Started");
+    } else {
+        std::cout << "No Command Selected";
+        frc::SmartDashboard::PutString("Auto Status", "Error");
+    }
 }
 
 void Auto::StartCommand(std::string FunctionName, std::string parameters[], int paramSize) {
@@ -116,5 +147,8 @@ void Auto::StartCommand(std::string FunctionName, std::string parameters[], int 
         m_command = new CountTest(std::stoi(parameters[0]));
     } else if (FunctionName == "OtherCommand") {
         std::cout << "Function = OtherCommand() \n";
+        m_command = new OtherCommand();
+    } else {
+        std::cout << "Function Name Not recognised: FunctionName = " << FunctionName;
     }
 }
