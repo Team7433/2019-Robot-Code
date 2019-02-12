@@ -11,7 +11,7 @@
 
 class CountTest : public frc::Command {
  public:
-  CountTest();
+  CountTest(int);
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

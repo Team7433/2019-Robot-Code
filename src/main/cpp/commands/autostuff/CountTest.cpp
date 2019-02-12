@@ -7,7 +7,7 @@
 
 #include "commands/autostuff/CountTest.h"
 
-CountTest::CountTest() {
+CountTest::CountTest(int Time) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
 }

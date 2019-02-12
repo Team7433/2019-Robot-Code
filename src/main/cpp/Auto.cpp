@@ -8,6 +8,11 @@
 #include "Auto.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 
+
+//commands
+#include "commands/autostuff/CountTest.h"
+#include "commands/autostuff/OtherCommand.h"
+
 Auto::Auto() {
     frc::SmartDashboard::PutNumber("Routine ID", 0);
     frc::SmartDashboard::PutString("Auto Status", "Not Running");
@@ -105,6 +110,11 @@ void Auto::StartStep() {
 
 }
 
-void Auto::StartCommand(std::string Function, std::string parameters[], int paramSize) {
-
+void Auto::StartCommand(std::string FunctionName, std::string parameters[], int paramSize) {
+    if (FunctionName == "CountTest") {
+        std::cout << "Function = CountTest(" << parameters[0] <<") \n";
+        m_command = new CountTest(std::stoi(parameters[0]));
+    } else if (FunctionName == "OtherCommand") {
+        std::cout << "Function = OtherCommand() \n";
+    }
 }
