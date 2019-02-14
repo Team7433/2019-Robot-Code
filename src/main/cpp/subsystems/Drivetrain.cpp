@@ -7,10 +7,13 @@
 
 #include "subsystems/Drivetrain.h"
 #include "commands/manualDrive.h"
+#include "subsystems/constants.h"
 
 Drivetrain::Drivetrain() : Subsystem("ExampleSubsystem") {}
 
 void Drivetrain::InitDefaultCommand() {
+  m_leftMaster->ConfigFactoryDefault(kTimeoutMs);
+  m_rightMaster->ConfigFactoryDefault(kTimeoutMs);
   // Set the default command for a subsystem here.
   SetDefaultCommand(new manualDrive());
 }

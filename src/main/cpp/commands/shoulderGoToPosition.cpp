@@ -5,29 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/manualDrive.h"
+#include "commands/shoulderGoToPosition.h"
 #include "Robot.h"
 
-manualDrive::manualDrive() {
+shoulderGoToPosition::shoulderGoToPosition(double position) {
+  m_position = position;
   // Use Requires() here to declare subsystem dependencies
-  Requires(&Robot::drivetrain);
+  Requires(&Robot::shoulder);
 }
 
 // Called just before this Command runs the first time
-void manualDrive::Initialize() {}
-
-// Called repeatedly when this Command is scheduled to run
-void manualDrive::Execute() {
-  auto& joystick = Robot::oi.getJoystick1();
-  Robot::drivetrain.driveCurvature(-joystick.GetY(),joystick.GetX(), joystick.GetRawButton(1));
+void shoulderGoToPosition::Initialize() {
+    Robot::shoulder.gotoPositionMM(m_position);
 }
 
+// Called repeatedly when this Command is scheduled to run
+void shoulderGoToPosition::Execute() {}
+
 // Make this return true when this Command no longer needs to run execute()
-bool manualDrive::IsFinished() { return false; }
+bool shoulderGoToPosition::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void manualDrive::End() {}
+void shoulderGoToPosition::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void manualDrive::Interrupted() {}
+void shoulderGoToPosition::Interrupted() {}

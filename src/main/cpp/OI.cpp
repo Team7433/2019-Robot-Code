@@ -14,6 +14,7 @@
 #include "commands/TrunkGotoPosition.h"
 #include "commands/ResetTrunkPosition.h"
 #include "commands/ResetFootEncoder.h"
+#include "commands/shoulderGoToPosition.h"
 
 
 OI::OI() {
@@ -41,11 +42,11 @@ OI::OI() {
     //m_joystick2button5.WhenPressed(new command());
     //m_joystick2button6.WhenPressed(new command());
     //m_joystick2button7.WhenPressed(new command());
-    //m_joystick2button8.WhenPressed(new command());
-    //m_joystick2button9.WhenPressed(new command());
-    //m_joystick2button10.WhenPressed(new command());
+    m_joystick2button8.WhenPressed(new shoulderGoToPosition(0));
+    //m_joystick2button9.WhenPressed(new shoulderGoToPosition(9057));
+    m_joystick2button10.WhenPressed(new shoulderGoToPosition(2889));
     //m_joystick2button11.WhenPressed(new command());
-    //m_joystick2button12.WhenPressed(new command());
+    m_joystick2button12.WhenPressed(new shoulderGoToPosition(9057));
 
 
 }

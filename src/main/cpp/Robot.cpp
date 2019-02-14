@@ -18,6 +18,7 @@ Vision Robot::vision;
 Foot Robot::foot;
 Trunk Robot::trunk;
 Drivetrain Robot::drivetrain;
+Shoulder Robot::shoulder;
 
 void Robot::RobotInit() {
 

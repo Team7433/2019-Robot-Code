@@ -20,6 +20,7 @@
 #include "subsystems/Foot.h"
 #include "subsystems/Trunk.h"
 #include "subsystems/Drivetrain.h"
+#include "subsystems/Shoulder.h"
 
 class Robot : public frc::TimedRobot {
  public:
@@ -32,7 +33,7 @@ class Robot : public frc::TimedRobot {
   //Subsystems
   static Foot foot;
   static Trunk trunk;
-
+  static Shoulder shoulder;
 
   void RobotInit() override;
   void RobotPeriodic() override;
