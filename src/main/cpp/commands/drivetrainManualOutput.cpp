@@ -5,34 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/manualFoot.h"
+#include "commands/drivetrainManualOutput.h"
 #include "Robot.h"
-#include <iostream>
 
-manualFoot::manualFoot() {
-  Requires(&Robot::foot);
+drivetrainManualOutput::drivetrainManualOutput(double left, double right) {
+  m_left = left;
+  m_right = right;
+  // Use Requires() here to declare subsystem dependencies
+  Requires(&Robot::drivetrain);
 }
 
 // Called just before this Command runs the first time
-void manualFoot::Initialize() {
-
+void drivetrainManualOutput::Initialize() {
+  Robot::drivetrain.driveTank(m_left, m_right);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void manualFoot::Execute() {
-  auto& joystick = Robot::oi.getJoystick2();
-  Robot::foot.controlManual(joystick.GetX());
-}
+void drivetrainManualOutput::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool manualFoot::IsFinished() { return false; }
+bool drivetrainManualOutput::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void manualFoot::End() {
-  std::cout << "Done \n";
-  Robot::foot.controlManual(0.00);
+void drivetrainManualOutput::End() {
+  Robot::drivetrain.driveTank(0,0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void manualFoot::Interrupted() {}
+void drivetrainManualOutput::Interrupted() {}

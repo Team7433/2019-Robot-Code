@@ -9,17 +9,12 @@
 
 #include <frc/commands/Command.h>
 
-class FootGotoPosition : public frc::Command {
-  public:
-    enum FootPosition {forward = -2750, start = 0, Back = 5600};
-    FootGotoPosition(double position);
-    FootGotoPosition(FootPosition position);
-    void Initialize() override;
-    void Execute() override;
-    bool IsFinished() override;
-    void End() override;
-    void Interrupted() override;
-  private:
-    double m_position;
-
+class manualDrive : public frc::Command {
+ public:
+  manualDrive();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };

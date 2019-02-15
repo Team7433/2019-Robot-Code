@@ -5,34 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/manualFoot.h"
+#include "commands/shoulderGoToPosition.h"
 #include "Robot.h"
-#include <iostream>
 
-manualFoot::manualFoot() {
-  Requires(&Robot::foot);
+shoulderGoToPosition::shoulderGoToPosition(double position) {
+  m_position = position;
+  // Use Requires() here to declare subsystem dependencies
+  Requires(&Robot::shoulder);
 }
 
 // Called just before this Command runs the first time
-void manualFoot::Initialize() {
-
+void shoulderGoToPosition::Initialize() {
+    Robot::shoulder.gotoPositionMM(m_position);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void manualFoot::Execute() {
-  auto& joystick = Robot::oi.getJoystick2();
-  Robot::foot.controlManual(joystick.GetX());
-}
+void shoulderGoToPosition::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool manualFoot::IsFinished() { return false; }
+bool shoulderGoToPosition::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void manualFoot::End() {
-  std::cout << "Done \n";
-  Robot::foot.controlManual(0.00);
-}
+void shoulderGoToPosition::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void manualFoot::Interrupted() {}
+void shoulderGoToPosition::Interrupted() {}

@@ -7,19 +7,10 @@
 
 #pragma once
 
-#include <frc/commands/Command.h>
+#include <frc/commands/InstantCommand.h>
 
-class FootGotoPosition : public frc::Command {
-  public:
-    enum FootPosition {forward = -2750, start = 0, Back = 5600};
-    FootGotoPosition(double position);
-    FootGotoPosition(FootPosition position);
-    void Initialize() override;
-    void Execute() override;
-    bool IsFinished() override;
-    void End() override;
-    void Interrupted() override;
-  private:
-    double m_position;
-
+class ResetFootEncoder : public frc::InstantCommand {
+ public:
+  ResetFootEncoder();
+  void Initialize() override;
 };

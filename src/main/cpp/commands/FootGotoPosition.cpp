@@ -8,9 +8,16 @@
 #include "commands/FootGotoPosition.h"
 #include "Robot.h"
 
+// Create FootGotoPosition with a double position @param double posiition 
 FootGotoPosition::FootGotoPosition(double position) {
   m_position = position;
   // Use Requires() here to declare subsystem dependencies
+  Requires(&Robot::foot);
+}
+
+// Create FootGotoPosition with a position @param FootPosition position
+FootGotoPosition::FootGotoPosition(FootPosition position) {
+  m_position = position;
   Requires(&Robot::foot);
 }
 

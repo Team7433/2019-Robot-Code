@@ -10,20 +10,20 @@
 #include <frc/commands/Subsystem.h>
 #include <ctre/Phoenix.h>
 
-class Foot : public frc::Subsystem {
+class Shoulder : public frc::Subsystem {
  private:
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
-  WPI_TalonSRX * m_footMotor = new WPI_TalonSRX(11);
-  CANifier * m_canifier = new CANifier{1};
- public:
-  Foot();
-  void InitDefaultCommand() override;
 
-  //Control Methods
-  void controlManual(double output);
+  WPI_TalonSRX * m_ShoulderMaster = new WPI_TalonSRX{8};
+  //WPI_TalonSRX * m_ShoulderSlave = new WPI_TalonSRX{3};
+ public:
+  Shoulder();
+  void InitDefaultCommand() override;
+  void manualControl(double output);
   void gotoPosition(double position);
-  void resetEncoder();
-  void UpdateData();
-  double getFootPosition();
+  void gotoPositionMM(double position);
+  void resetSensor();
+  double getPosition();
+  void SetMaxSpeeds(double forward, double reverse);
 };

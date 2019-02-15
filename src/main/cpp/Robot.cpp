@@ -17,7 +17,8 @@ Vision Robot::vision;
 //Subsystems
 Foot Robot::foot;
 Trunk Robot::trunk;
-
+Drivetrain Robot::drivetrain;
+Shoulder Robot::shoulder;
 
 void Robot::RobotInit() {
 
@@ -49,6 +50,9 @@ void Robot::TeleopInit() {
 
 void Robot::TeleopPeriodic() { 
   frc::Scheduler::GetInstance()->Run(); 
+
+  //update data from subsystems
+  foot.UpdateData();
 }
 
 void Robot::TestPeriodic() {}

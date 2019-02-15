@@ -5,21 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "commands/ResetFootEncoder.h"
+#include "Robot.h"
 
-#include <frc/commands/Command.h>
+ResetFootEncoder::ResetFootEncoder() {
+  // Use Requires() here to declare subsystem dependencies
+  // eg. Requires(Robot::chassis.get());
+}
 
-class FootGotoPosition : public frc::Command {
-  public:
-    enum FootPosition {forward = -2750, start = 0, Back = 5600};
-    FootGotoPosition(double position);
-    FootGotoPosition(FootPosition position);
-    void Initialize() override;
-    void Execute() override;
-    bool IsFinished() override;
-    void End() override;
-    void Interrupted() override;
-  private:
-    double m_position;
-
-};
+// Called once when the command executes
+void ResetFootEncoder::Initialize() {
+  Robot::foot.resetEncoder();
+}
