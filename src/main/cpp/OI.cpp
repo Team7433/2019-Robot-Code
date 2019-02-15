@@ -9,6 +9,8 @@
 
 #include <frc/WPILib.h>
 
+#include "positions.h"
+
 //commands
 #include "commands/FootGotoPosition.h"
 #include "commands/TrunkGotoPosition.h"
