@@ -9,9 +9,9 @@
 
 #include <frc/commands/Command.h>
 
-class manualFoot : public frc::Command {
+class manualElevator : public frc::Command {
  public:
-  manualFoot();
+  manualElevator();
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

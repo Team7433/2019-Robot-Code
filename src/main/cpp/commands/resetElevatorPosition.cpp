@@ -5,16 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "commands/resetElevatorPosition.h"
+#include "Robot.h"
 
-#include <frc/commands/Command.h>
+resetElevatorPosition::resetElevatorPosition() {
+  // Use Requires() here to declare subsystem dependencies
+  // eg. Requires(Robot::chassis.get());
+}
 
-class manualFoot : public frc::Command {
- public:
-  manualFoot();
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
-};
+// Called once when the command executes
+void resetElevatorPosition::Initialize() {
+  Robot::elevator.resetEncoder();
+}

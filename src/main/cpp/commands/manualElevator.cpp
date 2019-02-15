@@ -5,34 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/manualFoot.h"
+#include "commands/manualElevator.h"
 #include "Robot.h"
 #include <iostream>
-
-manualFoot::manualFoot() {
-  Requires(&Robot::foot);
+// Fix below.
+manualElevator::manualElevator() {
+  Requires(&Robot::elevator);
 }
 
 // Called just before this Command runs the first time
-void manualFoot::Initialize() {
-
-}
+void manualElevator::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void manualFoot::Execute() {
+void manualElevator::Execute() {
   auto& joystick = Robot::oi.getJoystick2();
-  Robot::foot.controlManual(joystick.GetX());
+  Robot::elevator.controlManual(joystick.GetY());
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool manualFoot::IsFinished() { return false; }
+bool manualElevator::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void manualFoot::End() {
+void manualElevator::End() {
   std::cout << "Done \n";
   Robot::foot.controlManual(0.00);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void manualFoot::Interrupted() {}
+void manualElevator::Interrupted() {}

@@ -21,6 +21,7 @@
 #include "subsystems/Trunk.h"
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Shoulder.h"
+#include "subsystems/Elevator.h"
 
 class Robot : public frc::TimedRobot {
  public:
@@ -28,12 +29,13 @@ class Robot : public frc::TimedRobot {
   //Modules
   static OI oi;
   static Vision vision;
-  static Drivetrain drivetrain;
 
   //Subsystems
   static Foot foot;
   static Trunk trunk;
   static Shoulder shoulder;
+  static Elevator elevator;
+  static Drivetrain drivetrain;
 
   void RobotInit() override;
   void RobotPeriodic() override;

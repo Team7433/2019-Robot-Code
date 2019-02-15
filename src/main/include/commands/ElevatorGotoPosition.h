@@ -9,12 +9,14 @@
 
 #include <frc/commands/Command.h>
 
-class manualFoot : public frc::Command {
+class ElevatorGotoPosition : public frc::Command {
  public:
-  manualFoot();
+  ElevatorGotoPosition(double position);
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;
   void End() override;
   void Interrupted() override;
+ private:
+  double m_position;
 };

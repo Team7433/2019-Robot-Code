@@ -15,6 +15,8 @@
 #include "commands/ResetTrunkPosition.h"
 #include "commands/ResetFootEncoder.h"
 #include "commands/shoulderGoToPosition.h"
+#include "commands/resetElevatorPosition.h"
+#include "commands/ElevatorGotoPosition.h"
 
 
 OI::OI() {
@@ -22,6 +24,7 @@ OI::OI() {
   //Setup joystick buttons to commands
     //joystick 1
     //m_joystick1button1.WhenPressed(new command());
+
     //m_joystick1button2.WhenPressed(new command());
     //m_joystick1button3.WhenPressed(new TrunkGotoPosition(750));
     //m_joystick1button4.WhenPressed(new command());
@@ -39,14 +42,14 @@ OI::OI() {
     //m_joystick2button2.WhenPressed(new command());
     //m_joystick2button3.WhenPressed(new command());
     //m_joystick2button4.WhenPressed(new command());
-    //m_joystick2button5.WhenPressed(new command());
+    m_joystick2button5.WhenPressed(new resetElevatorPosition());
     //m_joystick2button6.WhenPressed(new command());
     //m_joystick2button7.WhenPressed(new command());
-    //m_joystick2button8.WhenPressed(new shoulderGoToPosition(0));
-    //m_joystick2button9.WhenPressed(new shoulderGoToPosition(9057));
-    //m_joystick2button10.WhenPressed(new shoulderGoToPosition(2889));
+    m_joystick2button8.WhenPressed(new ElevatorGotoPosition(0));
+    //m_joystick2button9.WhenPressed(new command());
+    m_joystick2button10.WhenPressed(new ElevatorGotoPosition(-10000));
     //m_joystick2button11.WhenPressed(new command());
-    //m_joystick2button12.WhenPressed(new shoulderGoToPosition(9057));
+    m_joystick2button12.WhenPressed(new ElevatorGotoPosition(-20000));
 
 
 }

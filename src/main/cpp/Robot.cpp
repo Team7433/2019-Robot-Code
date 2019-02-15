@@ -19,6 +19,8 @@ Foot Robot::foot;
 Trunk Robot::trunk;
 Drivetrain Robot::drivetrain;
 Shoulder Robot::shoulder;
+Elevator Robot::elevator;
+
 
 void Robot::RobotInit() {
 
