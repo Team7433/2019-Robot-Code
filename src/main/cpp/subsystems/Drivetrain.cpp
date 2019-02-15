@@ -22,6 +22,10 @@ void Drivetrain::driveArcade(double forward, double rotation) {
   m_robotDrive.ArcadeDrive(forward, rotation);
 }
 
+void Drivetrain::driveArcade(double left, double right) {
+  m_robotDrive.TankDrive(left, right);
+}
+
 void Drivetrain::driveCurvature(double forward, double curve, bool isQuickTurn) {
   m_robotDrive.CurvatureDrive(forward, curve, isQuickTurn);
 }

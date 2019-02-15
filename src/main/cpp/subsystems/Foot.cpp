@@ -44,7 +44,7 @@ Foot::Foot() : Subsystem("ExampleSubsystem") {
 }
 
 void Foot::InitDefaultCommand() {
-  SetDefaultCommand(new manualFoot());
+  //SetDefaultCommand(new manualFoot());
 }
 
 void Foot::controlManual(double output) {

@@ -27,4 +27,5 @@ class Drivetrain : public frc::Subsystem {
   void InitDefaultCommand() override;
   void driveArcade(double forward, double rotation);
   void driveCurvature(double forward, double curve, bool isQuickTurn);
+  void driveTank(double left, double right);
 };
