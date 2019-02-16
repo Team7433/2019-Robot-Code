@@ -7,17 +7,9 @@
 
 #pragma once
 
-#include <frc/commands/Command.h>
+#include <frc/commands/CommandGroup.h>
 
-class TrunkGotoPosition : public frc::Command {
-  public:
-    TrunkGotoPosition(double position);
-    void Initialize() override;
-    void Execute() override;
-    bool IsFinished() override;
-    void End() override;
-    void Interrupted() override;
-  private:
-    double m_position;
-    double m_tolerence = 100;
+class ClimbReset : public frc::CommandGroup {
+ public:
+  ClimbReset();
 };

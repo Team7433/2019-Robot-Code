@@ -10,7 +10,8 @@
 #include "commands/ManualTrunk.h"
 
 Trunk::Trunk() : Subsystem("ExampleSubsystem") {
-
+  m_TrunkMaster->ConfigFactoryDefault();
+  m_TrunkSlave->ConfigFactoryDefault();
   //Make second motor follow first
   m_TrunkSlave->Follow(*m_TrunkMaster);
 

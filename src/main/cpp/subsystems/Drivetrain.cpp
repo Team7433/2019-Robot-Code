@@ -22,7 +22,7 @@ void Drivetrain::driveArcade(double forward, double rotation) {
   m_robotDrive.ArcadeDrive(forward, rotation);
 }
 
-void Drivetrain::driveArcade(double left, double right) {
+void Drivetrain::driveTank(double left, double right) {
   m_robotDrive.TankDrive(left, right);
 }
 

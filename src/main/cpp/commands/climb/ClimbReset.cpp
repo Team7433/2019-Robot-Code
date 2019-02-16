@@ -5,12 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/climb/ClimbFinish.h"
-#include "commands/TrunkGotoPosition.h"
+#include "commands/climb/ClimbReset.h"
 #include "commands/FootGotoPosition.h"
-#include "commands/drivetrainManualOutput.h"
 
-ClimbFinish::ClimbFinish() {
+ClimbReset::ClimbReset() {
   // Add Commands here:
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());
@@ -27,5 +25,5 @@ ClimbFinish::ClimbFinish() {
   // e.g. if Command1 requires chassis, and Command2 requires arm,
   // a CommandGroup containing them would require both the chassis and the
   // arm.
-  AddSequential(new TrunkGotoPosition(750));
+  AddSequential(new FootGotoPosition(0));
 }

@@ -8,20 +8,19 @@
 #pragma once
 
 #include <frc/commands/Subsystem.h>
-#include <ctre/Phoenix.h>
+#include <ctre/phoenix.h>
 
-class Elevator : public frc::Subsystem {
+class BallFloorWrist : public frc::Subsystem {
  private:
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
-  WPI_TalonSRX * m_elevatorMotor = new WPI_TalonSRX(7);
+  TalonSRX * m_wristMotor = new TalonSRX{15};
  public:
-  Elevator();
+  BallFloorWrist();
   void InitDefaultCommand() override;
-
-  //Control Methods
-  void controlManual(double output);
+  void manualcontrol(double output);
   void gotoPosition(double position);
-  void resetEncoder();
-  double getPosition();
+  void gotoPositionMM(double position);
+  void resetPosition();
+  int getPosition();
 };

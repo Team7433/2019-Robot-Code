@@ -20,6 +20,8 @@ Trunk Robot::trunk;
 Drivetrain Robot::drivetrain;
 Shoulder Robot::shoulder;
 Elevator Robot::elevator;
+Wrist Robot::wrist;
+BallFloorWrist Robot::ballfloorwrist;
 
 
 void Robot::RobotInit() {
@@ -32,6 +34,7 @@ void Robot::RobotPeriodic() {
 
 void Robot::DisabledInit() {
   Robot::trunk.manualControl(0);
+  Robot::foot.controlManual(0);
 }
 
 void Robot::DisabledPeriodic() { 

@@ -29,5 +29,5 @@ ClimbLift::ClimbLift() {
   // arm.
   AddSequential(new TrunkGotoPosition(19100));
   AddParallel(new FootGotoPosition(5600));
-  AddParallel(new shoulderGoToPosition(1700));
+  //AddSequential(new shoulderGoToPosition(1700));
 }

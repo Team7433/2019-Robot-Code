@@ -7,10 +7,10 @@
 
 #include "subsystems/Shoulder.h"
 #include "subsystems/constants.h"
-//#include "commands/shoulderManual.h"
+#include "commands/manualSholder.h"
 
 Shoulder::Shoulder() : Subsystem("ExampleSubsystem") {
-
+  m_ShoulderMaster->ConfigFactoryDefault();
   //Make second motor follow first
   //config sensor and make sure its readings are correct
   m_ShoulderMaster->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, kPIDLoopIdx, kTimeoutMs);
@@ -24,7 +24,7 @@ Shoulder::Shoulder() : Subsystem("ExampleSubsystem") {
 
 	// set PID Values
 	m_ShoulderMaster->Config_kF(kPIDLoopIdx, 3.64, kTimeoutMs);//1.39373
-	m_ShoulderMaster->Config_kP(kPIDLoopIdx, 1.0, kTimeoutMs);
+	m_ShoulderMaster->Config_kP(kPIDLoopIdx, 30.0, kTimeoutMs);
 	m_ShoulderMaster->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_ShoulderMaster->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
 
@@ -33,13 +33,15 @@ Shoulder::Shoulder() : Subsystem("ExampleSubsystem") {
   //m_ShoulderMaster->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,kTimeoutMs);
 
   //config motion magic with acceleration and cruise velocity 
-  m_ShoulderMaster->ConfigMotionCruiseVelocity(150.0, kTimeoutMs);
-	m_ShoulderMaster->ConfigMotionAcceleration(100.0, kTimeoutMs);
+  m_ShoulderMaster->ConfigMotionCruiseVelocity(250.0, kTimeoutMs);
+	m_ShoulderMaster->ConfigMotionAcceleration(200.0, kTimeoutMs);
+
+  m_ShoulderMaster->ConfigNeutralDeadband(0.02, kTimeoutMs);
 }
 
 void Shoulder::InitDefaultCommand() {
   // Set the default command for a subsystem here.
-  //SetDefaultCommand(new shoulderManual());
+  //SetDefaultCommand(new manualSholder());
 }
 
 void Shoulder::manualControl(double output) {

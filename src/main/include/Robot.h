@@ -22,6 +22,8 @@
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Shoulder.h"
 #include "subsystems/Elevator.h"
+#include "subsystems/Wrist.h"
+#include "subsystems/BallFloorWrist.h"
 
 class Robot : public frc::TimedRobot {
  public:
@@ -36,6 +38,8 @@ class Robot : public frc::TimedRobot {
   static Shoulder shoulder;
   static Elevator elevator;
   static Drivetrain drivetrain;
+  static Wrist wrist;
+  static BallFloorWrist ballfloorwrist;
 
   void RobotInit() override;
   void RobotPeriodic() override;

@@ -12,7 +12,8 @@
 #include "commands/manualFoot.h"
 
 Foot::Foot() : Subsystem("ExampleSubsystem") {
-  m_footMotor->ConfigRemoteFeedbackFilter(1, RemoteSensorSource::RemoteSensorSource_CANifier_Quadrature, 0, 0);
+	m_footMotor->ConfigFactoryDefault();
+	m_footMotor->ConfigRemoteFeedbackFilter(1, RemoteSensorSource::RemoteSensorSource_CANifier_Quadrature, 0, 0);
 	m_footMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::RemoteSensor0, 0, 0);
 	m_footMotor->SetSensorPhase(false);
 
@@ -77,4 +78,11 @@ void Foot::UpdateData() {
 
 double Foot::getFootPosition() {
 	return m_footMotor->GetSelectedSensorPosition();
+}
+
+bool Foot::OnlimitSwitch() {
+	if (m_footMotor->GetSensorCollection().IsFwdLimitSwitchClosed() == true ||
+		m_footMotor->GetSensorCollection().IsRevLimitSwitchClosed()) {
+		return true;
+	}
 }

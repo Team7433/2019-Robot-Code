@@ -5,39 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/TrunkGotoPosition.h"
+#include "commands/manualBallWrist.h"
 #include "Robot.h"
-#include "frc/smartdashboard/SmartDashboard.h"
-#include "iostream"
 
-TrunkGotoPosition::TrunkGotoPosition(double position) {
-  m_position = position;
+manualBallWrist::manualBallWrist() {
   // Use Requires() here to declare subsystem dependencies
-  Requires(&Robot::trunk);
+  Requires(&Robot::ballfloorwrist);
 }
 
 // Called just before this Command runs the first time
-void TrunkGotoPosition::Initialize() {
-  Robot::trunk.gotoPositionMM(m_position);
-}
+void manualBallWrist::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void TrunkGotoPosition::Execute() {
-  frc::SmartDashboard::PutNumber("Trunk Position", Robot::trunk.getPosition());
+void manualBallWrist::Execute() {
+  auto& Joystick = Robot::oi.getJoystick2();
+  Robot::ballfloorwrist.manualcontrol(Joystick.GetY());
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool TrunkGotoPosition::IsFinished() { 
-  if (m_position-m_tolerence < Robot::trunk.getPosition() && m_position+m_tolerence > Robot::trunk.getPosition()) {
-    return true;
-  }
-  return false;
- }
+bool manualBallWrist::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void TrunkGotoPosition::End() {}
+void manualBallWrist::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void TrunkGotoPosition::Interrupted() {
-}
+void manualBallWrist::Interrupted() {}
