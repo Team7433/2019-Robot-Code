@@ -10,23 +10,24 @@
 #include "commands/ManualTrunk.h"
 
 Trunk::Trunk() : Subsystem("ExampleSubsystem") {
-
+  m_TrunkMaster->ConfigFactoryDefault();
+  m_TrunkSlave->ConfigFactoryDefault();
   //Make second motor follow first
   m_TrunkSlave->Follow(*m_TrunkMaster);
 
   //config sensor and make sure its readings are correct
-  m_TrunkMaster->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, kPIDLoopIdx, kTimeoutMs);
+  m_TrunkMaster->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, kPIDLoopIdx, kTimeoutMs);
 	m_TrunkMaster->SetSensorPhase(true);
 
   //set the peak and nominal(least) outputs
 	m_TrunkMaster->ConfigNominalOutputForward(0, kTimeoutMs);
 	m_TrunkMaster->ConfigNominalOutputReverse(0, kTimeoutMs);
-	m_TrunkMaster->ConfigPeakOutputForward(0.5, kTimeoutMs);
-	m_TrunkMaster->ConfigPeakOutputReverse(-0.5, kTimeoutMs);
+	m_TrunkMaster->ConfigPeakOutputForward(1.0, kTimeoutMs);
+	m_TrunkMaster->ConfigPeakOutputReverse(-1.0, kTimeoutMs);
 
 	// set PID Values
 	m_TrunkMaster->Config_kF(kPIDLoopIdx, 1.423, kTimeoutMs);//1.39373
-	m_TrunkMaster->Config_kP(kPIDLoopIdx, 1.0, kTimeoutMs);
+	m_TrunkMaster->Config_kP(kPIDLoopIdx, 2.0, kTimeoutMs);
 	m_TrunkMaster->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_TrunkMaster->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
 

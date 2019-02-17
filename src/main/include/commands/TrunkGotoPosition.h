@@ -19,5 +19,5 @@ class TrunkGotoPosition : public frc::Command {
     void Interrupted() override;
   private:
     double m_position;
-    double m_tolerence = 10;
+    double m_tolerence = 100;
 };

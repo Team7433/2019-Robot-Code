@@ -20,8 +20,8 @@ void manualFoot::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void manualFoot::Execute() {
-  auto& joystick = Robot::oi.getJoystick1();
-  Robot::foot.controlManual(joystick.GetY());
+  auto& joystick = Robot::oi.getJoystick2();
+  Robot::foot.controlManual(joystick.GetX());
 }
 
 // Make this return true when this Command no longer needs to run execute()

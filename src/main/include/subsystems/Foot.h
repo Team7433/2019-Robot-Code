@@ -14,7 +14,8 @@ class Foot : public frc::Subsystem {
  private:
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
-  WPI_TalonSRX * m_footMotor = new WPI_TalonSRX(1);
+  WPI_TalonSRX * m_footMotor = new WPI_TalonSRX(11);
+  CANifier * m_canifier = new CANifier{1};
  public:
   Foot();
   void InitDefaultCommand() override;
@@ -23,5 +24,7 @@ class Foot : public frc::Subsystem {
   void controlManual(double output);
   void gotoPosition(double position);
   void resetEncoder();
+  void UpdateData();
   double getFootPosition();
+  bool OnlimitSwitch();
 };
