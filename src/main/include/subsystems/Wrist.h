@@ -25,4 +25,6 @@ class Wrist : public frc::Subsystem {
   void ResetPosition();
   int GetPosition();
   void UpdateData();
+  void GotoAngle(double angle);
+  double GetAngle();
 };

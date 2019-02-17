@@ -16,7 +16,7 @@ shoulderGoToPosition::shoulderGoToPosition(double position) {
 
 // Called just before this Command runs the first time
 void shoulderGoToPosition::Initialize() {
-    Robot::shoulder.gotoPositionMM(m_position);
+    Robot::shoulder.GotoAngle(m_position);
 }
 
 // Called repeatedly when this Command is scheduled to run

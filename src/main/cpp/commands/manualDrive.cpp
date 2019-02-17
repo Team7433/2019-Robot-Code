@@ -19,7 +19,18 @@ void manualDrive::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void manualDrive::Execute() {
   auto& joystick = Robot::oi.getJoystick1();
-  Robot::drivetrain.driveCurvature(-joystick.GetY(),joystick.GetX(), joystick.GetRawButton(1));
+  double rotation = 0;
+  if (!joystick.GetRawButton(1) == true) {
+    rotation = joystick.GetZ()*0.6;
+  } else {
+    rotation = joystick.GetZ();
+  }
+  if (joystick.GetRawAxis(3) > 0 ) {
+    Robot::drivetrain.driveCurvature(joystick.GetY(),rotation, !joystick.GetRawButton(1));
+  } else {
+    Robot::drivetrain.driveCurvature(-joystick.GetY(),rotation, !joystick.GetRawButton(1));
+  }
+  
 }
 
 // Make this return true when this Command no longer needs to run execute()

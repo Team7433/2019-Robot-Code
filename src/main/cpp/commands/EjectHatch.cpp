@@ -5,34 +5,33 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ballintakeIn.h"
+#include "commands/EjectHatch.h"
 #include "Robot.h"
 
-ballintakeIn::ballintakeIn() {
+EjectHatch::EjectHatch() {
   // Use Requires() here to declare subsystem dependencies
-  Requires(&Robot::ballfloorwrist);
-  
+  Requires(&Robot::wrist);
 }
 
 // Called just before this Command runs the first time
-void ballintakeIn::Initialize() {
-  //SetTimeout(2);
-  Robot::ballfloorwrist.manualcontrol(-0.6);
+void EjectHatch::Initialize() {
+  SetTimeout(0.8);
+  if (Robot::wrist.GetAngle() > 0 ) {
+    Robot::wrist.manualControl(-0.4);
+  } else {
+    Robot::wrist.manualControl(0.4);  
+  }
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ballintakeIn::Execute() {}
+void EjectHatch::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool ballintakeIn::IsFinished() { return IsTimedOut(); }
+bool EjectHatch::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void ballintakeIn::End() {
-  Robot::ballfloorwrist.manualcontrol(0);
-}
+void EjectHatch::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ballintakeIn::Interrupted() {
-  End();
-}
+void EjectHatch::Interrupted() {}

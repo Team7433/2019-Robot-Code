@@ -74,3 +74,9 @@ void Shoulder::UpdateData() {
   frc::SmartDashboard::PutNumber("Shoulder/Position", m_ShoulderMaster->GetSelectedSensorPosition());
   frc::SmartDashboard::PutNumber("Shoulder/Velocity", m_ShoulderMaster->GetSelectedSensorVelocity());
 }
+
+void Shoulder::GotoAngle(double angle) {
+  double position = (angle + 19) * 26.8074;
+  m_ShoulderMaster->Set(ControlMode::MotionMagic, position);
+}
+

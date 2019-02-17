@@ -16,7 +16,7 @@ wristGotoPosition::wristGotoPosition(double position) {
 
 // Called just before this Command runs the first time
 void wristGotoPosition::Initialize() {
-  Robot::wrist.GotoPositionMM(m_position);
+  Robot::wrist.GotoAngle(m_position);
 }
 
 // Called repeatedly when this Command is scheduled to run

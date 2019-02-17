@@ -38,6 +38,8 @@ Trunk::Trunk() : Subsystem("ExampleSubsystem") {
   //config motion magic with acceleration and cruise velocity 
   m_TrunkMaster->ConfigMotionCruiseVelocity(600.2, kTimeoutMs);
 	m_TrunkMaster->ConfigMotionAcceleration(380.8, kTimeoutMs);
+
+  m_TrunkMaster->Set(ControlMode::MotionMagic, 0);
 }
 
 void Trunk::InitDefaultCommand() {

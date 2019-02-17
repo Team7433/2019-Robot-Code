@@ -36,8 +36,6 @@ Wrist::Wrist() : Subsystem("ExampleSubsystem") {
   //config motion magic with acceleration and cruise velocity 
   m_wristMotor->ConfigMotionCruiseVelocity(200.0, kTimeoutMs);
 	m_wristMotor->ConfigMotionAcceleration(200.0, kTimeoutMs);
-
-  m_wristMotor->SetSelectedSensorPosition(-369.0, kPIDLoopIdx, kTimeoutMs);
 }
 
 void Wrist::InitDefaultCommand() {
@@ -68,6 +66,15 @@ int Wrist::GetPosition() {
 void Wrist::UpdateData() {
   frc::SmartDashboard::PutNumber("Wrist/Position", m_wristMotor->GetSelectedSensorPosition());
   frc::SmartDashboard::PutNumber("Wrist/Velocity", m_wristMotor->GetSelectedSensorVelocity());
+}
+
+void Wrist::GotoAngle(double angle) {
+  double position = (angle + 19) * 14.6222;
+  m_wristMotor->Set(ControlMode::MotionMagic, position);
+}
+
+double Wrist::GetAngle() {
+  return (m_wristMotor->GetSelectedSensorPosition() / 14.6222) - 19;
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

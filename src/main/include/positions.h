@@ -4,7 +4,8 @@
 namespace iona {
 
     enum Superstructure {
-        ballintake,
+        idle,
+        cargointake,
         hatchintake,
         hatchAbottom,   
         hatchBbottom,
@@ -12,6 +13,16 @@ namespace iona {
         hatchBMiddle,
         hatchATop,   
         hatchBTop,
+        cargoAlow,
+        cargoAmedium,
+        cargoAhigh,
+        cargoAtop,
+        cargoBlow,
+        cargoBmedium,
+        cargoBhigh,
+        cargoBtop,
+        cargoTest,
+        home,
     };
 
     //Put in the position namespace

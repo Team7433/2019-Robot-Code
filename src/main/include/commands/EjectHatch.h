@@ -8,19 +8,13 @@
 #pragma once
 
 #include <frc/commands/Command.h>
-#include "positions.h"
 
-class SuperStructureGotoPosition : public frc::Command {
-  public:
-    SuperStructureGotoPosition(iona::Superstructure position);
-    void Initialize() override;
-    void Execute() override;
-    bool IsFinished() override;
-    void End() override;
-    void Interrupted() override;
-  private:
-    iona::Superstructure m_position;
-    double m_elevatorPos; 
-    double m_wristPos; 
-    double m_shoulderPos; 
+class EjectHatch : public frc::Command {
+ public:
+  EjectHatch();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };

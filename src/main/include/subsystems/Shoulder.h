@@ -27,4 +27,5 @@ class Shoulder : public frc::Subsystem {
   double getPosition();
   void SetMaxSpeeds(double forward, double reverse);
   void UpdateData();
+  void GotoAngle(double angle);
 };
