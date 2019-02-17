@@ -8,6 +8,7 @@
 #include "subsystems/Shoulder.h"
 #include "subsystems/constants.h"
 #include "commands/manualSholder.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 Shoulder::Shoulder() : Subsystem("ExampleSubsystem") {
   m_ShoulderMaster->ConfigFactoryDefault();
@@ -67,4 +68,9 @@ void Shoulder::resetSensor() {
 void Shoulder::SetMaxSpeeds(double forward, double reverse) {
   m_ShoulderMaster->ConfigPeakOutputForward(forward, kTimeoutMs);
   m_ShoulderMaster->ConfigPeakOutputReverse(reverse, kTimeoutMs);	
+}
+
+void Shoulder::UpdateData() {
+  frc::SmartDashboard::PutNumber("Shoulder/Position", m_ShoulderMaster->GetSelectedSensorPosition());
+  frc::SmartDashboard::PutNumber("Shoulder/Velocity", m_ShoulderMaster->GetSelectedSensorVelocity());
 }

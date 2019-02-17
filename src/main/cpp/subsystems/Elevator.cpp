@@ -8,6 +8,7 @@
 #include "subsystems/Elevator.h"
 #include "subsystems/constants.h"
 #include "commands/manualElevator.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 
 
@@ -51,4 +52,11 @@ double Elevator::getPosition() {
 
 void Elevator::resetEncoder() {
 	m_elevatorMotor->SetSelectedSensorPosition(0);
+}
+
+void Elevator::UpdateData() {
+  frc::SmartDashboard::PutNumber("Elevator/Position", m_elevatorMotor->GetSelectedSensorPosition());
+  frc::SmartDashboard::PutNumber("Elevator/Velocity", m_elevatorMotor->GetSelectedSensorVelocity());
+	frc::SmartDashboard::PutBoolean("Elevator/ForwardLimit", m_elevatorMotor->GetSensorCollection().IsFwdLimitSwitchClosed());
+	frc::SmartDashboard::PutBoolean("Elevator/ReverseLimit", m_elevatorMotor->GetSensorCollection().IsRevLimitSwitchClosed());
 }

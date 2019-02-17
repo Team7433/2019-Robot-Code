@@ -24,4 +24,5 @@ class Elevator : public frc::Subsystem {
   void gotoPosition(double position);
   void resetEncoder();
   double getPosition();
+  void UpdateData();
 };

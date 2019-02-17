@@ -7,6 +7,7 @@
 
 #include "subsystems/BallFloorWrist.h"
 #include "subsystems/constants.h"
+#include "commands/manualBallWrist.h"
 
 BallFloorWrist::BallFloorWrist() : Subsystem("ExampleSubsystem") {
   m_wristMotor->ConfigFactoryDefault();
@@ -38,7 +39,7 @@ BallFloorWrist::BallFloorWrist() : Subsystem("ExampleSubsystem") {
 
 void BallFloorWrist::InitDefaultCommand() {
   // Set the default command for a subsystem here.
-  // SetDefaultCommand(new MySpecialCommand());
+  SetDefaultCommand(new manualBallWrist());
 }
 
 void BallFloorWrist::manualcontrol(double output) {

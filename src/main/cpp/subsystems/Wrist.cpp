@@ -8,6 +8,7 @@
 #include "subsystems/Wrist.h"
 #include "commands/manualWrist.h"
 #include "subsystems/constants.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 Wrist::Wrist() : Subsystem("ExampleSubsystem") {
   m_wristMotor->ConfigFactoryDefault();
@@ -35,6 +36,8 @@ Wrist::Wrist() : Subsystem("ExampleSubsystem") {
   //config motion magic with acceleration and cruise velocity 
   m_wristMotor->ConfigMotionCruiseVelocity(200.0, kTimeoutMs);
 	m_wristMotor->ConfigMotionAcceleration(200.0, kTimeoutMs);
+
+  m_wristMotor->SetSelectedSensorPosition(-369.0, kPIDLoopIdx, kTimeoutMs);
 }
 
 void Wrist::InitDefaultCommand() {
@@ -62,5 +65,9 @@ int Wrist::GetPosition() {
   return m_wristMotor->GetSelectedSensorPosition();
 }
 
+void Wrist::UpdateData() {
+  frc::SmartDashboard::PutNumber("Wrist/Position", m_wristMotor->GetSelectedSensorPosition());
+  frc::SmartDashboard::PutNumber("Wrist/Velocity", m_wristMotor->GetSelectedSensorVelocity());
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

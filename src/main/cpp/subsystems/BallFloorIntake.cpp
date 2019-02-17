@@ -5,18 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "subsystems/BallFloorIntake.h"
 
-#include <frc/commands/Command.h>
+BallFloorIntake::BallFloorIntake() : Subsystem("ExampleSubsystem") {}
 
-class BallWristGotoPosition : public frc::Command {
-  public:
-    BallWristGotoPosition(double position);
-    void Initialize() override;
-    void Execute() override;
-    bool IsFinished() override;
-    void End() override;
-    void Interrupted() override;
-  private:
-    double m_position;
-};
+void BallFloorIntake::InitDefaultCommand() {
+  // Set the default command for a subsystem here.
+  // SetDefaultCommand(new MySpecialCommand());
+}
+
+void BallFloorIntake::manual(double output) {
+  m_intakeMotor->Set(ControlMode::PercentOutput, output);
+}
+
+// Put methods for controlling this subsystem
+// here. Call these from Commands.

@@ -10,21 +10,13 @@
 #include <frc/commands/Subsystem.h>
 #include <ctre/Phoenix.h>
 
-class Shoulder : public frc::Subsystem {
+class BallFloorIntake : public frc::Subsystem {
  private:
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
-
-  WPI_TalonSRX * m_ShoulderMaster = new WPI_TalonSRX{8};
-  //WPI_TalonSRX * m_ShoulderSlave = new WPI_TalonSRX{3};
+  TalonSRX * m_intakeMotor = new TalonSRX{14};
  public:
-  Shoulder();
+  BallFloorIntake();
   void InitDefaultCommand() override;
-  void manualControl(double output);
-  void gotoPosition(double position);
-  void gotoPositionMM(double position);
-  void resetSensor();
-  double getPosition();
-  void SetMaxSpeeds(double forward, double reverse);
-  void UpdateData();
+  void manual(double output);
 };

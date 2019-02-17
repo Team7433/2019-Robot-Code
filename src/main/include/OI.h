@@ -13,15 +13,21 @@
 class OI {
   public:
     OI();
-
+    enum joystickNum {joy1, joy2};
     //create methods to get joysticks
     frc::Joystick& getJoystick1();
     frc::Joystick& getJoystick2();
+    frc::Joystick& getJoystick3();
+    bool joystickButtonLast(joystickNum,int button);
+    bool joystickButton(joystickNum,int button);
+    void UpdateButtons();
   private:
-
+    bool buttonslast1[12] = {false, false, false, false,false, false, false, false,false, false, false, false};
+    bool buttonslast2[12] = {false, false, false, false,false, false, false, false,false, false, false, false};
     //create joysticks
     frc::Joystick m_joy1{0};
     frc::Joystick m_joy2{1};
+    frc::Joystick m_joy3{2};
 
     //create Joystick buttons
 
