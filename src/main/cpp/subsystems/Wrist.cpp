@@ -34,8 +34,8 @@ Wrist::Wrist() : Subsystem("ExampleSubsystem") {
   //m_ShoulderMaster->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,kTimeoutMs);
 
   //config motion magic with acceleration and cruise velocity 
-  m_wristMotor->ConfigMotionCruiseVelocity(200.0, kTimeoutMs);
-	m_wristMotor->ConfigMotionAcceleration(200.0, kTimeoutMs);
+  m_wristMotor->ConfigMotionCruiseVelocity(180.0, kTimeoutMs);
+	m_wristMotor->ConfigMotionAcceleration(70.0, kTimeoutMs);
 }
 
 void Wrist::InitDefaultCommand() {
@@ -76,5 +76,7 @@ void Wrist::GotoAngle(double angle) {
 double Wrist::GetAngle() {
   return (m_wristMotor->GetSelectedSensorPosition() / 14.6222) - 19;
 }
+
+
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

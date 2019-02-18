@@ -154,6 +154,10 @@ void Robot::TeleopPeriodic() {
       frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchAbottom);
       commandToBeExecuted->Start();
     }
+    if (joystick3.GetRawButton(4) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 4) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::home);
+      commandToBeExecuted->Start();
+    }
   }
   
 

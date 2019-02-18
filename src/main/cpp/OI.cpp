@@ -23,6 +23,7 @@
 #include "commands/ballintakeIn.h"
 #include "commands/ballintakeOut.h"
 #include "commands/SuperStructureGotoPosition.h"
+#include "commands/EjectHatch.h"
 
 //climb commands
 #include "commands/climb/ClimbSetup.h"
@@ -42,7 +43,7 @@ OI::OI() {
     //joystick 1
     //m_joystick1button1.WhenPressed(new command());
     //m_joystick1button2.WhenPressed(new resetWrist());
-    //m_joystick1button3.WhenPressed(new TrunkGotoPosition(750));
+    m_joystick1button3.WhileHeld(new EjectHatch());
     //m_joystick2button4.WhenPressed(new ballintakeOut());
     //m_joystick1button5.WhenPressed(new resetBallWrist());
     //m_joystick1button6.WhenPressed(new resetWrist());

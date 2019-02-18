@@ -15,23 +15,29 @@ EjectHatch::EjectHatch() {
 
 // Called just before this Command runs the first time
 void EjectHatch::Initialize() {
+  m_previousPosition = Robot::wrist.GetAngle();
   SetTimeout(0.8);
-  if (Robot::wrist.GetAngle() > 0 ) {
-    Robot::wrist.manualControl(-0.4);
-  } else {
-    Robot::wrist.manualControl(0.4);  
-  }
+  Robot::wrist.GotoAngle(0);
 }
 
 // Called repeatedly when this Command is scheduled to run
 void EjectHatch::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool EjectHatch::IsFinished() { return false; }
+bool EjectHatch::IsFinished() { 
+  if (-5 < Robot::wrist.GetAngle() && 5 > Robot::wrist.GetAngle()) {
+    //return true;
+  }
+  return false;
+}
 
 // Called once after isFinished returns true
-void EjectHatch::End() {}
+void EjectHatch::End() {
+  Robot::wrist.GotoAngle(m_previousPosition);
+}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void EjectHatch::Interrupted() {}
+void EjectHatch::Interrupted() {
+  End();
+}

@@ -29,7 +29,7 @@ void TrunkGotoPosition::Execute() {
 // Make this return true when this Command no longer needs to run execute()
 bool TrunkGotoPosition::IsFinished() { 
   if (m_position-m_tolerence < Robot::trunk.getPosition() && m_position+m_tolerence > Robot::trunk.getPosition()) {
-    //return true;
+    return true;
   }
   return false;
  }

@@ -10,11 +10,13 @@
 #include <frc/commands/Command.h>
 
 class EjectHatch : public frc::Command {
- public:
-  EjectHatch();
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
+  public:
+    EjectHatch();
+    void Initialize() override;
+    void Execute() override;
+    bool IsFinished() override;
+    void End() override;
+    void Interrupted() override;
+  private:
+    double m_previousPosition;
 };

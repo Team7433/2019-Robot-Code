@@ -34,8 +34,8 @@ Shoulder::Shoulder() : Subsystem("ExampleSubsystem") {
   //m_ShoulderMaster->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,kTimeoutMs);
 
   //config motion magic with acceleration and cruise velocity 
-  m_ShoulderMaster->ConfigMotionCruiseVelocity(400.0, kTimeoutMs);
-	m_ShoulderMaster->ConfigMotionAcceleration(200.0, kTimeoutMs);
+  m_ShoulderMaster->ConfigMotionCruiseVelocity(300.0, kTimeoutMs);
+	m_ShoulderMaster->ConfigMotionAcceleration(100.0, kTimeoutMs);
 
   m_ShoulderMaster->ConfigNeutralDeadband(0.02, kTimeoutMs);
 }

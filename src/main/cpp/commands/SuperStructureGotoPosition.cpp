@@ -85,18 +85,18 @@ void SuperStructureGotoPosition::Initialize() {
       m_wristPos = 64;
       break;
     case iona::Superstructure::hatchAMiddle:
-      m_elevatorPos = 14800;
+      m_elevatorPos = 18400;
       m_shoulderPos = 84;
       m_wristPos = -79;
       break;
     case iona::Superstructure::hatchAbottom:
-      m_elevatorPos = 0;
+      m_elevatorPos = 2500;
       m_shoulderPos = 46;
       m_wristPos = -42;
       break;
     case iona::Superstructure::hatchBTop:
       m_elevatorPos = 0;
-      m_shoulderPos = 221;
+      m_shoulderPos = 205;
       m_wristPos = -28;
       break;
     case iona::Superstructure::hatchBMiddle:
