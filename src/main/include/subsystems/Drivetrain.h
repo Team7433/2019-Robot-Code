@@ -47,7 +47,7 @@ class Drivetrain : public frc::Subsystem {
 
   bool _bstart = false;
 
-  static const int KMinPointsInTalon = 5;
+  static const int KMinPointsInTalon = 30;
   static const int KNumLoopsTimeout = 10;
 
   //frc::Notifier m_notifier;

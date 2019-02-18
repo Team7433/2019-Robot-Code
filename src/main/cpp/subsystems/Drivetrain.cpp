@@ -13,6 +13,7 @@
 
 //WPI Librarys
 #include <frc/Notifier.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 //Motor Controler Libray
 #include "ctre/Phoenix.h"
@@ -303,6 +304,7 @@ void Drivetrain::StartFilling() {
 
       //Print Where we are up to in the sending (This could probably be at the top of the loop)
       printf("Sending point %i of %i\n", i, profileLength);
+      frc::SmartDashboard::PutNumber("Sent Point", i);
 
       //For each point, fill our structure and pass it to API
       pointLeft.position = positionRotLeft * 4096; //Covert Revolutions to Units
