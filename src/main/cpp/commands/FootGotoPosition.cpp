@@ -34,11 +34,16 @@ bool FootGotoPosition::IsFinished() {
  if (m_position-3 < Robot::foot.getFootPosition() && m_position+3 > Robot::foot.getFootPosition()) {
    return true;
  }
+ if (Robot::foot.OnlimitSwitch() == true) {
+   return true;
+ }
  return false;
 }
 
 // Called once after isFinished returns true
-void FootGotoPosition::End() {}
+void FootGotoPosition::End() {
+  Robot::foot.controlManual(0);
+}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run

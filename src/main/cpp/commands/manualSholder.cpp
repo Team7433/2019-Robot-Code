@@ -5,29 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/shoulderGoToPosition.h"
+#include "commands/manualSholder.h"
 #include "Robot.h"
 
-shoulderGoToPosition::shoulderGoToPosition(double position) {
-  m_position = position;
+manualSholder::manualSholder() {
   // Use Requires() here to declare subsystem dependencies
   Requires(&Robot::shoulder);
 }
 
 // Called just before this Command runs the first time
-void shoulderGoToPosition::Initialize() {
-    Robot::shoulder.GotoAngle(m_position);
-}
+void manualSholder::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void shoulderGoToPosition::Execute() {}
+void manualSholder::Execute() {
+  auto & Joystick = Robot::oi.getJoystick2();
+  Robot::shoulder.manualControl(Joystick.GetY());
+}
 
 // Make this return true when this Command no longer needs to run execute()
-bool shoulderGoToPosition::IsFinished() { return false; }
+bool manualSholder::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void shoulderGoToPosition::End() {}
+void manualSholder::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void shoulderGoToPosition::Interrupted() {}
+void manualSholder::Interrupted() {}

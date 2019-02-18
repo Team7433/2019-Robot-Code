@@ -8,10 +8,12 @@
 #include "subsystems/Elevator.h"
 #include "subsystems/constants.h"
 #include "commands/manualElevator.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 
 
 Elevator::Elevator() : Subsystem("ExampleSubsystem") {
+	m_elevatorMotor->ConfigFactoryDefault();
   m_elevatorMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative, kPIDLoopIdx, kTimeoutMs);
 	m_elevatorMotor->SetSensorPhase(true);
 
@@ -25,7 +27,7 @@ Elevator::Elevator() : Subsystem("ExampleSubsystem") {
 
 			// set closed loop gains in slot0
 	m_elevatorMotor->Config_kF(kPIDLoopIdx, 0.4358869565, kTimeoutMs); // 98% output is 2308 units/100ms
-	m_elevatorMotor->Config_kP(kPIDLoopIdx, 1.0, kTimeoutMs);
+	m_elevatorMotor->Config_kP(kPIDLoopIdx, 2.0, kTimeoutMs);
 	m_elevatorMotor->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_elevatorMotor->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
 
@@ -34,7 +36,7 @@ Elevator::Elevator() : Subsystem("ExampleSubsystem") {
 }
 
 void Elevator::InitDefaultCommand() {
-	SetDefaultCommand(new manualElevator());
+	//SetDefaultCommand(new manualElevator());
 }
 void Elevator::controlManual(double output) {
   m_elevatorMotor->Set(ControlMode::PercentOutput, output);
@@ -50,4 +52,11 @@ double Elevator::getPosition() {
 
 void Elevator::resetEncoder() {
 	m_elevatorMotor->SetSelectedSensorPosition(0);
+}
+
+void Elevator::UpdateData() {
+  frc::SmartDashboard::PutNumber("Elevator/Position", m_elevatorMotor->GetSelectedSensorPosition());
+  frc::SmartDashboard::PutNumber("Elevator/Velocity", m_elevatorMotor->GetSelectedSensorVelocity());
+	frc::SmartDashboard::PutBoolean("Elevator/ForwardLimit", m_elevatorMotor->GetSensorCollection().IsFwdLimitSwitchClosed());
+	frc::SmartDashboard::PutBoolean("Elevator/ReverseLimit", m_elevatorMotor->GetSensorCollection().IsRevLimitSwitchClosed());
 }

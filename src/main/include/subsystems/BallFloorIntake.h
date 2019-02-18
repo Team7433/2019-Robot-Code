@@ -7,17 +7,16 @@
 
 #pragma once
 
-#include <frc/commands/Command.h>
+#include <frc/commands/Subsystem.h>
+#include <ctre/Phoenix.h>
 
-class TrunkGotoPosition : public frc::Command {
-  public:
-    TrunkGotoPosition(double position);
-    void Initialize() override;
-    void Execute() override;
-    bool IsFinished() override;
-    void End() override;
-    void Interrupted() override;
-  private:
-    double m_position;
-    double m_tolerence = 100;
+class BallFloorIntake : public frc::Subsystem {
+ private:
+  // It's desirable that everything possible under private except
+  // for methods that implement subsystem capabilities
+  TalonSRX * m_intakeMotor = new TalonSRX{14};
+ public:
+  BallFloorIntake();
+  void InitDefaultCommand() override;
+  void manual(double output);
 };

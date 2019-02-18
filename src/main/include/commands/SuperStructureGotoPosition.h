@@ -8,16 +8,19 @@
 #pragma once
 
 #include <frc/commands/Command.h>
+#include "positions.h"
 
-class TrunkGotoPosition : public frc::Command {
+class SuperStructureGotoPosition : public frc::Command {
   public:
-    TrunkGotoPosition(double position);
+    SuperStructureGotoPosition(iona::Superstructure position);
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
     void End() override;
     void Interrupted() override;
   private:
-    double m_position;
-    double m_tolerence = 100;
+    iona::Superstructure m_position;
+    double m_elevatorPos; 
+    double m_wristPos; 
+    double m_shoulderPos; 
 };

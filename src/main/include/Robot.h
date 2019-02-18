@@ -22,6 +22,10 @@
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Shoulder.h"
 #include "subsystems/Elevator.h"
+#include "subsystems/Wrist.h"
+#include "subsystems/Hand.h"
+#include "subsystems/BallFloorWrist.h"
+#include "subsystems/BallFloorIntake.h"
 
 class Robot : public frc::TimedRobot {
  public:
@@ -36,6 +40,10 @@ class Robot : public frc::TimedRobot {
   static Shoulder shoulder;
   static Elevator elevator;
   static Drivetrain drivetrain;
+  static Wrist wrist;
+  static Hand hand;
+  static BallFloorWrist ballfloorwrist;
+  static BallFloorIntake ballfloorintake;
 
   void RobotInit() override;
   void RobotPeriodic() override;
@@ -50,5 +58,8 @@ class Robot : public frc::TimedRobot {
  private:
   // Have it null by default so that if testing teleop it
   // doesn't have undefined behavior and potentially crash.
-
+  //frc::Command * m_intakeIn = new IntakeIn();
+  //frc::Command * m_intakeOut = new IntakeOut();
+  bool m_InIntakeIsRunning = false;
+  bool m_OutIntakeIsRunning = false;
 };

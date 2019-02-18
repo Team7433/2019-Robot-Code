@@ -5,19 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "subsystems/Hand.h"
 
-#include <frc/commands/Command.h>
+Hand::Hand() : Subsystem("ExampleSubsystem") {}
 
-class TrunkGotoPosition : public frc::Command {
-  public:
-    TrunkGotoPosition(double position);
-    void Initialize() override;
-    void Execute() override;
-    bool IsFinished() override;
-    void End() override;
-    void Interrupted() override;
-  private:
-    double m_position;
-    double m_tolerence = 100;
-};
+void Hand::InitDefaultCommand() {
+  // Set the default command for a subsystem here.
+  // SetDefaultCommand(new MySpecialCommand());
+}
+
+void Hand::manual(double output) {
+  m_intakeLeft->Set(ControlMode::PercentOutput, output);
+  m_intakeRight->Set(ControlMode::PercentOutput, output);
+}

@@ -75,5 +75,6 @@
     "deque": "cpp",
     "unordered_map": "cpp",
     "fstream": "cpp"
-  }
+  },
+  "wpilib.autoStartRioLog": false
 }

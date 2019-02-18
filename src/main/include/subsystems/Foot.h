@@ -26,4 +26,5 @@ class Foot : public frc::Subsystem {
   void resetEncoder();
   void UpdateData();
   double getFootPosition();
+  bool OnlimitSwitch();
 };

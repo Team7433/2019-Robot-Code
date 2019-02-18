@@ -9,15 +9,16 @@
 
 #include <frc/commands/Command.h>
 
-class TrunkGotoPosition : public frc::Command {
+class SwichSide : public frc::Command {
   public:
-    TrunkGotoPosition(double position);
+    enum Side {A,B};
+    SwichSide(Side side);
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
     void End() override;
     void Interrupted() override;
   private:
-    double m_position;
-    double m_tolerence = 100;
+    Side m_side;
+    bool RightSide = false;
 };

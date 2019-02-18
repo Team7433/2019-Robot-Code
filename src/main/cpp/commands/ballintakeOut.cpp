@@ -5,29 +5,34 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/shoulderGoToPosition.h"
+#include "commands/ballintakeOut.h"
 #include "Robot.h"
 
-shoulderGoToPosition::shoulderGoToPosition(double position) {
-  m_position = position;
+ballintakeOut::ballintakeOut() {
   // Use Requires() here to declare subsystem dependencies
-  Requires(&Robot::shoulder);
+  Requires(&Robot::ballfloorwrist);
 }
 
 // Called just before this Command runs the first time
-void shoulderGoToPosition::Initialize() {
-    Robot::shoulder.GotoAngle(m_position);
+void ballintakeOut::Initialize() {
+  //SetTimeout(0.4);
+  Robot::ballfloorwrist.manualcontrol(0.6);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void shoulderGoToPosition::Execute() {}
+void ballintakeOut::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool shoulderGoToPosition::IsFinished() { return false; }
+bool ballintakeOut::IsFinished() { return IsTimedOut(); }
 
 // Called once after isFinished returns true
-void shoulderGoToPosition::End() {}
+void ballintakeOut::End() {
+  std::cout << "Done \n";
+  Robot::ballfloorwrist.manualcontrol(0);
+}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void shoulderGoToPosition::Interrupted() {}
+void ballintakeOut::Interrupted() {
+  End();
+}

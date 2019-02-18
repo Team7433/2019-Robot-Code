@@ -5,12 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/climb/ClimbFinish.h"
-#include "commands/TrunkGotoPosition.h"
-#include "commands/FootGotoPosition.h"
-#include "commands/drivetrainManualOutput.h"
+#include "commands/SuperstructureControl.h"
+#include "commands/SuperStructureGotoPosition.h"
+#include "commands/SwichSide.h"
 
-ClimbFinish::ClimbFinish() {
+SuperstructureControl::SuperstructureControl(iona::Superstructure position) {
+  if (position == iona::Superstructure::hatchATop || 
+      position == iona::Superstructure::cargoAhigh || 
+      position == iona::Superstructure::cargoAmedium || 
+      position == iona::Superstructure::cargoBtop || 
+      position == iona::Superstructure::cargoAlow || 
+      position == iona::Superstructure::hatchAMiddle || 
+      position == iona::Superstructure::hatchAbottom || 
+      position == iona::Superstructure::idle || 
+      position == iona::Superstructure::home) {
+    AddSequential(new SwichSide(SwichSide::Side::A));
+  } else {
+    AddSequential(new SwichSide(SwichSide::Side::B));
+  }
+  AddSequential(new SuperStructureGotoPosition(position));
   // Add Commands here:
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());
@@ -27,5 +40,4 @@ ClimbFinish::ClimbFinish() {
   // e.g. if Command1 requires chassis, and Command2 requires arm,
   // a CommandGroup containing them would require both the chassis and the
   // arm.
-  AddSequential(new TrunkGotoPosition(750));
 }

@@ -5,19 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "commands/resetBallWrist.h"
+#include "Robot.h"
 
-#include <frc/commands/Command.h>
+resetBallWrist::resetBallWrist() {
+  // Use Requires() here to declare subsystem dependencies
+}
 
-class TrunkGotoPosition : public frc::Command {
-  public:
-    TrunkGotoPosition(double position);
-    void Initialize() override;
-    void Execute() override;
-    bool IsFinished() override;
-    void End() override;
-    void Interrupted() override;
-  private:
-    double m_position;
-    double m_tolerence = 100;
-};
+// Called once when the command executes
+void resetBallWrist::Initialize() {
+  Robot::ballfloorwrist.resetPosition();
+}

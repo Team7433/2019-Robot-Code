@@ -14,7 +14,7 @@ class Elevator : public frc::Subsystem {
  private:
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
-  WPI_TalonSRX * m_elevatorMotor = new WPI_TalonSRX(3);
+  WPI_TalonSRX * m_elevatorMotor = new WPI_TalonSRX(7);
  public:
   Elevator();
   void InitDefaultCommand() override;
@@ -24,4 +24,5 @@ class Elevator : public frc::Subsystem {
   void gotoPosition(double position);
   void resetEncoder();
   double getPosition();
+  void UpdateData();
 };
