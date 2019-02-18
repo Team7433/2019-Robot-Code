@@ -34,7 +34,7 @@ Shoulder::Shoulder() : Subsystem("ExampleSubsystem") {
   //m_ShoulderMaster->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,kTimeoutMs);
 
   //config motion magic with acceleration and cruise velocity 
-  m_ShoulderMaster->ConfigMotionCruiseVelocity(250.0, kTimeoutMs);
+  m_ShoulderMaster->ConfigMotionCruiseVelocity(400.0, kTimeoutMs);
 	m_ShoulderMaster->ConfigMotionAcceleration(200.0, kTimeoutMs);
 
   m_ShoulderMaster->ConfigNeutralDeadband(0.02, kTimeoutMs);
@@ -73,10 +73,15 @@ void Shoulder::SetMaxSpeeds(double forward, double reverse) {
 void Shoulder::UpdateData() {
   frc::SmartDashboard::PutNumber("Shoulder/Position", m_ShoulderMaster->GetSelectedSensorPosition());
   frc::SmartDashboard::PutNumber("Shoulder/Velocity", m_ShoulderMaster->GetSelectedSensorVelocity());
+  frc::SmartDashboard::PutNumber("Shoulder/Output", m_ShoulderMaster->GetMotorOutputPercent());
 }
 
 void Shoulder::GotoAngle(double angle) {
   double position = (angle + 19) * 26.8074;
   m_ShoulderMaster->Set(ControlMode::MotionMagic, position);
+}
+
+double Shoulder::getAngle() {
+  return -((m_ShoulderMaster->GetSelectedSensorPosition() / 26.8074)-19);
 }
 

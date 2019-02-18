@@ -57,7 +57,7 @@ OI::OI() {
     //m_joystick2button1.WhenPressed(new command());
     //m_joystick2button2.WhenPressed(new command());
     m_joystick2button3.WhileHeld(new ballintakeIn());
-    m_joystick2button4.WhenPressed(new ballintakeOut());
+    m_joystick2button4.WhileHeld(new ballintakeOut());
     //m_joystick2button5.WhileActive(new IntakeIn());
     //m_joystick2button6.WhileActive(new IntakeOut());
     /*m_joystick2button7.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::cargoBhigh));

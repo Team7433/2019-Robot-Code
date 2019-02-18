@@ -15,7 +15,7 @@ ballintakeOut::ballintakeOut() {
 
 // Called just before this Command runs the first time
 void ballintakeOut::Initialize() {
-  SetTimeout(0.4);
+  //SetTimeout(0.4);
   Robot::ballfloorwrist.manualcontrol(0.6);
 }
 
@@ -33,4 +33,6 @@ void ballintakeOut::End() {
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ballintakeOut::Interrupted() {}
+void ballintakeOut::Interrupted() {
+  End();
+}
