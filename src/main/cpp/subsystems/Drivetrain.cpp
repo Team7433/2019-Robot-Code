@@ -306,7 +306,7 @@ void Drivetrain::StartFilling() {
 
       //For each point, fill our structure and pass it to API
       pointLeft.position = positionRotLeft * 4096; //Covert Revolutions to Units
-      pointLeft.velocity = VelocityRPMLeft * 4096 / 600; //Covert RPM to Units/100ms
+      pointLeft.velocity = VelocityRPMLeft * 4096 / 60; //Covert RPM to Units/100ms
       pointLeft.headingDeg = 0; //Furture feature Not Used
       pointLeft.profileSlotSelect0 = 0; //Idk
       pointLeft.profileSlotSelect1 = 0; //Furture feature Not Used
@@ -315,7 +315,7 @@ void Drivetrain::StartFilling() {
       pointLeft.isLastPoint = false;
 
       pointRight.position = -positionRotRight * 4096; //Covert Revolutions to Units
-      pointRight.velocity = -VelocityRPMRight * 4096 / 600; //Covert RPM to Units/100ms
+      pointRight.velocity = -VelocityRPMRight * 4096 / 60; //Covert RPM to Units/100ms
       pointRight.headingDeg = 0; //Furture feature Not Used
       pointRight.profileSlotSelect0 = 0; //Idk
       pointRight.profileSlotSelect1 = 0; //Furture feature Not Used

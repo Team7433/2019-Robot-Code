@@ -29,7 +29,7 @@ class Drivetrain : public frc::Subsystem {
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
 
-  double talon_kf = 0.4;
+  double talon_kf = 0.45;
   double talon_kp = 1.0;
   double talon_ki = 0.0;
   double talon_kd = 20.0;
