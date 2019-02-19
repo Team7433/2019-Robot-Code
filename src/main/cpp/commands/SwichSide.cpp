@@ -61,7 +61,10 @@ void SwichSide::Execute() {
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool SwichSide::IsFinished() { return RightSide; }
+bool SwichSide::IsFinished() { 
+  //return RightSide; 
+  return true;
+}
 
 // Called once after isFinished returns true
 void SwichSide::End() {}

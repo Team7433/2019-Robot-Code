@@ -23,6 +23,7 @@ namespace iona {
         cargoBtop,
         cargoTest,
         home,
+        climb,
     };
 
     //Put in the position namespace

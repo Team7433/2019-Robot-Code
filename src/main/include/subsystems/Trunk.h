@@ -26,4 +26,5 @@ class Trunk : public frc::Subsystem {
   void resetSensor();
   double getPosition();
   void SetMaxSpeeds(double forward, double reverse);
+  void UpdateData();
 };

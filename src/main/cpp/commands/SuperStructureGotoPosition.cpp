@@ -109,6 +109,11 @@ void SuperStructureGotoPosition::Initialize() {
       m_shoulderPos = 326;
       m_wristPos = 40;
       break;
+    case iona::Superstructure::climb:
+      m_elevatorPos = 0;
+      m_shoulderPos = 67;
+      m_wristPos = -15;
+      break;
     default:
       break;
   }

@@ -69,7 +69,7 @@ void Robot::TeleopPeriodic() {
 
   //floor intake controls
   if(joystick2.GetY() > 0.03 || joystick2.GetY() < -0.03) {
-    ballfloorintake.manual(-joystick2.GetY());
+    ballfloorintake.manual(-joystick2.GetX());
   } else {
     if(joystick3.GetRawButton(2) == false) {
       if (joystick3.GetRawButton(12) == false) {
@@ -81,6 +81,13 @@ void Robot::TeleopPeriodic() {
       ballfloorintake.manual(-1);
     }
   }
+
+  if (joystick2.GetY() > 0.5 || joystick2.GetY() < -0.5) {
+    ballfloorwrist.manualcontrol(-joystick2.GetY()*0.8);
+  } else {
+    ballfloorwrist.manualcontrol(0);
+  }
+
 
   //hand controls
   if (joystick2.GetRawButton(1) == true) {
@@ -167,7 +174,10 @@ void Robot::TeleopPeriodic() {
       commandToBeExecuted->Start();
     }
   }
-  
+  if (oi.getPow3(2) == true && oi.getPow3Last(2) == false) {
+    frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::climb);
+    commandToBeExecuted->Start();
+  }
 
   //update buttons
   oi.UpdateButtons();
@@ -179,6 +189,7 @@ void Robot::TeleopPeriodic() {
   elevator.UpdateData();
   shoulder.UpdateData();
   wrist.UpdateData();
+  trunk.UpdateData();
   
 }
 

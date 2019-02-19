@@ -8,6 +8,7 @@
 #include "subsystems/Trunk.h"
 #include "subsystems/constants.h"
 #include "commands/ManualTrunk.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 Trunk::Trunk() : Subsystem("ExampleSubsystem") {
   m_TrunkMaster->ConfigFactoryDefault();
@@ -36,8 +37,8 @@ Trunk::Trunk() : Subsystem("ExampleSubsystem") {
   m_TrunkMaster->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,kTimeoutMs);
 
   //config motion magic with acceleration and cruise velocity 
-  m_TrunkMaster->ConfigMotionCruiseVelocity(1100.2, kTimeoutMs);
-	m_TrunkMaster->ConfigMotionAcceleration(500.8, kTimeoutMs);
+  m_TrunkMaster->ConfigMotionCruiseVelocity(2000, kTimeoutMs);
+	m_TrunkMaster->ConfigMotionAcceleration(1000, kTimeoutMs);
 
   m_TrunkMaster->Set(ControlMode::MotionMagic, 0);
 }
@@ -72,3 +73,8 @@ void Trunk::SetMaxSpeeds(double forward, double reverse) {
   m_TrunkMaster->ConfigPeakOutputReverse(reverse, kTimeoutMs);	
 }
 
+void Trunk::UpdateData() {
+  frc::SmartDashboard::PutNumber("Trunk/Position", m_TrunkMaster->GetSelectedSensorPosition());
+  frc::SmartDashboard::PutNumber("Trunk/Velocity", m_TrunkMaster->GetSelectedSensorVelocity());
+  frc::SmartDashboard::PutNumber("Trunk/MotorOutput", m_TrunkMaster->GetMotorOutputPercent());
+}
