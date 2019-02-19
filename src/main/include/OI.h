@@ -21,10 +21,16 @@ class OI {
     bool joystickButtonLast(joystickNum,int button);
     bool joystickButton(joystickNum,int button);
     void UpdateButtons();
+    
+    // 
+    bool getPow3(int button);
+    bool getPow3Last(int button);
+    void UpdatePOV();
   private:
     bool buttonslast1[12] = {false, false, false, false,false, false, false, false,false, false, false, false};
     bool buttonslast2[12] = {false, false, false, false,false, false, false, false,false, false, false, false};
     bool buttonslast3[12] = {false, false, false, false,false, false, false, false,false, false, false, false};
+    bool POVLast3[4] = {false, false, false, false};
     //create joysticks
     frc::Joystick m_joy1{0};
     frc::Joystick m_joy2{1};

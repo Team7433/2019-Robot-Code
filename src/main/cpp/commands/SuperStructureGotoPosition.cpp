@@ -115,6 +115,7 @@ void SuperStructureGotoPosition::Initialize() {
   Robot::shoulder.GotoAngle(-m_shoulderPos);
   Robot::wrist.GotoAngle(m_wristPos);
   Robot::elevator.gotoPosition(-m_elevatorPos);
+  Robot::wrist.LastAngle = m_wristPos;
 }
 
 // Called repeatedly when this Command is scheduled to run

@@ -15,6 +15,7 @@ EjectHatch::EjectHatch() {
 
 // Called just before this Command runs the first time
 void EjectHatch::Initialize() {
+  Robot::wrist.WristSpeed(4000,4000);
   m_previousPosition = Robot::wrist.GetAngle();
   SetTimeout(0.8);
   Robot::wrist.GotoAngle(0);
@@ -33,7 +34,8 @@ bool EjectHatch::IsFinished() {
 
 // Called once after isFinished returns true
 void EjectHatch::End() {
-  Robot::wrist.GotoAngle(m_previousPosition);
+  Robot::wrist.WristSpeed(180,70);
+  Robot::wrist.GotoAngle(Robot::wrist.LastAngle);
 }
 
 // Called when another command which requires one or more of the same

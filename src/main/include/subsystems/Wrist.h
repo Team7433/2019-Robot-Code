@@ -27,4 +27,6 @@ class Wrist : public frc::Subsystem {
   void UpdateData();
   void GotoAngle(double angle);
   double GetAngle();
+  double LastAngle = 0;
+  void WristSpeed(double cruise, double acceleration);
 };

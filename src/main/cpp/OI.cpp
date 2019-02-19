@@ -129,3 +129,41 @@ bool OI::joystickButton(joystickNum joy,int button) {
   
 }
 
+bool OI::getPow3(int buttonid) {
+  switch (buttonid)
+  {
+    case 1:
+        if (m_joy3.GetPOV() == 315 || m_joy3.GetPOV() == 0 || m_joy3.GetPOV() == 45) {
+          return true;
+        }
+      break;
+    case 2:
+        if (m_joy3.GetPOV() == 45 || m_joy3.GetPOV() == 90 || m_joy3.GetPOV() == 135) {
+          return true;
+        }        
+      break;
+    case 3:
+        if (m_joy3.GetPOV() == 135 || m_joy3.GetPOV() == 180 || m_joy3.GetPOV() == 225) {
+          return true;
+        }  
+      break;
+    case 4:
+        if (m_joy3.GetPOV() == 225 || m_joy3.GetPOV() == 270 || m_joy3.GetPOV() == 315) {
+          return true;
+        }  
+      break;          
+  }
+  return false;
+}
+
+bool OI::getPow3Last(int button) {
+  return POVLast3[button-1];
+}
+
+void OI::UpdatePOV() {
+  for(int i = 0; i < 4; i++)
+  {
+    POVLast3[i] = getPow3(i+1);
+  }
+}
+

@@ -77,6 +77,10 @@ double Wrist::GetAngle() {
   return (m_wristMotor->GetSelectedSensorPosition() / 14.6222) - 19;
 }
 
+void Wrist::WristSpeed(double cruise, double acceleration) {
+  m_wristMotor->ConfigMotionCruiseVelocity(cruise, kTimeoutMs);
+	m_wristMotor->ConfigMotionAcceleration(acceleration, kTimeoutMs);  
+}
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

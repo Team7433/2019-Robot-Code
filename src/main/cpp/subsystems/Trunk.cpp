@@ -27,7 +27,7 @@ Trunk::Trunk() : Subsystem("ExampleSubsystem") {
 
 	// set PID Values
 	m_TrunkMaster->Config_kF(kPIDLoopIdx, 1.423, kTimeoutMs);//1.39373
-	m_TrunkMaster->Config_kP(kPIDLoopIdx, 2.0, kTimeoutMs);
+	m_TrunkMaster->Config_kP(kPIDLoopIdx, 3.0, kTimeoutMs);
 	m_TrunkMaster->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_TrunkMaster->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
 
@@ -36,8 +36,8 @@ Trunk::Trunk() : Subsystem("ExampleSubsystem") {
   m_TrunkMaster->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,kTimeoutMs);
 
   //config motion magic with acceleration and cruise velocity 
-  m_TrunkMaster->ConfigMotionCruiseVelocity(600.2, kTimeoutMs);
-	m_TrunkMaster->ConfigMotionAcceleration(380.8, kTimeoutMs);
+  m_TrunkMaster->ConfigMotionCruiseVelocity(1100.2, kTimeoutMs);
+	m_TrunkMaster->ConfigMotionAcceleration(500.8, kTimeoutMs);
 
   m_TrunkMaster->Set(ControlMode::MotionMagic, 0);
 }
