@@ -78,50 +78,53 @@ void Robot::TeleopPeriodic() {
         ballfloorintake.manual(0);
       }
     } else {
-      ballfloorintake.manual(-1);
+      //ballfloorintake.manual(-1);
     }
   }
 
-  if (joystick2.GetY() > 0.5 || joystick2.GetY() < -0.5) {
+  /*if (joystick2.GetY() > 0.5 || joystick2.GetY() < -0.5) {
     ballfloorwrist.manualcontrol(-joystick2.GetY()*0.8);
   } else {
     ballfloorwrist.manualcontrol(0);
-  }
-
+  }*/
 
   //hand controls
   if (joystick2.GetRawButton(1) == true) {
       hand.manual(0.4);
-  } else if (joystick1.GetRawButton(2) == true) {
+  } else if (joystick1.GetRawButton(4) == true) {
       hand.manual(-0.7);
   } else {
-    hand.manual(0);
+    if (joystick2.GetX() < 0) {
+      hand.manual(joystick2.GetX());
+    } else {
+      hand.manual(0);
+    }
   }
 
   //superstructure controls
   if (joystick3.GetRawButton(10) == true) { //cargo mode
     if (oi.getPow3(1) == true && oi.getPow3Last(1) == false) {
-      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoBhigh);
-      commandToBeExecuted->Start();
-    }
-    if (joystick3.GetRawButton(9) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 9) == false) {
       frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoAhigh);
       commandToBeExecuted->Start();
     }
-    if (joystick3.GetRawButton(6) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 6) == false) {
-      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoBmedium);
+    if (joystick3.GetRawButton(9) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 9) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoBhigh);
       commandToBeExecuted->Start();
     }
-    if (joystick3.GetRawButton(5) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 5) == false) {
+    if (joystick3.GetRawButton(6) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 6) == false) {
       frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoAmedium);
       commandToBeExecuted->Start();
     }
+    if (joystick3.GetRawButton(5) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 5) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoBmedium);
+      commandToBeExecuted->Start();
+    }
     if (joystick3.GetRawButton(2) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 2) == false) {
-      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoBlow);
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoAlow);
       commandToBeExecuted->Start();
     }
     if (joystick3.GetRawButton(1) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 1) == false) {
-      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoAlow);
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoBlow);
       commandToBeExecuted->Start();
     }
     if (joystick3.GetRawButton(3) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 3) == false) {
@@ -133,11 +136,11 @@ void Robot::TeleopPeriodic() {
       commandToBeExecuted->Start();
     }
     if (joystick3.GetRawButton(7) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 7) == false) {
-      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoBtop);
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoAtop);
       commandToBeExecuted->Start();
     }
     if (joystick3.GetRawButton(8) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 8) == false) {
-      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoAtop);
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoBtop);
       commandToBeExecuted->Start();
     }
   } else { //hatch mode
@@ -146,27 +149,27 @@ void Robot::TeleopPeriodic() {
       commandToBeExecuted->Start();
     }
     if (oi.getPow3(1) == true && oi.getPow3Last(1) == false) {
-      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchBTop);
-      commandToBeExecuted->Start();
-    }
-    if (joystick3.GetRawButton(9) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 9) == false) {
       frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchATop);
       commandToBeExecuted->Start();
     }
-    if (joystick3.GetRawButton(6) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 6) == false) {
-      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchBMiddle);
+    if (joystick3.GetRawButton(9) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 9) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchBTop);
       commandToBeExecuted->Start();
     }
-    if (joystick3.GetRawButton(5) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 5) == false) {
+    if (joystick3.GetRawButton(6) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 6) == false) {
       frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchAMiddle);
       commandToBeExecuted->Start();
     }
+    if (joystick3.GetRawButton(5) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 5) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchBMiddle);
+      commandToBeExecuted->Start();
+    }
     if (joystick3.GetRawButton(2) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 2) == false) {
-      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchBbottom);
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchAbottom);
       commandToBeExecuted->Start();
     }
     if (joystick3.GetRawButton(1) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 1) == false) {
-      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchAbottom);
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchBbottom);
       commandToBeExecuted->Start();
     }
     if (joystick3.GetRawButton(4) == true && oi.joystickButtonLast(oi.joystickNum::joy3, 4) == false) {
@@ -178,6 +181,10 @@ void Robot::TeleopPeriodic() {
     frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::climb);
     commandToBeExecuted->Start();
   }
+  //if (joystick2.GetRawButton(7) == true && oi.joystickButtonLast(oi.joystickNum::joy2, 7) == false) {
+  //  frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::autostep1);
+  //  commandToBeExecuted->Start();
+  //}
 
   //update buttons
   oi.UpdateButtons();
@@ -191,6 +198,11 @@ void Robot::TeleopPeriodic() {
   wrist.UpdateData();
   trunk.UpdateData();
   
+}
+
+double Map(double x, double in_min, double in_max, double out_min, double out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
 void Robot::TestPeriodic() {}

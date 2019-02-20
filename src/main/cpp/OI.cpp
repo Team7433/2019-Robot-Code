@@ -24,6 +24,8 @@
 #include "commands/ballintakeOut.h"
 #include "commands/SuperStructureGotoPosition.h"
 #include "commands/EjectHatch.h"
+#include "commands/AutoHatchOut.h"
+#include "commands/SwitchVisionSide.h"
 
 //climb commands
 #include "commands/climb/ClimbSetup.h"
@@ -51,23 +53,23 @@ OI::OI() {
     m_joystick1button8.WhenPressed(new ClimbLift());
     m_joystick1button9.WhenPressed(new ClimbFinish());
     m_joystick1button10.WhenPressed(new ClimbReset()); 
-    //m_joystick1button11.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::cargoBhigh)); 
+    m_joystick1button11.WhenPressed(new SwitchVisionSide()); 
     //m_joystick1button12.WhenPressed(new shoulderGoToPosition(-20));
 
     //joystick 2
     //m_joystick2button1.WhenPressed(new command());
-    //m_joystick2button2.WhenPressed(new command());
+    //m_joystick2button2.WhenPressed(());
     m_joystick2button3.WhileHeld(new ballintakeIn());
     m_joystick2button4.WhileHeld(new ballintakeOut());
     //m_joystick2button5.WhileActive(new IntakeIn());
     //m_joystick2button6.WhileActive(new IntakeOut());
-    /*m_joystick2button7.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::cargoBhigh));
-    m_joystick2button8.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::cargoAhigh));
-    m_joystick2button9.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::cargoBmedium));
-    m_joystick2button10.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::cargoAmedium));
-    m_joystick2button11.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::cargoBlow));
-    m_joystick2button12.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::cargoAlow));
-    */
+    m_joystick2button7.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::autostep1));
+    m_joystick2button8.WhenPressed(new AutoHatchOut());
+    m_joystick2button9.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::autostep3));
+    //m_joystick2button10.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::cargoAmedium));
+    //m_joystick2button11.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::cargoBlow));
+    //m_joystick2button12.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::cargoAlow));
+    
     //joystick 3
     //m_joystick3button1.WhenPressed(new command());
     //m_joystick3button2.WhenPressed(new command());

@@ -23,4 +23,11 @@ class SuperStructureGotoPosition : public frc::Command {
     double m_elevatorPos; 
     double m_wristPos; 
     double m_shoulderPos; 
+    double m_wristAcc = 0; 
+    double m_shoulderAcc = 0; 
+    double m_wristCruise = 0; 
+    double m_shoulderCruise = 0; 
+    double m_elevatorTolerence = 200; 
+    double m_wristTolerence = 3; 
+    double m_shoulderTolerence = 3; 
 };

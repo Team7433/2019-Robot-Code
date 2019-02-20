@@ -30,6 +30,11 @@ BallFloorWrist::BallFloorWrist() : Subsystem("ExampleSubsystem") {
 
   m_wristMotor->ConfigContinuousCurrentLimit(2, kTimeoutMs);
 
+  m_wristMotor->ConfigPeakCurrentLimit(1, kTimeoutMs);
+  m_wristMotor->ConfigPeakCurrentDuration(0, kTimeoutMs); /* this is a necessary call to avoid errata. */
+  m_wristMotor->ConfigContinuousCurrentLimit(0.5, kTimeoutMs);
+  m_wristMotor->EnableCurrentLimit(false); /* honor initial setting */
+
   //config limit switches
   //m_ShoulderMaster->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyClosed,kTimeoutMs);
   //m_ShoulderMaster->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,kTimeoutMs);
@@ -41,7 +46,7 @@ BallFloorWrist::BallFloorWrist() : Subsystem("ExampleSubsystem") {
 
 void BallFloorWrist::InitDefaultCommand() {
   // Set the default command for a subsystem here.
-  //SetDefaultCommand(new manualBallWrist());
+  SetDefaultCommand(new manualBallWrist());
 }
 
 void BallFloorWrist::manualcontrol(double output) {

@@ -11,12 +11,14 @@
 #include <networktables/NetworkTableInstance.h>
 #include <frc/Servo.h>
 
+double Map(double x, double in_min, double in_max, double out_min, double out_max);
+
 class Vision {
   public:
     Vision();
 
     //set up a mode system for vision
-    enum visionMode { Driver, Tape, Hatch };
+    enum visionMode { Driver, Tape };
     void SetVisionMode(visionMode Mode);
     int getVisionMode();
 
@@ -29,6 +31,10 @@ class Vision {
     //get if something is detected
     bool getHatchDetected();
     bool getTapeDetected();
+
+    void SetCamera(int camera);
+
+    int m_VisionSide = 0;
   private:
     std::shared_ptr<NetworkTable> visionTable;
     //Store current vision mode

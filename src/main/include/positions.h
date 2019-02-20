@@ -24,6 +24,10 @@ namespace iona {
         cargoTest,
         home,
         climb,
+        autostep1,
+        autostep2,
+        autostep3,
+
     };
 
     //Put in the position namespace

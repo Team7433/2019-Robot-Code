@@ -77,4 +77,6 @@ void Trunk::UpdateData() {
   frc::SmartDashboard::PutNumber("Trunk/Position", m_TrunkMaster->GetSelectedSensorPosition());
   frc::SmartDashboard::PutNumber("Trunk/Velocity", m_TrunkMaster->GetSelectedSensorVelocity());
   frc::SmartDashboard::PutNumber("Trunk/MotorOutput", m_TrunkMaster->GetMotorOutputPercent());
+  frc::SmartDashboard::PutBoolean("Trunk/FwdLimit", m_TrunkMaster->GetSensorCollection().IsFwdLimitSwitchClosed());
+  frc::SmartDashboard::PutBoolean("Trunk/RevLimit", m_TrunkMaster->GetSensorCollection().IsRevLimitSwitchClosed());
 }

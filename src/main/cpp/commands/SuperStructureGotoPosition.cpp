@@ -7,6 +7,7 @@
 
 #include "commands/SuperStructureGotoPosition.h"
 #include "Robot.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 
 SuperStructureGotoPosition::SuperStructureGotoPosition(iona::Superstructure position) {
   m_position = position;
@@ -23,7 +24,7 @@ void SuperStructureGotoPosition::Initialize() {
     case iona::Superstructure::idle:
       m_elevatorPos = 8000;
       m_shoulderPos = 25;
-      m_wristPos = -25;
+      m_wristPos = -17;
       break;
     case iona::Superstructure::cargoAhigh:
       m_elevatorPos = 17000;
@@ -82,10 +83,10 @@ void SuperStructureGotoPosition::Initialize() {
     case iona::Superstructure::hatchATop:
       m_elevatorPos = 7000;
       m_shoulderPos = 118;
-      m_wristPos = 64;
+      m_wristPos = 74;
       break;
     case iona::Superstructure::hatchAMiddle:
-      m_elevatorPos = 18400;
+      m_elevatorPos = 15000;
       m_shoulderPos = 84;
       m_wristPos = -79;
       break;
@@ -100,13 +101,13 @@ void SuperStructureGotoPosition::Initialize() {
       m_wristPos = -28;
       break;
     case iona::Superstructure::hatchBMiddle:
-      m_elevatorPos = 16600;
+      m_elevatorPos = 19600;
       m_shoulderPos = 285;
-      m_wristPos = 77;
+      m_wristPos = 67;
       break;
     case iona::Superstructure::hatchBbottom:
       m_elevatorPos = 2884;
-      m_shoulderPos = 326;
+      m_shoulderPos = 321;
       m_wristPos = 40;
       break;
     case iona::Superstructure::climb:
@@ -114,12 +115,29 @@ void SuperStructureGotoPosition::Initialize() {
       m_shoulderPos = 67;
       m_wristPos = -15;
       break;
+    case iona::Superstructure::autostep1:
+      m_elevatorPos = 4000;
+      m_shoulderPos = 68;
+      m_wristPos = -19;
+      break;
+    case iona::Superstructure::autostep2:
+      m_elevatorPos = 0;
+      m_shoulderPos = 68;
+      m_wristPos = 0;
+      break;
+    case iona::Superstructure::autostep3:
+      m_elevatorPos = 0;
+      m_shoulderPos = 29;
+      m_wristPos = 0;
+      break;
     default:
       break;
   }
-  Robot::shoulder.GotoAngle(-m_shoulderPos);
+  m_shoulderPos = -m_shoulderPos;
+  m_elevatorPos = -m_elevatorPos;
+  Robot::shoulder.GotoAngle(m_shoulderPos);
   Robot::wrist.GotoAngle(m_wristPos);
-  Robot::elevator.gotoPosition(-m_elevatorPos);
+  Robot::elevator.gotoPosition(m_elevatorPos);
   Robot::wrist.LastAngle = m_wristPos;
 }
 
@@ -127,7 +145,22 @@ void SuperStructureGotoPosition::Initialize() {
 void SuperStructureGotoPosition::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool SuperStructureGotoPosition::IsFinished() { return false; }
+bool SuperStructureGotoPosition::IsFinished() { 
+  //frc::SmartDashboard::PutNumber("Shoulder Error", Robot::shoulder.getAngle());
+  //frc::SmartDashboard::PutNumber("Wrist Error", Robot::wrist.GetAngle()- m_wristPos);
+  //frc::SmartDashboard::PutNumber("Elevator Error", Robot::elevator.getPosition()+ m_elevatorPos);
+  frc::SmartDashboard::PutBoolean("IF1",  abs(m_shoulderPos-Robot::shoulder.getAngle()) < m_shoulderTolerence);
+  frc::SmartDashboard::PutBoolean("IF2",  abs(m_elevatorPos-Robot::elevator.getPosition()) < m_elevatorTolerence);
+  frc::SmartDashboard::PutBoolean("IF3",  abs(m_wristPos-Robot::wrist.GetAngle()) < m_wristTolerence);
+  if (abs(m_shoulderPos-Robot::shoulder.getAngle()) < m_shoulderTolerence) {
+    if (abs(m_elevatorPos-Robot::elevator.getPosition()) < m_elevatorTolerence) {
+      if (abs(m_wristPos-Robot::wrist.GetAngle()) < m_wristTolerence) {
+        return true;
+      }
+    }
+  }
+  return false; 
+}
 
 // Called once after isFinished returns true
 void SuperStructureGotoPosition::End() {}

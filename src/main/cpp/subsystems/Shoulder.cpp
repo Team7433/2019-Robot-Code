@@ -24,18 +24,23 @@ Shoulder::Shoulder() : Subsystem("ExampleSubsystem") {
 	m_ShoulderMaster->ConfigPeakOutputReverse(-1.0, kTimeoutMs);
 
 	// set PID Values
-	m_ShoulderMaster->Config_kF(kPIDLoopIdx, 3.64, kTimeoutMs);//1.39373
-	m_ShoulderMaster->Config_kP(kPIDLoopIdx, 30.0, kTimeoutMs);
+	m_ShoulderMaster->Config_kF(kPIDLoopIdx, 3.5, kTimeoutMs);//1.39373
+	m_ShoulderMaster->Config_kP(kPIDLoopIdx, 15.0, kTimeoutMs);
 	m_ShoulderMaster->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_ShoulderMaster->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
+
+  //m_ShoulderMaster->ConfigPeakCurrentLimit(20, kTimeoutMs);
+  //m_ShoulderMaster->ConfigPeakCurrentDuration(0, kTimeoutMs); /* this is a necessary call to avoid errata. */
+  //m_ShoulderMaster->ConfigContinuousCurrentLimit(15, kTimeoutMs);
+  m_ShoulderMaster->EnableCurrentLimit(false); /* honor initial setting */
 
   //config limit switches
   //m_ShoulderMaster->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyClosed,kTimeoutMs);
   //m_ShoulderMaster->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,kTimeoutMs);
 
   //config motion magic with acceleration and cruise velocity 
-  m_ShoulderMaster->ConfigMotionCruiseVelocity(300.0, kTimeoutMs);
-	m_ShoulderMaster->ConfigMotionAcceleration(100.0, kTimeoutMs);
+  m_ShoulderMaster->ConfigMotionCruiseVelocity(50.0, kTimeoutMs);
+	m_ShoulderMaster->ConfigMotionAcceleration(36.0, kTimeoutMs);
 
   m_ShoulderMaster->ConfigNeutralDeadband(0.02, kTimeoutMs);
 }
@@ -77,11 +82,13 @@ void Shoulder::UpdateData() {
 }
 
 void Shoulder::GotoAngle(double angle) {
-  double position = (angle + 19) * 26.8074;
+  double position = (angle + 19) * 10.1240;
   m_ShoulderMaster->Set(ControlMode::MotionMagic, position);
 }
 
 double Shoulder::getAngle() {
-  return -((m_ShoulderMaster->GetSelectedSensorPosition() / 26.8074)-19);
+  //26.8074 188 reduction
+  //10.1240 71 reduction
+  return -((m_ShoulderMaster->GetSelectedSensorPosition() / 10.1240)-19);
 }
 

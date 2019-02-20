@@ -7,7 +7,7 @@
 
 #include "Vision.h"
 #include <frc/smartdashboard/SmartDashboard.h>
-// DO THIS NOW!!!
+
 //This is for all raspberry pi interfacing and vision control
 Vision::Vision() {
     visionTable = nt::NetworkTableInstance::GetDefault().GetTable("ChickenVision");
@@ -26,11 +26,6 @@ void Vision::SetVisionMode(visionMode mode) {
             visionTable->PutBoolean("Tape", true);
             frc::SmartDashboard::PutString("VisionMode", "Tape");
             break;
-        case Hatch:
-            visionTable->PutBoolean("Driver", false);
-            visionTable->PutBoolean("Tape", false);
-            frc::SmartDashboard::PutString("VisionMode", "Hatch");
-            break;
     
         default:
             frc::SmartDashboard::PutString("VisionMode", "Error: set to defult");
@@ -47,7 +42,7 @@ bool Vision::getHatchDetected() {
 }
 
 bool Vision::getTapeDetected() {
-    return visionTable->GetBoolean("TapeDetected", false);
+    return visionTable->GetBoolean("tapeDetected", false);
 }
 
 double Vision::getHatchYaw() {
@@ -64,4 +59,8 @@ double Vision::getTapeLeftYaw(){
 
 double Vision::getTapeRightYaw() {
     return visionTable->GetNumber("tapeRightYaw", 0.0);
+}
+
+void Vision::SetCamera(int camera) {
+    visionTable->PutNumber("WhichCamera", 1);
 }

@@ -18,8 +18,12 @@ void manualBallWrist::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
 void manualBallWrist::Execute() {
-  auto& Joystick = Robot::oi.getJoystick2();
-  Robot::ballfloorwrist.manualcontrol(Joystick.GetY());
+  auto& Joystick2 = Robot::oi.getJoystick2();
+  if (Joystick2.GetY() > 0.5 || Joystick2.GetY() < -0.5) {
+    Robot::ballfloorwrist.manualcontrol(-Joystick2.GetY()*0.8);
+  } else {
+    Robot::ballfloorwrist.manualcontrol(0);
+  }
 }
 
 // Make this return true when this Command no longer needs to run execute()

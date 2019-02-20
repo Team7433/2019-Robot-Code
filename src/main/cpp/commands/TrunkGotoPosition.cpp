@@ -32,7 +32,7 @@ bool TrunkGotoPosition::IsFinished() {
     return true;
   }
   return false;
- }
+}
 
 // Called once after isFinished returns true
 void TrunkGotoPosition::End() {}

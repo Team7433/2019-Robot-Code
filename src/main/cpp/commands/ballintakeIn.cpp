@@ -16,7 +16,7 @@ ballintakeIn::ballintakeIn() {
 
 // Called just before this Command runs the first time
 void ballintakeIn::Initialize() {
-  //SetTimeout(2);
+  SetTimeout(1);
   Robot::ballfloorwrist.manualcontrol(-0.6);
 }
 
