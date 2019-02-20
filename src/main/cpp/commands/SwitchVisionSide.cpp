@@ -15,11 +15,10 @@ SwitchVisionSide::SwitchVisionSide() {
 
 // Called once when the command executes
 void SwitchVisionSide::Initialize() {
-  if (Robot::vision.m_VisionSide = 0) {
-    Robot::vision.m_VisionSide = 1;
+  std::cout << "" << "\n";
+  if (Robot::vision.GetVisionCamera() == 0) {
     Robot::vision.SetCamera(1);
   } else {
-    Robot::vision.m_VisionSide = 0;
     Robot::vision.SetCamera(0);
   }
 }

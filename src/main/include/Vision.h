@@ -35,6 +35,7 @@ class Vision {
     void SetCamera(int camera);
 
     int m_VisionSide = 0;
+    int GetVisionCamera();
   private:
     std::shared_ptr<NetworkTable> visionTable;
     //Store current vision mode

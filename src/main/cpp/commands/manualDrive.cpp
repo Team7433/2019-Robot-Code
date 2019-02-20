@@ -64,8 +64,10 @@ void manualDrive::Execute() {
     }
     if (joystick.GetRawAxis(3) > 0 ) {
       Robot::drivetrain.driveCurvature(joystick.GetY(),rotation, !joystick.GetRawButton(1));
+      Robot::vision.SetCamera(1);
     } else {
       Robot::drivetrain.driveCurvature(-joystick.GetY(),rotation, !joystick.GetRawButton(1));
+      Robot::vision.SetCamera(0);
     }
   }
 }

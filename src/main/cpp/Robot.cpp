@@ -57,6 +57,7 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {
   trunk.gotoPositionMM(0);
+  std::cout << "Hi" << "\n";
 }
 
 void Robot::TeleopPeriodic() { 
@@ -94,11 +95,7 @@ void Robot::TeleopPeriodic() {
   } else if (joystick1.GetRawButton(4) == true) {
       hand.manual(-0.7);
   } else {
-    if (joystick2.GetX() < 0) {
-      hand.manual(joystick2.GetX());
-    } else {
-      hand.manual(0);
-    }
+    hand.manual(0);
   }
 
   //superstructure controls

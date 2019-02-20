@@ -53,12 +53,12 @@ OI::OI() {
     m_joystick1button8.WhenPressed(new ClimbLift());
     m_joystick1button9.WhenPressed(new ClimbFinish());
     m_joystick1button10.WhenPressed(new ClimbReset()); 
-    m_joystick1button11.WhenPressed(new SwitchVisionSide()); 
+    //m_joystick1button11.WhenPressed(new SwitchVisionSide()); 
     //m_joystick1button12.WhenPressed(new shoulderGoToPosition(-20));
 
     //joystick 2
     //m_joystick2button1.WhenPressed(new command());
-    //m_joystick2button2.WhenPressed(());
+    //m_joystick2button2.WhenPressed();
     m_joystick2button3.WhileHeld(new ballintakeIn());
     m_joystick2button4.WhileHeld(new ballintakeOut());
     //m_joystick2button5.WhileActive(new IntakeIn());

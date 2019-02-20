@@ -7,6 +7,7 @@
 
 #include "Vision.h"
 #include <frc/smartdashboard/SmartDashboard.h>
+#include "Robot.h"
 
 //This is for all raspberry pi interfacing and vision control
 Vision::Vision() {
@@ -62,5 +63,11 @@ double Vision::getTapeRightYaw() {
 }
 
 void Vision::SetCamera(int camera) {
-    visionTable->PutNumber("WhichCamera", 1);
+    std::cout << "Set Camera to " << camera << "\n";
+    visionTable->PutNumber("WhichCamera", camera);
+    std::cout << "Camera is " << visionTable->GetNumber("WhichCamera", 99) << "\n";
+}
+
+int Vision::GetVisionCamera() {
+    return visionTable->GetNumber("WhichCamera", 0);
 }
