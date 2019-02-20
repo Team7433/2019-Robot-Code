@@ -22,8 +22,8 @@ class Drivetrain : public frc::Subsystem {
  private:
   WPI_TalonSRX * m_LeftMaster = new WPI_TalonSRX(1);
   WPI_TalonSRX * m_RightMaster = new WPI_TalonSRX(2);
-  WPI_TalonSRX * m_LeftSlave = new WPI_TalonSRX(3);
-  WPI_TalonSRX * m_RightSlave = new WPI_TalonSRX(4);
+  //WPI_TalonSRX * m_LeftSlave = new WPI_TalonSRX(3);
+  //WPI_TalonSRX * m_RightSlave = new WPI_TalonSRX(4);
 
   frc::DifferentialDrive m_RobotDrive{*m_LeftMaster, *m_RightMaster};
   // It's desirable that everything possible under private except

@@ -28,21 +28,12 @@
 Drivetrain::Drivetrain() : Subsystem("DriveTrain") {
   //Initialisation Code
 
-  //Set Open Loop Ramp
-  m_LeftMaster->ConfigOpenloopRamp(1, kTimeoutMs);
-  m_RightMaster->ConfigOpenloopRamp(1, kTimeoutMs);
-  m_LeftSlave->ConfigOpenloopRamp(1, kTimeoutMs);
-  m_RightSlave->ConfigOpenloopRamp(1, kTimeoutMs);
-
-  //Set Closed Loop Ramp (For PID control)
-  m_LeftMaster->ConfigClosedloopRamp(0, kTimeoutMs);
-  m_RightMaster->ConfigClosedloopRamp(0, kTimeoutMs);
-  m_LeftSlave->ConfigClosedloopRamp(0, kTimeoutMs);
-  m_RightSlave->ConfigClosedloopRamp(0, kTimeoutMs);
+  m_LeftMaster->ConfigFactoryDefault();
+  m_RightMaster->ConfigFactoryDefault();
 
   //Make the slave Talons follow the Master Talons
-  m_LeftSlave->Follow(*m_LeftMaster);
-  m_RightSlave->Follow(*m_RightMaster);
+  //m_LeftSlave->Follow(*m_LeftMaster);
+  //m_RightSlave->Follow(*m_RightMaster);
 
   //Add Motors To Dashboard
   AddChild("Left", m_LeftMaster);
@@ -57,7 +48,7 @@ Drivetrain::Drivetrain() : Subsystem("DriveTrain") {
   m_RightMaster->SetSensorPhase(true);
 
   //Set Mininum Output For Forward And Reverse
-  m_LeftMaster->ConfigNominalOutputForward(0, kTimeoutMs);
+  /*m_LeftMaster->ConfigNominalOutputForward(0, kTimeoutMs);
   m_LeftMaster->ConfigNominalOutputReverse(0, kTimeoutMs);
   m_RightMaster->ConfigNominalOutputForward(0, kTimeoutMs);
   m_RightMaster->ConfigNominalOutputReverse(0, kTimeoutMs);
@@ -67,6 +58,7 @@ Drivetrain::Drivetrain() : Subsystem("DriveTrain") {
   m_LeftMaster->ConfigPeakOutputReverse(-1, kTimeoutMs);
   m_RightMaster->ConfigPeakOutputForward(1, kTimeoutMs);
   m_RightMaster->ConfigPeakOutputReverse(-1, kTimeoutMs);
+  */
 
   //Set K
   m_LeftMaster->Config_kP(kSlotIdx, talon_kp, kTimeoutMs);
@@ -89,8 +81,8 @@ Drivetrain::Drivetrain() : Subsystem("DriveTrain") {
 
   m_RobotDrive.SetSafetyEnabled(false);
 
-  m_LeftMaster->ConfigNeutralDeadband(0.01, kTimeoutMs);
-  m_RightMaster->ConfigNeutralDeadband(0.01, kTimeoutMs);
+  //m_LeftMaster->ConfigNeutralDeadband(0.01, kTimeoutMs);
+  //m_RightMaster->ConfigNeutralDeadband(0.01, kTimeoutMs);
 
   m_LeftMaster->SetStatusFramePeriod(StatusFrameEnhanced::Status_10_MotionMagic,10,kTimeoutMs);
   m_RightMaster->SetStatusFramePeriod(StatusFrameEnhanced::Status_10_MotionMagic,10,kTimeoutMs);
@@ -332,7 +324,7 @@ void Drivetrain::StartFilling() {
       }
 
       //if last point set last point to true
-      if ((1+1) == profileLength) {
+      if ((i+1) == profileLength) {
         pointLeft.isLastPoint = true;
         pointRight.isLastPoint = true;
       }

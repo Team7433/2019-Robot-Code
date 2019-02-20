@@ -30,8 +30,8 @@ OI::OI() {
     //m_joystick1button8.WhenPressed(new TrunkGotoPosition(0));
     //m_joystick1button9.WhenPressed(new FootGotoPosition(0));
     //m_joystick1button10.WhenPressed(new TrunkGotoPosition(3000));
-    m_joystick1button11.WhenPressed(new ExecuteMotionProfile("P_1"));
-    //m_joystick1button12.WhenPressed(new ExecuteMotionProfile("P_1"));
+    m_joystick1button11.WhenPressed(new ExecuteMotionProfile("Test"));
+    m_joystick1button12.WhenPressed(new ExecuteMotionProfile("Test2"));
 
     //joystick 2
     //m_joystick2button1.WhenPressed(new command());

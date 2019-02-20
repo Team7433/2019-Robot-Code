@@ -26,7 +26,7 @@ class OI {
     //create Joystick buttons
 
       //joystick 1
-      frc::JoystickButton m_joystick1button1{&m_joy1, 1};
+      /*rc::JoystickButton m_joystick1button1{&m_joy1, 1};
       frc::JoystickButton m_joystick1button2{&m_joy1, 2};
       frc::JoystickButton m_joystick1button3{&m_joy1, 3};
       frc::JoystickButton m_joystick1button4{&m_joy1, 4};
@@ -51,7 +51,8 @@ class OI {
       frc::JoystickButton m_joystick2button9{&m_joy2, 9};
       frc::JoystickButton m_joystick2button10{&m_joy2, 10};
       frc::JoystickButton m_joystick2button11{&m_joy2, 11};
-      frc::JoystickButton m_joystick2button12{&m_joy2, 12};
+      frc::JoystickButton m_joystick2button12{&m_joy2, 12};*/
 
-
+      frc::JoystickButton m_joystick1button11{&m_joy1, 11};
+      frc::JoystickButton m_joystick1button12{&m_joy1, 12};
 };
