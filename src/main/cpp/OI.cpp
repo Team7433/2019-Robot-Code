@@ -37,6 +37,7 @@
 #include "commands/resetShoulder.h"
 #include "commands/resetWrist.h"
 #include "commands/resetBallWrist.h"
+#include "commands/ExecuteMotionProfile.h"
 
 
 OI::OI() {

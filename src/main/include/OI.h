@@ -79,6 +79,4 @@ class OI {
       frc::JoystickButton m_joystick3button10{&m_joy3, 10};
       frc::JoystickButton m_joystick3button11{&m_joy3, 11};
       frc::JoystickButton m_joystick3button12{&m_joy3, 12};
-
-
 };
