@@ -55,7 +55,7 @@ OI::OI() {
     m_joystick1button8.WhenPressed(new ClimbLift());
     m_joystick1button9.WhenPressed(new ClimbFinish());
     m_joystick1button10.WhenPressed(new ClimbReset()); 
-    //m_joystick1button11.WhenPressed(new SwitchVisionSide()); 
+    m_joystick1button11.WhenPressed(new ExecuteMotionProfile("Test2"));
     m_joystick1button12.WhenPressed(new ExecuteMotionProfile("Test"));
 
     //joystick 2
