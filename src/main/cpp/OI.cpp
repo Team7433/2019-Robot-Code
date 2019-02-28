@@ -26,6 +26,7 @@
 #include "commands/EjectHatch.h"
 #include "commands/AutoHatchOut.h"
 #include "commands/SwitchVisionSide.h"
+#include "commands/ExecuteMotionProfile.h"
 
 //climb commands
 #include "commands/climb/ClimbSetup.h"
@@ -37,7 +38,7 @@
 #include "commands/resetShoulder.h"
 #include "commands/resetWrist.h"
 #include "commands/resetBallWrist.h"
-#include "commands/ExecuteMotionProfile.h"
+
 
 
 OI::OI() {
@@ -55,7 +56,7 @@ OI::OI() {
     m_joystick1button9.WhenPressed(new ClimbFinish());
     m_joystick1button10.WhenPressed(new ClimbReset()); 
     //m_joystick1button11.WhenPressed(new SwitchVisionSide()); 
-    //m_joystick1button12.WhenPressed(new shoulderGoToPosition(-20));
+    m_joystick1button12.WhenPressed(new ExecuteMotionProfile("Test"));
 
     //joystick 2
     //m_joystick2button1.WhenPressed(new command());

@@ -23,7 +23,7 @@
 #include <fstream>
 
 //Default Command
-#include "commands/DriveWithJoystick.h"
+#include "commands/manualDrive.h"
 
 Drivetrain::Drivetrain() : Subsystem("DriveTrain") {
   //Initialisation Code
@@ -91,7 +91,7 @@ Drivetrain::Drivetrain() : Subsystem("DriveTrain") {
 
 void Drivetrain::InitDefaultCommand() {
   // Set the default command for a subsystem here.
-  SetDefaultCommand(new DriveWithJoystick());
+  SetDefaultCommand(new manualDrive());
 }
 
 //Arcade Drive

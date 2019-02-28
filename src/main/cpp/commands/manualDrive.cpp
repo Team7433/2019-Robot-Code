@@ -44,12 +44,12 @@ void manualDrive::Execute() {
 
     //put into drive output
 
-    Robot::drivetrain.driveArcade(-joystick.GetY(), TurnValue);
+    Robot::drivetrain.DriveArcade(-joystick.GetY(), TurnValue);
     if (joystick.GetRawAxis(3) > 0 ) {
-      Robot::drivetrain.driveArcade(joystick.GetY(), TurnValue);
+      Robot::drivetrain.DriveArcade(joystick.GetY(), TurnValue);
       Robot::vision.SetCamera(1);
     } else {
-      Robot::drivetrain.driveArcade(-joystick.GetY(), TurnValue);
+      Robot::drivetrain.DriveArcade(-joystick.GetY(), TurnValue);
       Robot::vision.SetCamera(0);
     }
 
@@ -63,10 +63,10 @@ void manualDrive::Execute() {
       rotation = joystick.GetZ();
     }
     if (joystick.GetRawAxis(3) > 0 ) {
-      Robot::drivetrain.driveCurvature(joystick.GetY(),rotation, !joystick.GetRawButton(1));
+      Robot::drivetrain.DriveCurvature(joystick.GetY(),rotation, !joystick.GetRawButton(1));
       Robot::vision.SetCamera(1);
     } else {
-      Robot::drivetrain.driveCurvature(-joystick.GetY(),rotation, !joystick.GetRawButton(1));
+      Robot::drivetrain.DriveCurvature(-joystick.GetY(),rotation, !joystick.GetRawButton(1));
       Robot::vision.SetCamera(0);
     }
   }
