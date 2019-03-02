@@ -69,18 +69,10 @@ void Robot::TeleopPeriodic() {
   auto& joystick3 = oi.getJoystick3();
 
   //floor intake controls
-  if(joystick2.GetY() > 0.03 || joystick2.GetY() < -0.03) {
+  if(joystick2.GetX() > 0.03 || joystick2.GetX() < -0.03) {
     ballfloorintake.manual(-joystick2.GetX());
   } else {
-    if(joystick3.GetRawButton(2) == false) {
-      if (joystick3.GetRawButton(12) == false) {
-        ballfloorintake.manual(1);
-      } else {
-        ballfloorintake.manual(0);
-      }
-    } else {
-      //ballfloorintake.manual(-1);
-    }
+    ballfloorintake.manual(0);
   }
 
   /*if (joystick2.GetY() > 0.5 || joystick2.GetY() < -0.5) {
@@ -189,11 +181,11 @@ void Robot::TeleopPeriodic() {
 
 
   //update data from subsystems
-  foot.UpdateData();
+  //foot.UpdateData();
   elevator.UpdateData();
   shoulder.UpdateData();
   wrist.UpdateData();
-  trunk.UpdateData();
+  //trunk.UpdateData();
   
 }
 

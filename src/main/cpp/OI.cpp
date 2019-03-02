@@ -27,6 +27,7 @@
 #include "commands/AutoHatchOut.h"
 #include "commands/SwitchVisionSide.h"
 #include "commands/ExecuteMotionProfile.h"
+#include "commands/Testing/TestBallWrist.h"
 
 //climb commands
 #include "commands/climb/ClimbSetup.h"
@@ -55,8 +56,8 @@ OI::OI() {
     m_joystick1button8.WhenPressed(new ClimbLift());
     m_joystick1button9.WhenPressed(new ClimbFinish());
     m_joystick1button10.WhenPressed(new ClimbReset()); 
-    m_joystick1button11.WhenPressed(new ExecuteMotionProfile("Test2"));
-    m_joystick1button12.WhenPressed(new ExecuteMotionProfile("Test"));
+    m_joystick1button11.WhenPressed(new ExecuteMotionProfile("Test"));
+    m_joystick1button12.WhenPressed(new ExecuteMotionProfile("Test2"));
 
     //joystick 2
     //m_joystick2button1.WhenPressed(new command());
@@ -70,7 +71,7 @@ OI::OI() {
     m_joystick2button9.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::autostep3));
     //m_joystick2button10.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::cargoAmedium));
     //m_joystick2button11.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::cargoBlow));
-    //m_joystick2button12.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::cargoAlow));
+    m_joystick2button12.WhenPressed(new TestBallWrist());
     
     //joystick 3
     //m_joystick3button1.WhenPressed(new command());

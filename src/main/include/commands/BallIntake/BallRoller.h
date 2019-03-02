@@ -9,14 +9,15 @@
 
 #include <frc/commands/Command.h>
 
-class ballintakeIn : public frc::Command {
+class BallRoller : public frc::Command {
   public:
-    ballintakeIn();
+    BallRoller(double speed, double time);
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
     void End() override;
     void Interrupted() override;
   private:
+    double m_speed;
     double m_time;
 };

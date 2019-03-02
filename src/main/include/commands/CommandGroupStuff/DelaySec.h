@@ -9,14 +9,14 @@
 
 #include <frc/commands/Command.h>
 
-class ballintakeIn : public frc::Command {
+class DelaySec : public frc::Command {
   public:
-    ballintakeIn();
+    DelaySec(double seconds);
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
     void End() override;
     void Interrupted() override;
   private:
-    double m_time;
+    double m_seconds;
 };

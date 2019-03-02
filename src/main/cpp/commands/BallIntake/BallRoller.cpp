@@ -5,34 +5,35 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ballintakeOut.h"
+#include "commands/BallIntake/BallRoller.h"
 #include "Robot.h"
 
-ballintakeOut::ballintakeOut() {
+BallRoller::BallRoller(double speed, double time) {
+  m_time = time;
+  m_speed = speed;
   // Use Requires() here to declare subsystem dependencies
-  Requires(&Robot::ballfloorwrist);
+  Requires(&Robot::ballfloorintake);
 }
 
 // Called just before this Command runs the first time
-void ballintakeOut::Initialize() {
-  SetTimeout(0.4);
-  Robot::ballfloorwrist.manualcontrol(0.6);
+void BallRoller::Initialize() {
+  SetTimeout(m_time);
+  Robot::ballfloorintake.manual(m_speed);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ballintakeOut::Execute() {}
+void BallRoller::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool ballintakeOut::IsFinished() { return IsTimedOut(); }
+bool BallRoller::IsFinished() { return IsTimedOut(); }
 
 // Called once after isFinished returns true
-void ballintakeOut::End() {
-  std::cout << "Done \n";
-  Robot::ballfloorwrist.manualcontrol(0);
+void BallRoller::End() {
+  Robot::ballfloorintake.manual(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ballintakeOut::Interrupted() {
+void BallRoller::Interrupted() {
   End();
 }

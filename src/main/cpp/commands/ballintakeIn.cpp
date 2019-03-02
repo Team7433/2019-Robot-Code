@@ -9,6 +9,7 @@
 #include "Robot.h"
 
 ballintakeIn::ballintakeIn() {
+  m_time = 0;
   // Use Requires() here to declare subsystem dependencies
   Requires(&Robot::ballfloorwrist);
   
@@ -16,7 +17,7 @@ ballintakeIn::ballintakeIn() {
 
 // Called just before this Command runs the first time
 void ballintakeIn::Initialize() {
-  SetTimeout(1);
+  SetTimeout(m_time);
   Robot::ballfloorwrist.manualcontrol(-0.6);
 }
 
