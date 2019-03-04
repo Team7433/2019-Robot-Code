@@ -17,6 +17,11 @@ class Shoulder : public frc::Subsystem {
 
   WPI_TalonSRX * m_ShoulderMaster = new WPI_TalonSRX{8};
   //WPI_TalonSRX * m_ShoulderSlave = new WPI_TalonSRX{3};
+
+
+  //26.8074 188 reduction
+  //10.1240 71 reduction
+  double kCountsToAngle = 10.1240;
  public:
   Shoulder();
   void InitDefaultCommand() override;

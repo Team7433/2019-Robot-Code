@@ -5,19 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/Testing/TestBallWrist.h"
-#include "commands/ballintakeIn.h"
-#include "commands/ballintakeOut.h"
-#include "commands/CommandGroupStuff/DelaySec.h"
-#include "commands/BallIntake/BallRoller.h"
+#include "commands/Testing/MotionPTest.h"
+#include "commands/ExecuteMotionProfile.h"
+#include "commands/SuperStructureGotoPosition.h"
 
-TestBallWrist::TestBallWrist() {
-  AddParallel(new BallRoller(1, 2));
-  AddSequential(new ballintakeOut());
-  AddSequential(new DelaySec(1));
-  AddSequential(new ballintakeIn(0.6));
-  AddParallel(new BallRoller(-1,1.5));
-  //AddSequential(new ballintakeOut());
+MotionPTest::MotionPTest() {
+  AddSequential(new SuperStructureGotoPosition(iona::Superstructure::idle));
+  AddSequential(new ExecuteMotionProfile("P_1"));
+  AddSequential(new SuperStructureGotoPosition(iona::Superstructure::home));
   // Add Commands here:
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());

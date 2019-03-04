@@ -11,9 +11,8 @@
 #include "commands/ballintakeOut.h"
 
 AutoHatchOut::AutoHatchOut() {
-  //AddSequential(new ballintakeIn(0.5));
-  AddParallel(new SuperStructureGotoPosition(iona::Superstructure::autostep1));
-  AddSequential(new ballintakeOut());
-  AddParallel(new ballintakeIn());
-  AddParallel(new SuperStructureGotoPosition(iona::Superstructure::autostep3));
+  AddSequential(new ballintakeIn(0.8));
+  AddParallel(new ballintakeIn(1));
+  AddSequential(new SuperStructureGotoPosition(iona::Superstructure::autostep1));
+  AddSequential(new SuperStructureGotoPosition(iona::Superstructure::autostep3));
 }

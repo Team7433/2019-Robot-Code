@@ -159,6 +159,9 @@ bool SuperStructureGotoPosition::IsFinished() {
       }
     }
   }
+  if (abs(m_elevatorPos-Robot::elevator.getPosition()) < m_elevatorTolerence) {
+    return true;
+  }
   return false; 
 }
 

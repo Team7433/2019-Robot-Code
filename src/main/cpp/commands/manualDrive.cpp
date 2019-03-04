@@ -39,7 +39,7 @@ void manualDrive::Execute() {
       TurnValue = Map(inputYaw, 0 , 20, 0.3, 0.5);
     } else {
       //if yaw is negative do negative yaw
-      TurnValue = Map(inputYaw, 0 , -20, -0.4, -0.5);
+      TurnValue = Map(inputYaw, 0 , -20, -0.3, -0.5);
     }
 
     //put into drive output

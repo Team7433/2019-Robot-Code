@@ -25,7 +25,7 @@
 //Default Command
 #include "commands/manualDrive.h"
 
-Drivetrain::Drivetrain() : Subsystem("DriveTrain") {
+Drivetrain::Drivetrain() : Subsystem("DriveTrain"), m_notifier(&Drivetrain::MPPeriodicTask, this) {
   //Initialisation Code
 
   m_LeftMaster->ConfigFactoryDefault();
@@ -131,6 +131,7 @@ void Drivetrain::ResetMP() {
   _bstart = false;
   _setValueLeft = SetValueMotionProfile::Disable;
   _setValueRight = SetValueMotionProfile::Disable;
+  m_loadedPath = "null";
 
   //Set Output to nothing
   m_LeftMaster->Set(ControlMode::PercentOutput, 0.0);
@@ -174,8 +175,11 @@ void Drivetrain::MPControl() {
           _setValueLeft = SetValueMotionProfile::Disable;
           _setValueRight = SetValueMotionProfile::Disable;
 
-          //Start filling the profile 
-          StartFilling();
+          if (m_MpPathId != m_loadedPath) {
+             m_notifier.StartPeriodic(0.005);
+            //Start filling the profile 
+            StartFilling(m_MpPathId);
+          }
 
           //Start the notifier
           //m_notifier.StartPeriodic(0.005);
@@ -217,6 +221,8 @@ void Drivetrain::MPControl() {
           _setValueRight = SetValueMotionProfile::Hold;
           _state = 3;
           _loopTimeout = -1;
+          m_notifier.Stop();
+          m_loadedPath = "null";
         }
         break;
     }
@@ -228,7 +234,8 @@ void Drivetrain::MPControl() {
   }
 }
 
-void Drivetrain::StartFilling() {
+void Drivetrain::StartFilling(std::string path) {
+  m_loadedPath = path;
   printf("Start Filling \n");
 
   //Creates points to store the data for each point
@@ -247,23 +254,24 @@ void Drivetrain::StartFilling() {
   m_RightMaster->ClearMotionProfileTrajectories();
 
   //Sets Base trjectory Perod
-  m_LeftMaster->ConfigMotionProfileTrajectoryPeriod(10, kTimeoutMs);
-  m_RightMaster->ConfigMotionProfileTrajectoryPeriod(10, kTimeoutMs);
+  m_LeftMaster->ConfigMotionProfileTrajectoryPeriod(0, kTimeoutMs);
+  m_RightMaster->ConfigMotionProfileTrajectoryPeriod(0, kTimeoutMs);
 
   //Read Profile From File
 
   //Find The length of the profile
   int profileLength = 0;
   std::string line;
-  std::ifstream profileforlength("U/" + m_MpPathId + ".csv");
+  std::ifstream profileforlength("home/lvuser/Profiles/" + m_loadedPath + ".csv");
   if (profileforlength.is_open()) {
+    //std::cout << "Found File" << "\n";
     while (getline(profileforlength, line)) {
       profileLength++;
     }
     printf("Profile Length: %i \n", profileLength);
     profileforlength.close();
   }
-  std::ifstream myfile ("U/" + m_MpPathId + ".csv");
+  std::ifstream myfile ("home/lvuser/Profiles/" + m_loadedPath + ".csv");
   if (myfile.is_open()) {
     int i =0;
     while (getline (myfile, line)) {        //Repeat through each line in the code and set the varible line to the current line
@@ -363,7 +371,9 @@ void Drivetrain::MPPeriodicTask() {
   m_RightMaster->ProcessMotionProfileBuffer();
 }
 
-
+void Drivetrain::StartPerioticTask() {
+  m_notifier.StartPeriodic(0.005);
+}
 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

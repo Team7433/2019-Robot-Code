@@ -5,35 +5,35 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ballintakeIn.h"
+#include "commands/BallIntake/manualBallRoller.h"
 #include "Robot.h"
 
-ballintakeIn::ballintakeIn(double time) {
-  m_time = time;
+manualBallRoller::manualBallRoller() {
   // Use Requires() here to declare subsystem dependencies
-  Requires(&Robot::ballfloorwrist);
-  
+  Requires(&Robot::ballfloorintake);
 }
 
 // Called just before this Command runs the first time
-void ballintakeIn::Initialize() {
-  SetTimeout(m_time);
-  Robot::ballfloorwrist.manualcontrol(-0.6);
-}
+void manualBallRoller::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void ballintakeIn::Execute() {}
+void manualBallRoller::Execute() {
+  auto& joystick2 = Robot::oi.getJoystick2();
+  if(joystick2.GetX() > 0.03 || joystick2.GetX() < -0.03) {
+    Robot::ballfloorintake.manual(-joystick2.GetX());
+  } else {
+    Robot::ballfloorintake.manual(0);
+  }
+}
 
 // Make this return true when this Command no longer needs to run execute()
-bool ballintakeIn::IsFinished() { return IsTimedOut(); }
+bool manualBallRoller::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void ballintakeIn::End() {
-  Robot::ballfloorwrist.manualcontrol(0);
+void manualBallRoller::End() {
+  Robot::ballfloorintake.manual(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ballintakeIn::Interrupted() {
-  End();
-}
+void manualBallRoller::Interrupted() {}

@@ -5,18 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/BallFloorIntake.h"
-#include "commands/BallIntake/manualBallRoller.h"
+#include "commands/FillMotionProfile.h"
+#include "Robot.h"
 
-BallFloorIntake::BallFloorIntake() : Subsystem("ExampleSubsystem") {}
-
-void BallFloorIntake::InitDefaultCommand() { 
-  SetDefaultCommand(new manualBallRoller());
+FillMotionProfile::FillMotionProfile(std::string path) {
+  m_path = path;
+  // Use Requires() here to declare subsystem dependencies
+  // eg. Requires(Robot::chassis.get());
 }
 
-void BallFloorIntake::manual(double output) {
-  m_intakeMotor->Set(ControlMode::PercentOutput, output);
+// Called once when the command executes
+void FillMotionProfile::Initialize() {
+  Robot::drivetrain.StartFilling(m_path);
 }
-
-// Put methods for controlling this subsystem
-// here. Call these from Commands.

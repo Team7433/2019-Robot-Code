@@ -9,7 +9,7 @@
 #include "Robot.h"
 
 ElevatorGotoPosition::ElevatorGotoPosition(double position) {
-   m_position = position;
+   m_position = -position;
   // Use Requires() here to declare subsystem dependencies
    Requires(&Robot::elevator);
 }
@@ -24,7 +24,7 @@ void ElevatorGotoPosition::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
 bool ElevatorGotoPosition::IsFinished() { 
- if (m_position-3 < Robot::elevator.getPosition() && m_position+3 > Robot::elevator.getPosition()) {
+ if (m_position-3 < abs(Robot::elevator.getPosition()) && m_position+3 > abs(Robot::elevator.getPosition())) {
    return true;
  }
  return false;

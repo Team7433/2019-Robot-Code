@@ -21,11 +21,14 @@ class OI {
     bool joystickButtonLast(joystickNum,int button);
     bool joystickButton(joystickNum,int button);
     void UpdateButtons();
+
+    void DriveControl();
     
     // 
     bool getPow3(int button);
     bool getPow3Last(int button);
     void UpdatePOV();
+    void ShowSubsystems();
   private:
     bool buttonslast1[12] = {false, false, false, false,false, false, false, false,false, false, false, false};
     bool buttonslast2[12] = {false, false, false, false,false, false, false, false,false, false, false, false};

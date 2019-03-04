@@ -11,7 +11,7 @@
 
 class ballintakeIn : public frc::Command {
   public:
-    ballintakeIn();
+    ballintakeIn(double time);
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;

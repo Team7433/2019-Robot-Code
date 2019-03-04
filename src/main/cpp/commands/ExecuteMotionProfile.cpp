@@ -24,12 +24,13 @@ void ExecuteMotionProfile::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void ExecuteMotionProfile::Execute() {
   Robot::drivetrain.MPControl();
-  Robot::drivetrain.MPPeriodicTask();
+  //Robot::drivetrain.MPPeriodicTask();
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool ExecuteMotionProfile::IsFinished() {
-   return Robot::drivetrain.IsFinishedMP(); 
+  auto& joystick = Robot::oi.getJoystick1();
+   return Robot::drivetrain.IsFinishedMP() || joystick.GetY() > 0.2 || joystick.GetY() < -0.2; 
 }
 
 // Called once after isFinished returns true
@@ -39,4 +40,6 @@ void ExecuteMotionProfile::End() {
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ExecuteMotionProfile::Interrupted() {}
+void ExecuteMotionProfile::Interrupted() {
+  End();
+}

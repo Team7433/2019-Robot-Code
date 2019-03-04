@@ -36,6 +36,7 @@ class Drivetrain : public frc::Subsystem {
  
 
   std::string m_MpPathId;
+  std::string m_loadedPath;
 
   SetValueMotionProfile _setValueLeft =  SetValueMotionProfile::Disable;
   SetValueMotionProfile _setValueRight =  SetValueMotionProfile::Disable;
@@ -47,10 +48,10 @@ class Drivetrain : public frc::Subsystem {
 
   bool _bstart = false;
 
-  static const int KMinPointsInTalon = 30;
+  static const int KMinPointsInTalon = 4;
   static const int KNumLoopsTimeout = 10;
 
-  //frc::Notifier m_notifier;
+  frc::Notifier m_notifier;
 
  public:
   Drivetrain();
@@ -65,9 +66,10 @@ class Drivetrain : public frc::Subsystem {
   void StartMP(std::string Profile);
   void MPPeriodicTask();
   void MPControl();
-  void StartFilling();        // Fills the Talon with profile points
+  void StartFilling(std::string pathName);        // Fills the Talon with profile points
   void ResetMP();             // Resets The Motion Profile Code 
   bool IsFinishedMP();        // check when the motion profile has finished so the command nows to move on
+  void StartPerioticTask();
   
   //Reset Sensors
   void resetGyro();

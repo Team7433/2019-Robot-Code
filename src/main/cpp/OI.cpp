@@ -10,6 +10,7 @@
 #include <frc/WPILib.h>
 
 #include "positions.h"
+#include "Robot.h"
 
 //commands
 #include "commands/FootGotoPosition.h"
@@ -22,12 +23,16 @@
 #include "commands/wristGotoPosition.h"
 #include "commands/ballintakeIn.h"
 #include "commands/ballintakeOut.h"
+#include "commands/SuperstructureControl.h"
 #include "commands/SuperStructureGotoPosition.h"
 #include "commands/EjectHatch.h"
 #include "commands/AutoHatchOut.h"
 #include "commands/SwitchVisionSide.h"
 #include "commands/ExecuteMotionProfile.h"
 #include "commands/Testing/TestBallWrist.h"
+#include "commands/Testing/MotionPTest.h"
+#include "Commands/Testing/AutoStart.h"
+#include "commands/FillMotionProfile.h"
 
 //climb commands
 #include "commands/climb/ClimbSetup.h"
@@ -50,20 +55,20 @@ OI::OI() {
     //m_joystick1button2.WhenPressed(new resetWrist());
     m_joystick1button3.WhileHeld(new EjectHatch());
     //m_joystick2button4.WhenPressed(new ballintakeOut());
-    //m_joystick1button5.WhenPressed(new resetBallWrist());
+    m_joystick1button5.WhenPressed(new FillMotionProfile("Test2"));
     //m_joystick1button6.WhenPressed(new resetWrist());
     m_joystick1button7.WhenPressed(new ClimbSetup());
     m_joystick1button8.WhenPressed(new ClimbLift());
     m_joystick1button9.WhenPressed(new ClimbFinish());
     m_joystick1button10.WhenPressed(new ClimbReset()); 
-    m_joystick1button11.WhenPressed(new ExecuteMotionProfile("Test"));
+    m_joystick1button11.WhenPressed(new AutoStart());
     m_joystick1button12.WhenPressed(new ExecuteMotionProfile("Test2"));
 
     //joystick 2
     //m_joystick2button1.WhenPressed(new command());
     //m_joystick2button2.WhenPressed();
-    m_joystick2button3.WhileHeld(new ballintakeIn());
-    m_joystick2button4.WhileHeld(new ballintakeOut());
+    //m_joystick2button3.WhileHeld(new ballintakeIn());
+    //m_joystick2button4.WhileHeld(new ballintakeOut());
     //m_joystick2button5.WhileActive(new IntakeIn());
     //m_joystick2button6.WhileActive(new IntakeOut());
     m_joystick2button7.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::autostep1));
@@ -172,3 +177,107 @@ void OI::UpdatePOV() {
   }
 }
 
+void OI::DriveControl() {
+  //hand controls
+  if (m_joy2.GetRawButton(1) == true) {
+      Robot::hand.manual(0.4);
+  } else if (m_joy1.GetRawButton(4) == true) {
+      Robot::hand.manual(-0.7);
+  } else {
+    Robot::hand.manual(0);
+  }
+
+  //superstructure controls
+  if (m_joy3.GetRawButton(10) == true) { //cargo mode
+    if (getPow3(1) == true && getPow3Last(1) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoAhigh);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(9) == true && joystickButtonLast(joystickNum::joy3, 9) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoBhigh);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(6) == true && joystickButtonLast(joystickNum::joy3, 6) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoAmedium);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(5) == true && joystickButtonLast(joystickNum::joy3, 5) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoBmedium);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(2) == true && joystickButtonLast(joystickNum::joy3, 2) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoAlow);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(1) == true && joystickButtonLast(joystickNum::joy3, 1) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoBlow);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(3) == true && joystickButtonLast(joystickNum::joy3, 3) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::idle);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(4) == true && joystickButtonLast(joystickNum::joy3, 4) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::home);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(7) == true && joystickButtonLast(joystickNum::joy3, 7) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoAtop);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(8) == true && joystickButtonLast(joystickNum::joy3, 8) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::cargoBtop);
+      commandToBeExecuted->Start();
+    }
+  } else { //hatch mode
+    if (m_joy3.GetRawButton(3) == true && joystickButtonLast(joystickNum::joy3, 3) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchintake);
+      commandToBeExecuted->Start();
+    }
+    if (getPow3(1) == true && getPow3Last(1) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchATop);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(9) == true && joystickButtonLast(joystickNum::joy3, 9) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchBTop);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(6) == true && joystickButtonLast(joystickNum::joy3, 6) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchAMiddle);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(5) == true && joystickButtonLast(joystickNum::joy3, 5) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchBMiddle);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(2) == true && joystickButtonLast(joystickNum::joy3, 2) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchAbottom);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(1) == true && joystickButtonLast(joystickNum::joy3, 1) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::hatchBbottom);
+      commandToBeExecuted->Start();
+    }
+    if (m_joy3.GetRawButton(4) == true && joystickButtonLast(joystickNum::joy3, 4) == false) {
+      frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::home);
+      commandToBeExecuted->Start();
+    }
+  }
+  if (getPow3(2) == true && getPow3Last(2) == false) {
+    frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::climb);
+    commandToBeExecuted->Start();
+  }
+
+  //update buttons
+  UpdateButtons();
+  UpdatePOV();
+}
+
+
+void OI::ShowSubsystems() {
+  //Robot::foot.UpdateData();
+  Robot::elevator.UpdateData();
+  Robot::shoulder.UpdateData();
+  Robot::wrist.UpdateData();
+  //Robot::trunk.UpdateData();
+}
