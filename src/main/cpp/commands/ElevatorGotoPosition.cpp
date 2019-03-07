@@ -24,7 +24,7 @@ void ElevatorGotoPosition::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
 bool ElevatorGotoPosition::IsFinished() { 
- if (m_position-3 < abs(Robot::elevator.getPosition()) && m_position+3 > abs(Robot::elevator.getPosition())) {
+ if (abs(abs(m_position)-abs(Robot::elevator.getPosition())) < 300) {
    return true;
  }
  return false;

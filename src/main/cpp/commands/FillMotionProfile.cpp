@@ -17,4 +17,5 @@ FillMotionProfile::FillMotionProfile(std::string path) {
 // Called once when the command executes
 void FillMotionProfile::Initialize() {
   Robot::drivetrain.StartFilling(m_path);
+  Robot::drivetrain.StartPerioticTask();
 }

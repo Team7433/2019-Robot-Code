@@ -8,8 +8,9 @@
 #pragma once
 
 #include <frc/commands/CommandGroup.h>
+#include <string>
 
 class AutoStart : public frc::CommandGroup {
  public:
-  AutoStart();
+  AutoStart(std::string path = "P_1");
 };

@@ -10,9 +10,9 @@
 #include "Commands/AutoHatchOut.h"
 #include "Commands/ballintakeIn.h"
 
-AutoStart::AutoStart() {
+AutoStart::AutoStart(std::string path) {
   AddParallel(new AutoHatchOut());
-  AddSequential(new ExecuteMotionProfile("P_1"));
+  AddSequential(new ExecuteMotionProfile(path));
   //AddSequential(new ballintakeIn(0.8));
   // Add Commands here:
   // e.g. AddSequential(new Command1());

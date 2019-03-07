@@ -18,7 +18,11 @@ ExecuteMotionProfile::ExecuteMotionProfile(std::string path) {
 // Called just before this Command runs the first time
 void ExecuteMotionProfile::Initialize() {
   printf("Start Executing Motion Profile \n");
-  Robot::drivetrain.StartMP(m_Path);
+  if (m_Path == "Chooser") {
+    Robot::drivetrain.StartMP(Robot::oi.GetPickedPath());
+  } else {
+    Robot::drivetrain.StartMP(m_Path);
+  }
 }
 
 // Called repeatedly when this Command is scheduled to run

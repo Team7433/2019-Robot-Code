@@ -78,9 +78,9 @@ SuperstructureControl::SuperstructureControl(iona::Superstructure position) {
       AddParallel(new WristGoToAngle(26));
       break;
     case iona::Superstructure::hatchATop:
-      AddParallel(new ElevatorGotoPosition(7000));
-      AddParallel(new ShoulderGotoAngle(118));
-      AddParallel(new WristGoToAngle(74));
+      AddParallel(new ElevatorGotoPosition(1425));
+      AddParallel(new ShoulderGotoAngle(137));
+      AddParallel(new WristGoToAngle(46));
       break;
     case iona::Superstructure::hatchAMiddle:
       AddParallel(new ElevatorGotoPosition(15000));
@@ -114,13 +114,8 @@ SuperstructureControl::SuperstructureControl(iona::Superstructure position) {
       break;
     case iona::Superstructure::autostep1:
       AddParallel(new ElevatorGotoPosition(4000));
-      AddParallel(new ShoulderGotoAngle(68));
+      AddParallel(new ShoulderGotoAngle(50));
       AddParallel(new WristGoToAngle(-19));
-      break;
-    case iona::Superstructure::autostep2:
-      AddParallel(new ElevatorGotoPosition(0));
-      AddParallel(new ShoulderGotoAngle(68));
-      AddParallel(new WristGoToAngle(0));
       break;
     case iona::Superstructure::autostep3:
       AddParallel(new ElevatorGotoPosition(0));

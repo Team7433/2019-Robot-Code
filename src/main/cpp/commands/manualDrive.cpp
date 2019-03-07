@@ -23,8 +23,8 @@ void manualDrive::Execute() {
   //Get the joystick
   auto& joystick = Robot::oi.getJoystick1();
 
-  frc::SmartDashboard::PutBoolean("TapeDetected", Robot::vision.getTapeDetected());
-  frc::SmartDashboard::PutNumber("TapeYaw", Robot::vision.getTapeYaw());
+  //frc::SmartDashboard::PutBoolean("TapeDetected", Robot::vision.getTapeDetected());
+  //frc::SmartDashboard::PutNumber("TapeYaw", Robot::vision.getTapeYaw());
   //check if we want to vision align and there is a target
   if (joystick.GetRawButton(2) == true && Robot::vision.getTapeDetected()) {
 

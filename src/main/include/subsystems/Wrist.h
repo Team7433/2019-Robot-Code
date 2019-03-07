@@ -17,8 +17,9 @@ class Wrist : public frc::Subsystem {
 
   TalonSRX * m_wristMotor = new TalonSRX{10};
   
-  //71 
+  //71 5.5222
   //188 14.6222
+  //71-12 2.238
   double kCountsToAngle = 5.5222;
  public:
   Wrist();

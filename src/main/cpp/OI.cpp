@@ -17,17 +17,13 @@
 #include "commands/TrunkGotoPosition.h"
 #include "commands/ResetTrunkPosition.h"
 #include "commands/ResetFootEncoder.h"
-#include "commands/shoulderGoToPosition.h"
 #include "commands/resetElevatorPosition.h"
 #include "commands/ElevatorGotoPosition.h"
 #include "commands/wristGotoPosition.h"
-#include "commands/ballintakeIn.h"
-#include "commands/ballintakeOut.h"
 #include "commands/SuperstructureControl.h"
 #include "commands/SuperStructureGotoPosition.h"
 #include "commands/EjectHatch.h"
 #include "commands/AutoHatchOut.h"
-#include "commands/SwitchVisionSide.h"
 #include "commands/ExecuteMotionProfile.h"
 #include "commands/Testing/TestBallWrist.h"
 #include "commands/Testing/MotionPTest.h"
@@ -169,11 +165,48 @@ bool OI::getPow3(int buttonid) {
 bool OI::getPow3Last(int button) {
   return POVLast3[button-1];
 }
+bool OI::getPow1(int buttonid) {
+  switch (buttonid)
+  {
+    case 1:
+        if (m_joy1.GetPOV() == 0) {
+          return true;
+        }
+      break;
+    case 2:
+        if (m_joy1.GetPOV() == 90) {
+          return true;
+        }        
+      break;
+    case 3:
+        if (m_joy1.GetPOV() == 180) {
+          return true;
+        }  
+      break;
+    case 4:
+        if (m_joy1.GetPOV() == 270) {
+          return true;
+        }  
+      break;          
+  }
+  return false;
+}
+
+bool OI::getPow1Last(int button) {
+  return POVLast1[button-1];
+}
 
 void OI::UpdatePOV() {
-  for(int i = 0; i < 4; i++)
-  {
+  for(int i = 0; i < 4; i++)  {
     POVLast3[i] = getPow3(i+1);
+  }
+  for(int i = 0; i < 4; i++)  {
+    POVLast1[i] = getPow1(i+1);
+  }
+  if (m_joy1.GetPOV() == 0) {
+    LastPovForward = true;
+  } else {
+    LastPovForward = false;
   }
 }
 
@@ -267,8 +300,20 @@ void OI::DriveControl() {
     frc::Command* commandToBeExecuted = new SuperstructureControl(iona::Superstructure::climb);
     commandToBeExecuted->Start();
   }
-
+  if (getPow1(1) == true && getPow1Last(1) == false) {
+    frc::Command* commandToBeExecuted = new ExecuteMotionProfile("Chooser");
+    commandToBeExecuted->Start();
+  }
+  if (getPow1(4) == true && getPow1Last(4) == false) {
+    frc::Command* commandToBeExecuted = new ExecuteMotionProfile("BLCS-BLLS");
+    commandToBeExecuted->Start();
+  }
+  if (getPow1(2) == true && getPow1Last(2) == false) {
+    frc::Command* commandToBeExecuted = new ExecuteMotionProfile("BRCS-BRLS");
+    commandToBeExecuted->Start();
+  }
   //update buttons
+
   UpdateButtons();
   UpdatePOV();
 }
@@ -280,4 +325,50 @@ void OI::ShowSubsystems() {
   Robot::shoulder.UpdateData();
   Robot::wrist.UpdateData();
   //Robot::trunk.UpdateData();
+}
+
+std::string OI::GetPickedPath() {
+  return m_pickedPath;
+}
+
+bool OI::IsPathPicked() {
+  return m_isPathPicked;
+}
+
+void OI::SetPathPicked(std::string path) {
+  m_pickedPath = path;
+}
+
+void OI::UpdatePathChooser() {
+  bool ButtonsCurrent[k_PathPoints];
+  bool PathPicked = false;
+  for(int i = 0; i < k_PathPoints; i++) {
+    ButtonsCurrent[i] = frc::SmartDashboard::GetBoolean("Path " + std::to_string(i), false);
+    if (ButtonsCurrent[i] == true && PathButtonsLast[i] == false) {
+      for(int j = 0; j < k_PathPoints; j++) {
+        if (j != i) {
+          frc::SmartDashboard::PutBoolean("Path " + std::to_string(j), false);
+        }
+      }
+      m_pickedPath = "Path " + std::to_string(i);
+      PathPicked = true;
+    } else if (ButtonsCurrent[i] == false) {
+      if (m_pickedPath == "Path " + std::to_string(i)) {
+        m_pickedPath = "null";
+        PathPicked = false;
+      }
+    }
+  }
+  m_isPathPicked = PathPicked;
+  frc::SmartDashboard::PutString("Picked Path", m_pickedPath);
+  for(int i = 0; i < k_PathPoints; i++) {
+    PathButtonsLast[i] = ButtonsCurrent[i];
+  }
+  
+}
+
+void OI::SetupPathChooser() {
+  for(int i = 0; i < k_PathPoints; i++) {
+    frc::SmartDashboard::PutBoolean("Path " + std::to_string(i), false);
+  }
 }

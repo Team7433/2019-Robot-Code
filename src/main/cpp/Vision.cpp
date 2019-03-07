@@ -63,9 +63,9 @@ double Vision::getTapeRightYaw() {
 }
 
 void Vision::SetCamera(int camera) {
-    std::cout << "Set Camera to " << camera << "\n";
+    //std::cout << "Set Camera to " << camera << "\n";
     visionTable->PutNumber("WhichCamera", camera);
-    std::cout << "Camera is " << visionTable->GetNumber("WhichCamera", 99) << "\n";
+    //std::cout << "Camera is " << visionTable->GetNumber("WhichCamera", 99) << "\n";
 }
 
 int Vision::GetVisionCamera() {

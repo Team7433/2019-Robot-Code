@@ -45,6 +45,7 @@ class Robot : public frc::TimedRobot {
   static BallFloorWrist ballfloorwrist;
   static BallFloorIntake ballfloorintake;
 
+  //Methods
   void RobotInit() override;
   void RobotPeriodic() override;
   void DisabledInit() override;
@@ -57,10 +58,6 @@ class Robot : public frc::TimedRobot {
 
 
  private:
-  // Have it null by default so that if testing teleop it
-  // doesn't have undefined behavior and potentially crash.
-  //frc::Command * m_intakeIn = new IntakeIn();
-  //frc::Command * m_intakeOut = new IntakeOut();
-  bool m_InIntakeIsRunning = false;
-  bool m_OutIntakeIsRunning = false;
+  std::unique_ptr<frc::Command> autonomousCommand;
+  frc::SendableChooser<frc::Command*> chooser;
 };
