@@ -57,7 +57,7 @@ class OI {
     std::string m_pickedPath = "null";
     bool m_isPathPicked = false;
 
-    int k_PathPoints = 18;
+    int k_PathPoints = 28;
 
     //create Joystick buttons
 
