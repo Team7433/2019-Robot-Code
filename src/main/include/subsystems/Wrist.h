@@ -20,7 +20,7 @@ class Wrist : public frc::Subsystem {
   //71 5.5222
   //188 14.6222
   //71-12 2.238
-  double kCountsToAngle = 5.5222;
+  double kCountsToAngle = 14.6222;
  public:
   Wrist();
   void InitDefaultCommand() override;

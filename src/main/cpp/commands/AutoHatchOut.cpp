@@ -13,6 +13,6 @@
 AutoHatchOut::AutoHatchOut() {
   AddSequential(new ballintakeIn(2));
   AddSequential(new SuperstructureControl(iona::Superstructure::autostep1));
-  AddParallel(new ballintakeIn(0.6));
+  AddParallel(new ballintakeIn(2));
   AddSequential(new SuperstructureControl(iona::Superstructure::autostep3));
 }

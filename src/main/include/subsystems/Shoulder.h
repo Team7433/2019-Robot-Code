@@ -22,7 +22,8 @@ class Shoulder : public frc::Subsystem {
   //26.8074 188 reduction
   //10.1240 71 reduction
   //15.0204 71 with 22 - 60 cogs
-  double kCountsToAngle = 15.0204;
+  //13.8055 71 with 12 - 30
+  double kCountsToAngle = 13.8055;
  public:
   Shoulder();
   void InitDefaultCommand() override;
