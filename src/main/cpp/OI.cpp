@@ -51,7 +51,7 @@ OI::OI() {
     //m_joystick1button2.WhenPressed(new resetWrist());
     m_joystick1button3.WhileHeld(new EjectHatch());
     //m_joystick2button4.WhenPressed(new ballintakeOut());
-    m_joystick1button5.WhenPressed(new FillMotionProfile("Test2"));
+    m_joystick1button5.WhenPressed(new SuperstructureControl(iona::Superstructure::hatchintake2));
     //m_joystick1button6.WhenPressed(new resetWrist());
     m_joystick1button7.WhenPressed(new ClimbSetup());
     m_joystick1button8.WhenPressed(new ClimbLift());

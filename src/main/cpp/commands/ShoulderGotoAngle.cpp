@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/ShoulderGotoAngle.h"
+#include "frc/smartdashboard/SmartDashboard.h"
 #include "robot.h"
 
 ShoulderGotoAngle::ShoulderGotoAngle(double angle) {
@@ -16,6 +17,7 @@ ShoulderGotoAngle::ShoulderGotoAngle(double angle) {
 
 // Called just before this Command runs the first time
 void ShoulderGotoAngle::Initialize() {
+  frc::SmartDashboard::PutNumber("Shoulder/target Angle",m_angle);
   Robot::shoulder.GotoAngle(m_angle);
 }
 

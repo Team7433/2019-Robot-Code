@@ -28,7 +28,7 @@ Trunk::Trunk() : Subsystem("ExampleSubsystem") {
 
 	// set PID Values
 	m_TrunkMaster->Config_kF(kPIDLoopIdx, 1.423, kTimeoutMs);//1.39373
-	m_TrunkMaster->Config_kP(kPIDLoopIdx, 3.0, kTimeoutMs);
+	m_TrunkMaster->Config_kP(kPIDLoopIdx, 3.5, kTimeoutMs);
 	m_TrunkMaster->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_TrunkMaster->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
 

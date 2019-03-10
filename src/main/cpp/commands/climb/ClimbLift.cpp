@@ -27,7 +27,7 @@ ClimbLift::ClimbLift() {
   // e.g. if Command1 requires chassis, and Command2 requires arm,
   // a CommandGroup containing them would require both the chassis and the
   // arm.
-  AddSequential(new TrunkGotoPosition(19100));
+  AddSequential(new TrunkGotoPosition(18500));
   AddParallel(new FootGotoPosition(5600));
   //AddSequential(new shoulderGoToPosition(1700));
 }
