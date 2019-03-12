@@ -10,7 +10,7 @@
 #include "commands/FootGotoPosition.h"
 #include "commands/shoulderGoToPosition.h"
 
-ClimbLift::ClimbLift() {
+ClimbLift::ClimbLift(bool top) {
   // Add Commands here:
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());
@@ -27,7 +27,11 @@ ClimbLift::ClimbLift() {
   // e.g. if Command1 requires chassis, and Command2 requires arm,
   // a CommandGroup containing them would require both the chassis and the
   // arm.
-  AddSequential(new TrunkGotoPosition(18500));
+  if (top == true) {
+    AddSequential(new TrunkGotoPosition(18500));
+  } else {
+    AddSequential(new TrunkGotoPosition(7000));
+  }
   AddParallel(new FootGotoPosition(5600));
   //AddSequential(new shoulderGoToPosition(1700));
 }

@@ -39,6 +39,8 @@ void Robot::RobotInit() {
   chooser.AddOption("BCHP-FLR3", new AutoStart("BCHP-FLR3"));
   //chooser.AddOption("FLC1-BLLS", new AutoStart("FLC1-BLLS"));
   chooser.AddOption("FLHP-FLR3", new AutoStart("FLHP-FLR3"));
+  chooser.AddOption("BCHP-FLC0", new AutoStart("BCHP-FLC0"));
+  //chooser.AddOption("BCHP-FL0", new AutoStart("FLHP-FLR3"));
   frc::SmartDashboard::PutData("Auto Chooser", &chooser);
   oi.SetupPathChooser();
 }
