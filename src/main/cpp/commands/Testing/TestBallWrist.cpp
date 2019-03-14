@@ -5,12 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/climb/ClimbLift.h"
-#include "commands/TrunkGotoPosition.h"
-#include "commands/FootGotoPosition.h"
-#include "commands/shoulderGoToPosition.h"
+#include "commands/Testing/TestBallWrist.h"
+#include "commands/ballintakeIn.h"
+#include "commands/ballintakeOut.h"
+#include "commands/CommandGroupStuff/DelaySec.h"
+#include "commands/BallIntake/BallRoller.h"
 
-ClimbLift::ClimbLift(bool top) {
+TestBallWrist::TestBallWrist() {
+  AddParallel(new BallRoller(1, 2));
+  AddSequential(new ballintakeOut());
+  AddSequential(new DelaySec(1));
+  AddSequential(new ballintakeIn(0.6));
+  AddParallel(new BallRoller(-1,1.5));
+  //AddSequential(new ballintakeOut());
   // Add Commands here:
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());
@@ -27,11 +34,4 @@ ClimbLift::ClimbLift(bool top) {
   // e.g. if Command1 requires chassis, and Command2 requires arm,
   // a CommandGroup containing them would require both the chassis and the
   // arm.
-  if (top == true) {
-    AddSequential(new TrunkGotoPosition(18500));
-  } else {
-    AddSequential(new TrunkGotoPosition(7000));
-  }
-  AddParallel(new FootGotoPosition(5600));
-  //AddSequential(new shoulderGoToPosition(1700));
 }

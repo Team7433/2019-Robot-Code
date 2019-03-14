@@ -5,35 +5,45 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ballintakeIn.h"
-#include "Robot.h"
+#include "commands/ExecuteMotionProfile.h"
+#include <Robot.h>
 
-ballintakeIn::ballintakeIn(double time) {
-  m_time = time;
+ExecuteMotionProfile::ExecuteMotionProfile(std::string path) {
+  m_Path = path;
   // Use Requires() here to declare subsystem dependencies
-  Requires(&Robot::ballfloorwrist);
-  
+  // eg. Requires(Robot::chassis.get());
+  Requires(&Robot::drivetrain);
 }
 
 // Called just before this Command runs the first time
-void ballintakeIn::Initialize() {
-  SetTimeout(m_time);
-  Robot::ballfloorwrist.manualcontrol(-0.6);
+void ExecuteMotionProfile::Initialize() {
+  printf("Start Executing Motion Profile \n");
+  if (m_Path == "Chooser") {
+    Robot::drivetrain.StartMP(Robot::oi.GetPickedPath());
+  } else {
+    Robot::drivetrain.StartMP(m_Path);
+  }
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ballintakeIn::Execute() {}
+void ExecuteMotionProfile::Execute() {
+  Robot::drivetrain.MPControl();
+  //Robot::drivetrain.MPPeriodicTask();
+}
 
 // Make this return true when this Command no longer needs to run execute()
-bool ballintakeIn::IsFinished() { return IsTimedOut(); }
+bool ExecuteMotionProfile::IsFinished() {
+  auto& joystick = Robot::oi.getJoystick1();
+   return Robot::drivetrain.IsFinishedMP() || joystick.GetY() > 0.2 || joystick.GetY() < -0.2; 
+}
 
 // Called once after isFinished returns true
-void ballintakeIn::End() {
-  Robot::ballfloorwrist.manualcontrol(0);
+void ExecuteMotionProfile::End() {
+  Robot::drivetrain.ResetMP();
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ballintakeIn::Interrupted() {
+void ExecuteMotionProfile::Interrupted() {
   End();
 }

@@ -5,35 +5,30 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ballintakeIn.h"
-#include "Robot.h"
+#include "commands/CommandGroupStuff/DelaySec.h"
 
-ballintakeIn::ballintakeIn(double time) {
-  m_time = time;
+DelaySec::DelaySec(double seconds) {
+  m_seconds = seconds;
   // Use Requires() here to declare subsystem dependencies
-  Requires(&Robot::ballfloorwrist);
-  
+  // eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
-void ballintakeIn::Initialize() {
-  SetTimeout(m_time);
-  Robot::ballfloorwrist.manualcontrol(-0.6);
+void DelaySec::Initialize() {
+  SetTimeout(m_seconds);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ballintakeIn::Execute() {}
+void DelaySec::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool ballintakeIn::IsFinished() { return IsTimedOut(); }
+bool DelaySec::IsFinished() { return IsTimedOut(); }
 
 // Called once after isFinished returns true
-void ballintakeIn::End() {
-  Robot::ballfloorwrist.manualcontrol(0);
-}
+void DelaySec::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ballintakeIn::Interrupted() {
+void DelaySec::Interrupted() {
   End();
 }

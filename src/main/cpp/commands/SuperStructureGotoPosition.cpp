@@ -152,12 +152,15 @@ bool SuperStructureGotoPosition::IsFinished() {
   frc::SmartDashboard::PutBoolean("IF1",  abs(m_shoulderPos-Robot::shoulder.getAngle()) < m_shoulderTolerence);
   frc::SmartDashboard::PutBoolean("IF2",  abs(m_elevatorPos-Robot::elevator.getPosition()) < m_elevatorTolerence);
   frc::SmartDashboard::PutBoolean("IF3",  abs(m_wristPos-Robot::wrist.GetAngle()) < m_wristTolerence);
-  if (abs(m_shoulderPos-Robot::shoulder.getAngle()) < m_shoulderTolerence) {
+  if (abs(m_shoulderPos+Robot::shoulder.getAngle()) < m_shoulderTolerence) {
     if (abs(m_elevatorPos-Robot::elevator.getPosition()) < m_elevatorTolerence) {
       if (abs(m_wristPos-Robot::wrist.GetAngle()) < m_wristTolerence) {
         return true;
       }
     }
+  }
+  if (abs(m_elevatorPos-Robot::elevator.getPosition()) < m_elevatorTolerence) {
+    return true;
   }
   return false; 
 }

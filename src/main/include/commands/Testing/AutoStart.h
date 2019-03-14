@@ -5,18 +5,12 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "subsystems/BallFloorIntake.h"
-#include "commands/BallIntake/manualBallRoller.h"
+#pragma once
 
-BallFloorIntake::BallFloorIntake() : Subsystem("ExampleSubsystem") {}
+#include <frc/commands/CommandGroup.h>
+#include <string>
 
-void BallFloorIntake::InitDefaultCommand() { 
-  SetDefaultCommand(new manualBallRoller());
-}
-
-void BallFloorIntake::manual(double output) {
-  m_intakeMotor->Set(ControlMode::PercentOutput, output);
-}
-
-// Put methods for controlling this subsystem
-// here. Call these from Commands.
+class AutoStart : public frc::CommandGroup {
+ public:
+  AutoStart(std::string path = "P_1");
+};

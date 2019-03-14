@@ -8,9 +8,12 @@
 #pragma once
 
 #include <frc/commands/InstantCommand.h>
+#include <string.h>
 
-class SwitchVisionSide : public frc::InstantCommand {
- public:
-  SwitchVisionSide();
-  void Initialize() override;
+class FillMotionProfile : public frc::InstantCommand {
+  public:
+    FillMotionProfile(std::string path);
+    void Initialize() override;
+  private:
+    std::string m_path;
 };

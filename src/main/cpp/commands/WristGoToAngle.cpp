@@ -5,35 +5,35 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ballintakeIn.h"
+#include "commands/WristGoToAngle.h"
 #include "Robot.h"
 
-ballintakeIn::ballintakeIn(double time) {
-  m_time = time;
+WristGoToAngle::WristGoToAngle(double angle) {
+  m_angle = angle;
   // Use Requires() here to declare subsystem dependencies
-  Requires(&Robot::ballfloorwrist);
-  
+  Requires(&Robot::wrist);
 }
 
 // Called just before this Command runs the first time
-void ballintakeIn::Initialize() {
-  SetTimeout(m_time);
-  Robot::ballfloorwrist.manualcontrol(-0.6);
+void WristGoToAngle::Initialize() {
+  Robot::wrist.GotoAngle(m_angle);
+  Robot::wrist.LastAngle = m_angle;
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ballintakeIn::Execute() {}
+void WristGoToAngle::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool ballintakeIn::IsFinished() { return IsTimedOut(); }
+bool WristGoToAngle::IsFinished() { 
+  if (abs(m_angle-Robot::wrist.GetAngle()) < 5) {
+    return true;
+  }
+  return false; 
+}
 
 // Called once after isFinished returns true
-void ballintakeIn::End() {
-  Robot::ballfloorwrist.manualcontrol(0);
-}
+void WristGoToAngle::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ballintakeIn::Interrupted() {
-  End();
-}
+void WristGoToAngle::Interrupted() {}

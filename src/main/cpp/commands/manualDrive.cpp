@@ -23,8 +23,8 @@ void manualDrive::Execute() {
   //Get the joystick
   auto& joystick = Robot::oi.getJoystick1();
 
-  frc::SmartDashboard::PutBoolean("TapeDetected", Robot::vision.getTapeDetected());
-  frc::SmartDashboard::PutNumber("TapeYaw", Robot::vision.getTapeYaw());
+  //frc::SmartDashboard::PutBoolean("TapeDetected", Robot::vision.getTapeDetected());
+  //frc::SmartDashboard::PutNumber("TapeYaw", Robot::vision.getTapeYaw());
   //check if we want to vision align and there is a target
   if (joystick.GetRawButton(2) == true && Robot::vision.getTapeDetected()) {
 
@@ -39,17 +39,17 @@ void manualDrive::Execute() {
       TurnValue = Map(inputYaw, 0 , 20, 0.3, 0.5);
     } else {
       //if yaw is negative do negative yaw
-      TurnValue = Map(inputYaw, 0 , -20, -0.4, -0.5);
+      TurnValue = Map(inputYaw, 0 , -20, -0.3, -0.5);
     }
 
     //put into drive output
 
-    Robot::drivetrain.driveArcade(-joystick.GetY(), TurnValue);
+    Robot::drivetrain.DriveArcade(-joystick.GetY(), TurnValue);
     if (joystick.GetRawAxis(3) > 0 ) {
-      Robot::drivetrain.driveArcade(joystick.GetY(), TurnValue);
+      Robot::drivetrain.DriveArcade(joystick.GetY(), TurnValue);
       Robot::vision.SetCamera(1);
     } else {
-      Robot::drivetrain.driveArcade(-joystick.GetY(), TurnValue);
+      Robot::drivetrain.DriveArcade(-joystick.GetY(), TurnValue);
       Robot::vision.SetCamera(0);
     }
 
@@ -63,10 +63,10 @@ void manualDrive::Execute() {
       rotation = joystick.GetZ();
     }
     if (joystick.GetRawAxis(3) > 0 ) {
-      Robot::drivetrain.driveCurvature(joystick.GetY(),rotation, !joystick.GetRawButton(1));
+      Robot::drivetrain.DriveCurvature(joystick.GetY(),rotation, !joystick.GetRawButton(1));
       Robot::vision.SetCamera(1);
     } else {
-      Robot::drivetrain.driveCurvature(-joystick.GetY(),rotation, !joystick.GetRawButton(1));
+      Robot::drivetrain.DriveCurvature(-joystick.GetY(),rotation, !joystick.GetRawButton(1));
       Robot::vision.SetCamera(0);
     }
   }

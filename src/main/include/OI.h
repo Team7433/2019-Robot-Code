@@ -9,6 +9,7 @@
 
 #include <frc/Joystick.h>
 #include <frc/buttons/JoystickButton.h>
+//#include "Robot.h"
 
 class OI {
   public:
@@ -21,20 +22,42 @@ class OI {
     bool joystickButtonLast(joystickNum,int button);
     bool joystickButton(joystickNum,int button);
     void UpdateButtons();
+
+    void DriveControl();
     
     // 
     bool getPow3(int button);
     bool getPow3Last(int button);
+    bool getPow1(int button);
+    bool getPow1Last(int button);
     void UpdatePOV();
+    void ShowSubsystems();
+    std::string GetPickedPath();
+    bool IsPathPicked();
+    void UpdatePathChooser();
+    void SetPathPicked(std::string path);
+    void SetupPathChooser();
   private:
     bool buttonslast1[12] = {false, false, false, false,false, false, false, false,false, false, false, false};
     bool buttonslast2[12] = {false, false, false, false,false, false, false, false,false, false, false, false};
     bool buttonslast3[12] = {false, false, false, false,false, false, false, false,false, false, false, false};
+    bool PathButtonsLast[15] = {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
     bool POVLast3[4] = {false, false, false, false};
+    bool POVLast1[4] = {false, false, false, false};
+    bool LastPovForward = false;
     //create joysticks
     frc::Joystick m_joy1{0};
     frc::Joystick m_joy2{1};
     frc::Joystick m_joy3{2};
+
+    //int FirstID;
+    std::string m_previousPath;
+    std::string m_newPath;
+  
+    std::string m_pickedPath = "null";
+    bool m_isPathPicked = false;
+
+    int k_PathPoints = 28;
 
     //create Joystick buttons
 
@@ -79,6 +102,4 @@ class OI {
       frc::JoystickButton m_joystick3button10{&m_joy3, 10};
       frc::JoystickButton m_joystick3button11{&m_joy3, 11};
       frc::JoystickButton m_joystick3button12{&m_joy3, 12};
-
-
 };

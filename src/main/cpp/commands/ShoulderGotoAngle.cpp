@@ -5,35 +5,36 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ballintakeIn.h"
-#include "Robot.h"
+#include "commands/ShoulderGotoAngle.h"
+#include "frc/smartdashboard/SmartDashboard.h"
+#include "robot.h"
 
-ballintakeIn::ballintakeIn(double time) {
-  m_time = time;
+ShoulderGotoAngle::ShoulderGotoAngle(double angle) {
+  m_angle = -angle;
   // Use Requires() here to declare subsystem dependencies
-  Requires(&Robot::ballfloorwrist);
-  
+  Requires(&Robot::shoulder);
 }
 
 // Called just before this Command runs the first time
-void ballintakeIn::Initialize() {
-  SetTimeout(m_time);
-  Robot::ballfloorwrist.manualcontrol(-0.6);
+void ShoulderGotoAngle::Initialize() {
+  frc::SmartDashboard::PutNumber("Shoulder/target Angle",m_angle);
+  Robot::shoulder.GotoAngle(m_angle);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ballintakeIn::Execute() {}
+void ShoulderGotoAngle::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool ballintakeIn::IsFinished() { return IsTimedOut(); }
+bool ShoulderGotoAngle::IsFinished() {
+  if (abs(m_angle+Robot::shoulder.getAngle()) < 5) {
+    return true;
+  }
+  return false;
+}
 
 // Called once after isFinished returns true
-void ballintakeIn::End() {
-  Robot::ballfloorwrist.manualcontrol(0);
-}
+void ShoulderGotoAngle::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ballintakeIn::Interrupted() {
-  End();
-}
+void ShoulderGotoAngle::Interrupted() {}

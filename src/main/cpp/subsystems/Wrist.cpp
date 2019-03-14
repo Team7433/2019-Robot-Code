@@ -69,12 +69,12 @@ void Wrist::UpdateData() {
 }
 
 void Wrist::GotoAngle(double angle) {
-  double position = (angle + 19) * 14.6222;
+  double position = (angle + 19) * kCountsToAngle;
   m_wristMotor->Set(ControlMode::MotionMagic, position);
 }
 
 double Wrist::GetAngle() {
-  return (m_wristMotor->GetSelectedSensorPosition() / 14.6222) - 19;
+  return (m_wristMotor->GetSelectedSensorPosition() / kCountsToAngle) - 19;
 }
 
 void Wrist::WristSpeed(double cruise, double acceleration) {

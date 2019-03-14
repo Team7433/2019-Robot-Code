@@ -11,5 +11,5 @@
 
 class ClimbLift : public frc::CommandGroup {
  public:
-  ClimbLift();
+  ClimbLift(bool top);
 };

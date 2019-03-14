@@ -10,11 +10,13 @@
 #include <frc/commands/Command.h>
 
 class ballintakeIn : public frc::Command {
- public:
-  ballintakeIn();
-  void Initialize() override;
-  void Execute() override;
-  bool IsFinished() override;
-  void End() override;
-  void Interrupted() override;
+  public:
+    ballintakeIn(double time);
+    void Initialize() override;
+    void Execute() override;
+    bool IsFinished() override;
+    void End() override;
+    void Interrupted() override;
+  private:
+    double m_time;
 };

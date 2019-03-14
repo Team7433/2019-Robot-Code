@@ -17,7 +17,7 @@ drivetrainManualOutput::drivetrainManualOutput(double left, double right) {
 
 // Called just before this Command runs the first time
 void drivetrainManualOutput::Initialize() {
-  Robot::drivetrain.driveTank(m_left, m_right);
+  Robot::drivetrain.DriveTank(m_left, m_right);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -28,7 +28,7 @@ bool drivetrainManualOutput::IsFinished() { return false; }
 
 // Called once after isFinished returns true
 void drivetrainManualOutput::End() {
-  Robot::drivetrain.driveTank(0,0);
+  Robot::drivetrain.DriveTank(0,0);
 }
 
 // Called when another command which requires one or more of the same

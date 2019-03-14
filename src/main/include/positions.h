@@ -27,7 +27,7 @@ namespace iona {
         autostep1,
         autostep2,
         autostep3,
-
+        hatchintake2
     };
 
     //Put in the position namespace

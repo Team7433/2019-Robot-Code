@@ -5,20 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/SwitchVisionSide.h"
-#include "Robot.h"
+#pragma once
 
-SwitchVisionSide::SwitchVisionSide() {
-  // Use Requires() here to declare subsystem dependencies
-  // eg. Requires(Robot::chassis.get());
-}
+#include <frc/commands/Command.h>
 
-// Called once when the command executes
-void SwitchVisionSide::Initialize() {
-  std::cout << "" << "\n";
-  if (Robot::vision.GetVisionCamera() == 0) {
-    Robot::vision.SetCamera(1);
-  } else {
-    Robot::vision.SetCamera(0);
-  }
-}
+class DelaySec : public frc::Command {
+  public:
+    DelaySec(double seconds);
+    void Initialize() override;
+    void Execute() override;
+    bool IsFinished() override;
+    void End() override;
+    void Interrupted() override;
+  private:
+    double m_seconds;
+};

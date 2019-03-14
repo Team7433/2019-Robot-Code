@@ -5,12 +5,15 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/climb/ClimbLift.h"
-#include "commands/TrunkGotoPosition.h"
-#include "commands/FootGotoPosition.h"
-#include "commands/shoulderGoToPosition.h"
+#include "commands/Testing/AutoStart.h"
+#include "commands/ExecuteMotionProfile.h"
+#include "Commands/AutoHatchOut.h"
+#include "Commands/ballintakeIn.h"
 
-ClimbLift::ClimbLift(bool top) {
+AutoStart::AutoStart(std::string path) {
+  AddParallel(new AutoHatchOut());
+  AddSequential(new ExecuteMotionProfile(path));
+  //AddSequential(new ballintakeIn(0.8));
   // Add Commands here:
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());
@@ -27,11 +30,4 @@ ClimbLift::ClimbLift(bool top) {
   // e.g. if Command1 requires chassis, and Command2 requires arm,
   // a CommandGroup containing them would require both the chassis and the
   // arm.
-  if (top == true) {
-    AddSequential(new TrunkGotoPosition(18500));
-  } else {
-    AddSequential(new TrunkGotoPosition(7000));
-  }
-  AddParallel(new FootGotoPosition(5600));
-  //AddSequential(new shoulderGoToPosition(1700));
 }
