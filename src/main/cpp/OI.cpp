@@ -29,6 +29,7 @@
 #include "commands/Testing/MotionPTest.h"
 #include "Commands/Testing/AutoStart.h"
 #include "commands/FillMotionProfile.h"
+#include "commands/SetElevatorBuffer.h"
 
 //climb commands
 #include "commands/climb/ClimbSetup.h"
@@ -49,9 +50,9 @@ OI::OI() {
     //joystick 1
     //m_joystick1button1.WhenPressed(new command());
     //m_joystick1button2.WhenPressed(new resetWrist());
-    m_joystick1button3.WhileHeld(new EjectHatch());
+    m_joystick1button3.WhileHeld(new SetElevatorBuffer(0));
     //m_joystick2button4.WhenPressed(new ballintakeOut());
-    m_joystick1button5.WhenPressed(new SuperstructureControl(iona::Superstructure::hatchintake2));
+    m_joystick1button5.WhenPressed(new SetElevatorBuffer(4000));
     //m_joystick1button6.WhenPressed(new resetWrist());
     m_joystick1button7.WhenPressed(new ClimbSetup());
     m_joystick1button8.WhenPressed(new ClimbLift(true));
@@ -63,9 +64,9 @@ OI::OI() {
     //joystick 2
     //m_joystick2button1.WhenPressed(new command());
     //m_joystick2button2.WhenPressed();
-    //m_joystick2button3.WhileHeld(new ballintakeIn());
-    //m_joystick2button4.WhileHeld(new ballintakeOut());
-    //m_joystick2button5.WhileActive(new IntakeIn());
+    m_joystick2button3.WhileHeld(new SetElevatorBuffer(0));
+    //m_joystick2button4.WhenPressed(new ballintakeOut());
+    m_joystick2button5.WhenPressed(new SetElevatorBuffer(4000));
     //m_joystick2button6.WhileActive(new IntakeOut());
     //m_joystick2button7.WhenPressed(new SuperStructureGotoPosition(iona::Superstructure::autostep1));
     m_joystick2button8.WhenPressed(new AutoHatchOut());

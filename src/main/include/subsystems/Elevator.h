@@ -25,4 +25,6 @@ class Elevator : public frc::Subsystem {
   void resetEncoder();
   double getPosition();
   void UpdateData();
+  double currentPos;
+  double offset;
 };

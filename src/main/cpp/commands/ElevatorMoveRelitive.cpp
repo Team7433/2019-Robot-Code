@@ -5,35 +5,37 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "commands/ElevatorGotoPosition.h"
-#include "Robot.h"
+#include "commands/ElevatorMoveRelitive.h"
+#include "robot.h"
 
-ElevatorGotoPosition::ElevatorGotoPosition(double position) {
-   m_position = -position;
+ElevatorMoveRelitive::ElevatorMoveRelitive(double distance) {
+  m_distance = distance;
   // Use Requires() here to declare subsystem dependencies
-   Requires(&Robot::elevator);
+  Requires(&Robot::elevator);
 }
 
 // Called just before this Command runs the first time
-void ElevatorGotoPosition::Initialize() {
-   Robot::elevator.currentPos = -m_position;
-   Robot::elevator.gotoPosition(m_position - Robot::elevator.offset);
+void ElevatorMoveRelitive::Initialize() {
+  Robot::elevator.offset = m_distance;
+
+  if (-Robot::elevator.getPosition() + m_distance > 20000) {
+    Robot::trunk.gotoPositionMM(-20000);
+  } else if (-Robot::elevator.getPosition() + m_distance < 0) {
+    Robot::elevator.gotoPosition(0);
+  } else {
+    Robot::elevator.gotoPosition(-(- + m_distance));
+  }
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ElevatorGotoPosition::Execute() {}
+void ElevatorMoveRelitive::Execute() {}
 
 // Make this return true when this Command no longer needs to run execute()
-bool ElevatorGotoPosition::IsFinished() { 
- if (abs(abs(m_position)-abs(Robot::elevator.getPosition())) < 300) {
-   return true;
- }
- return false;
-}
+bool ElevatorMoveRelitive::IsFinished() { return false; }
 
 // Called once after isFinished returns true
-void ElevatorGotoPosition::End() {}
+void ElevatorMoveRelitive::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ElevatorGotoPosition::Interrupted() {}
+void ElevatorMoveRelitive::Interrupted() {}

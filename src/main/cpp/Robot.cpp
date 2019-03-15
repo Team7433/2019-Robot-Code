@@ -32,7 +32,7 @@ BallFloorIntake Robot::ballfloorintake;
 
 void Robot::RobotInit() {
   chooser.SetDefaultOption("LLHP-FLR1", new AutoStart("LLHP-FLR1"));
-  chooser.AddOption("BCHP-FCC0", new AutoStart("BCHP-FCC0"));
+  //chooser.AddOption("BCHP-FCC0", new AutoStart("BCHP-FCC0"));
   chooser.AddOption("BLHP-FLC1", new AutoStart("BLHP-FLC1"));
   chooser.AddOption("BCHP-FLC1", new AutoStart("BCHP-FLC1"));
   //chooser.AddOption("BLHP-FLR3", new AutoStart("BLHP-FLR3"));
@@ -41,6 +41,7 @@ void Robot::RobotInit() {
   chooser.AddOption("FLHP-FLR3", new AutoStart("FLHP-FLR3"));
   chooser.AddOption("BCHP-FLC0", new AutoStart("BCHP-FLC0"));
   //chooser.AddOption("BCHP-FL0", new AutoStart("FLHP-FLR3"));
+  chooser.AddOption("BCHP-FRC0", new AutoStart("BCHP-FRC0"));
   frc::SmartDashboard::PutData("Auto Chooser", &chooser);
   oi.SetupPathChooser();
 }
@@ -62,6 +63,7 @@ void Robot::DisabledPeriodic() {
 }
 
 void Robot::AutonomousInit() {
+  foot.gotoPosition(0);
  autonomousCommand.reset(chooser.GetSelected());
  if (autonomousCommand.get() != nullptr) {
    autonomousCommand->Start();

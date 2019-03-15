@@ -26,7 +26,7 @@ Foot::Foot() : Subsystem("ExampleSubsystem") {
 	//Elevator_talon_a->ConfigPeakOutputReverse(elevatordownmax, kTimeoutMs);
 
 			// set closed loop gains in slot0
-	m_footMotor->Config_kF(kPIDLoopIdx, 0.0, kTimeoutMs);
+	m_footMotor->Config_kF(kPIDLoopIdx, 3.8171641791, kTimeoutMs);
 	m_footMotor->Config_kP(kPIDLoopIdx, 50.0, kTimeoutMs);
 	m_footMotor->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_footMotor->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
@@ -42,6 +42,9 @@ Foot::Foot() : Subsystem("ExampleSubsystem") {
 													LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,
 													1,
 													kTimeoutMs);
+
+	m_footMotor->ConfigMotionCruiseVelocity(134);
+	m_footMotor->ConfigMotionAcceleration(55);
 }
 
 void Foot::InitDefaultCommand() {
@@ -53,7 +56,7 @@ void Foot::controlManual(double output) {
 }
 
 void Foot::gotoPosition(double position) {
-  m_footMotor->Set(ControlMode::Position, position);
+  m_footMotor->Set(ControlMode::MotionMagic, position);
 }
 
 void Foot::resetEncoder() {
