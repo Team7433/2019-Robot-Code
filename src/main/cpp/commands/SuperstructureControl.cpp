@@ -104,7 +104,7 @@ SuperstructureControl::SuperstructureControl(iona::Superstructure position) {
       break;
     case iona::Superstructure::hatchBMiddle:
       AddParallel(new ElevatorGotoPosition(14900));
-      AddParallel(new ShoulderGotoAngle(279));
+      AddParallel(new ShoulderGotoAngle(265));
       AddParallel(new WristGoToAngle(80));
       break;
     case iona::Superstructure::hatchBbottom:

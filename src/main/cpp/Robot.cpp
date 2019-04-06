@@ -77,6 +77,7 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {
   trunk.gotoPositionMM(0);
+  foot.gotoPosition(0);
   if (autonomousCommand != nullptr) {
     autonomousCommand->Cancel();
     autonomousCommand = nullptr;
