@@ -26,11 +26,17 @@ Foot::Foot() : Subsystem("ExampleSubsystem") {
 	//Elevator_talon_a->ConfigPeakOutputReverse(elevatordownmax, kTimeoutMs);
 
 			// set closed loop gains in slot0
+	m_footMotor->Config_kF(kPIDLoopIdx, 4.125, kTimeoutMs);
+	m_footMotor->Config_kP(kPIDLoopIdx, 2.0, kTimeoutMs);
+	m_footMotor->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
+	m_footMotor->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
+
+	/* Old Values for PG 27
 	m_footMotor->Config_kF(kPIDLoopIdx, 3.8171641791, kTimeoutMs);
 	m_footMotor->Config_kP(kPIDLoopIdx, 50.0, kTimeoutMs);
 	m_footMotor->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_footMotor->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
-
+	*/
 
 	//Config limit switches to remote canifier
 	m_footMotor->ConfigForwardLimitSwitchSource(	RemoteLimitSwitchSource::RemoteLimitSwitchSource_RemoteCANifier,
@@ -42,9 +48,10 @@ Foot::Foot() : Subsystem("ExampleSubsystem") {
 													LimitSwitchNormal::LimitSwitchNormal_NormallyOpen,
 													1,
 													kTimeoutMs);
-
-	m_footMotor->ConfigMotionCruiseVelocity(134);
-	m_footMotor->ConfigMotionAcceleration(55);
+	//cruise pg 27 134
+	//accel pg 27 55
+	m_footMotor->ConfigMotionCruiseVelocity(348.4);
+	m_footMotor->ConfigMotionAcceleration(200);
 }
 
 void Foot::InitDefaultCommand() {

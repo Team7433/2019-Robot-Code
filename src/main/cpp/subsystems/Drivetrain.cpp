@@ -87,6 +87,17 @@ Drivetrain::Drivetrain() : Subsystem("DriveTrain"), m_notifier(&Drivetrain::MPPe
   m_LeftMaster->SetStatusFramePeriod(StatusFrameEnhanced::Status_10_MotionMagic,10,kTimeoutMs);
   m_RightMaster->SetStatusFramePeriod(StatusFrameEnhanced::Status_10_MotionMagic,10,kTimeoutMs);
 
+
+  //current limit
+  m_LeftMaster->ConfigPeakCurrentLimit(45, kTimeoutMs);
+  m_LeftMaster->ConfigPeakCurrentDuration(500, kTimeoutMs); /* this is a necessary call to avoid errata. */
+  m_LeftMaster->ConfigContinuousCurrentLimit(40, kTimeoutMs);
+  m_LeftMaster->EnableCurrentLimit(true); /* honor initial setting */
+
+  m_RightMaster->ConfigPeakCurrentLimit(45, kTimeoutMs);
+  m_RightMaster->ConfigPeakCurrentDuration(500, kTimeoutMs); /* this is a necessary call to avoid errata. */
+  m_RightMaster->ConfigContinuousCurrentLimit(40, kTimeoutMs);
+  m_RightMaster->EnableCurrentLimit(true); /* honor initial setting */
 }
 
 void Drivetrain::InitDefaultCommand() {
