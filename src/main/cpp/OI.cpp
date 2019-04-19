@@ -217,6 +217,8 @@ void OI::DriveControl() {
       Robot::hand.manual(0.4);
   } else if (m_joy1.GetRawButton(4) == true) {
       Robot::hand.manual(-0.7);
+  } else if (m_joy2.GetRawButton(6)) {
+      Robot::hand.manual(0.8);
   } else {
     Robot::hand.manual(0);
   }
