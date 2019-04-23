@@ -27,7 +27,7 @@ Foot::Foot() : Subsystem("ExampleSubsystem") {
 
 			// set closed loop gains in slot0
 	m_footMotor->Config_kF(kPIDLoopIdx, 4.125, kTimeoutMs);
-	m_footMotor->Config_kP(kPIDLoopIdx, 2.0, kTimeoutMs);
+	m_footMotor->Config_kP(kPIDLoopIdx, 10.0, kTimeoutMs);
 	m_footMotor->Config_kI(kPIDLoopIdx, 0.0, kTimeoutMs);
 	m_footMotor->Config_kD(kPIDLoopIdx, 0.0, kTimeoutMs);
 

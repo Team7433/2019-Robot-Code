@@ -33,6 +33,6 @@ ClimbLift::ClimbLift(bool top) {
     AddSequential(new TrunkGotoPosition(7000));
   }
   //AddParallel(new FootGotoPosition(1092)); PG 27
-  AddParallel(new FootGotoPosition(5608));
+  AddParallel(new FootGotoPosition(5750));
   //AddSequential(new shoulderGoToPosition(1700));
 }
