@@ -21,7 +21,6 @@
 #include "commands/ElevatorGotoPosition.h"
 #include "commands/wristGotoPosition.h"
 #include "commands/SuperstructureControl.h"
-#include "commands/SuperStructureGotoPosition.h"
 #include "commands/EjectHatch.h"
 #include "commands/AutoHatchOut.h"
 #include "commands/ExecuteMotionProfile.h"

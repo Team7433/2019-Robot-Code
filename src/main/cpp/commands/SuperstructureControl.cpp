@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 #include "commands/SuperstructureControl.h"
-#include "commands/SuperStructureGotoPosition.h"
 #include "commands/SwichSide.h"
 #include "commands/ShoulderGotoAngle.h"
 #include "commands/WristGoToAngle.h"

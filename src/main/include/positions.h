@@ -28,30 +28,5 @@ namespace iona {
         autostep2,
         autostep3,
         hatchintake2
-    };
-
-    //Put in the position namespace
-    namespace positions {
-
-        //setup Elevator positions
-        enum Elevator {
-            Top = 5000,
-            Bottom = 0,
-            center = 2500
-        };
-
-        //setup Sholder positions
-        enum Sholder {
-            BallIntake = 0,
-            BottomHatch = 30
-        };
-
-        //setup Sholder positions
-        enum Wrist {
-            Strait = 0,
-            Forward = 30
-        };
-
-        
-    }
+    };  
 }

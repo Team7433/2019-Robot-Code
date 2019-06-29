@@ -7,12 +7,12 @@
 
 #include "commands/Testing/MotionPTest.h"
 #include "commands/ExecuteMotionProfile.h"
-#include "commands/SuperStructureGotoPosition.h"
+#include "commands/SuperstructureControl.h"
 
 MotionPTest::MotionPTest() {
-  AddSequential(new SuperStructureGotoPosition(iona::Superstructure::idle));
+  AddSequential(new SuperstructureControl(iona::Superstructure::idle));
   AddSequential(new ExecuteMotionProfile("P_1"));
-  AddSequential(new SuperStructureGotoPosition(iona::Superstructure::home));
+  AddSequential(new SuperstructureControl(iona::Superstructure::home));
   // Add Commands here:
   // e.g. AddSequential(new Command1());
   //      AddSequential(new Command2());
